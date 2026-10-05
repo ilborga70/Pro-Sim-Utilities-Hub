@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pro-Sim Utilities - FOV & LookAhead Controller Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg-color: #0b0d12;
+--card-bg: rgba(22, 27, 38, 0.75);
+--card-border: rgba(255, 255, 255, 0.08);
+--accent-cyan: #00f2fe;
+--accent-blue: #4facfe;
+--accent-green: #00ff88;
+--accent-red: #ff3366;
+--text-main: #f0f4f8;
+--text-muted: #8a99ad;
+--font-heading: 'Orbitron', sans-serif;
+--font-body: 'Inter', sans-serif;
+}
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+body {
+background-color: var(--bg-color);
+background-image:
+radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+radial-gradient(circle at 90% 80%, rgba(255, 51, 102, 0.08) 0%, transparent 40%);
+color: var(--text-main);
+font-family: var(--font-body);
+padding: 2rem 1rem;
+min-height: 100vh;
+}
+
+.container {
+max-width: 1300px;
+margin: 0 auto;
+}
+
+header {
+text-align: center;
+margin-bottom: 3.5rem;
+position: relative;
+}
+
+header h1 {
+font-family: var(--font-heading);
+font-size: 2.5rem;
+font-weight: 900;
+letter-spacing: 2px;
+text-transform: uppercase;
+background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+margin-bottom: 0.5rem;
+}
+
+header p {
+color: var(--text-muted);
+font-size: 1.1rem;
+letter-spacing: 1px;
+}
+
+.badge {
+display: inline-block;
+background: rgba(0, 242, 254, 0.1);
+border: 1px solid var(--accent-cyan);
+color: var(--accent-cyan);
+font-family: var(--font-heading);
+font-size: 0.75rem;
+padding: 0.3rem 0.8rem;
+border-radius: 20px;
+margin-bottom: 1rem;
+text-transform: uppercase;
+}
+
+/* App Sections Showcase */
+.showcase-grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 2rem;
+margin-bottom: 4rem;
+}
+
+.app-card {
+background: var(--card-bg);
+border: 1px solid var(--card-border);
+border-radius: 16px;
+padding: 2rem;
+backdrop-filter: blur(12px);
+position: relative;
+overflow: hidden;
+transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.app-card:hover {
+border-color: rgba(0, 242, 254, 0.3);
+}
+
+.app-card-title-group {
+margin-bottom: 1rem;
+}
+
+.app-card-title {
+font-family: var(--font-heading);
+font-size: 1.6rem;
+color: #fff;
+margin-bottom: 0.4rem;
+}
+
+.app-card-subtitle {
+color: var(--text-muted);
+font-size: 0.95rem;
+line-height: 1.5;
+}
+
+.app-features-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 1rem;
+margin: 1.5rem 0;
+}
+
+.feature-item {
+background: rgba(0, 0, 0, 0.3);
+border: 1px solid rgba(255, 255, 255, 0.04);
+border-radius: 8px;
+padding: 1rem;
+}
+
+.feature-title {
+font-family: var(--font-heading);
+font-size: 0.85rem;
+color: var(--accent-cyan);
+margin-bottom: 0.3rem;
+}
+
+.feature-desc {
+font-size: 0.8rem;
+color: var(--text-muted);
+line-height: 1.4;
+}
+
+/* Buttons & Downloads */
+.btn {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+color: #0b0d12;
+font-family: var(--font-heading);
+font-weight: 700;
+text-decoration: none;
+border-radius: 8px;
+padding: 0.8rem 1.4rem;
+font-size: 0.85rem;
+transition: all 0.3s ease;
+box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
+}
+
+.btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 6px 20px rgba(0, 242, 254, 0.4);
+filter: brightness(1.1);
+}
+
+.download-group-container {
+margin-top: 2rem;
+padding-top: 1.5rem;
+border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.download-group-title {
+font-family: var(--font-heading);
+font-size: 0.85rem;
+color: var(--text-muted);
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-bottom: 1rem;
+}
+
+.download-buttons-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 1rem;
+}
+
+.download-buttons-grid .btn {
+width: 100%;
+justify-content: center;
+}
+
+/* Preset Configurator Section */
+.section-title {
+font-family: var(--font-heading);
+font-size: 1.8rem;
+color: #fff;
+text-align: center;
+margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+text-align: center;
+color: var(--text-muted);
+margin-bottom: 2rem;
+font-size: 0.95rem;
+}
+
+.search-container {
+margin-bottom: 2rem;
+display: flex;
+justify-content: center;
+}
+
+.search-input {
+width: 100%;
+max-width: 450px;
+background: var(--card-bg);
+border: 1px solid var(--card-border);
+padding: 0.9rem 1.2rem;
+border-radius: 8px;
+color: #fff;
+font-family: var(--font-body);
+font-size: 0.95rem;
+outline: none;
+transition: all 0.3s ease;
+}
+
+.search-input:focus {
+border-color: var(--accent-cyan);
+box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+}
+
+/* Presets Grid */
+.presets-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+gap: 1.5rem;
+}
+
+.card {
+background: var(--card-bg);
+border: 1px solid var(--card-border);
+border-radius: 12px;
+padding: 1.5rem;
+backdrop-filter: blur(12px);
+position: relative;
+overflow: hidden;
+transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 4px;
+height: 100%;
+background: linear-gradient(180deg, var(--accent-cyan), var(--accent-blue));
+opacity: 0.5;
+transition: opacity 0.3s ease;
+}
+
+.card:hover {
+transform: translateY(-4px);
+border-color: rgba(0, 242, 254, 0.3);
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover::before {
+opacity: 1;
+}
+
+.card-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 1.2rem;
+padding-bottom: 0.8rem;
+border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-title {
+font-family: var(--font-heading);
+font-size: 1.1rem;
+font-weight: 700;
+color: #fff;
+}
+
+.card-tag {
+font-size: 0.7rem;
+font-weight: 700;
+padding: 0.2rem 0.5rem;
+border-radius: 4px;
+background: rgba(255, 255, 255, 0.05);
+color: var(--accent-cyan);
+border: 1px solid rgba(0, 242, 254, 0.2);
+text-transform: uppercase;
+}
+
+.metrics-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 0.8rem;
+}
+
+.metric-box {
+background: rgba(0, 0, 0, 0.25);
+padding: 0.6rem 0.8rem;
+border-radius: 6px;
+border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.metric-box.full-width {
+grid-column: span 2;
+}
+
+.metric-label {
+font-size: 0.7rem;
+color: var(--text-muted);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+margin-bottom: 0.2rem;
+}
+
+.metric-value {
+font-family: var(--font-heading);
+font-size: 0.95rem;
+font-weight: 700;
+color: #fff;
+}
+
+.metric-value.highlight {
+color: var(--accent-cyan);
+}
+
+.status-active { color: var(--accent-green); }
+.status-off { color: var(--accent-red); }
+
+/* Tips Section */
+.tips-section {
+margin-top: 4rem;
+background: var(--card-bg);
+border: 1px solid var(--card-border);
+border-radius: 12px;
+padding: 2rem;
+}
+
+.tips-title {
+font-family: var(--font-heading);
+font-size: 1.2rem;
+color: var(--accent-cyan);
+margin-bottom: 1rem;
+}
+
+.tips-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 1.2rem;
+}
+
+.tip-item {
+font-size: 0.88rem;
+line-height: 1.5;
+color: var(--text-muted);
+}
+
+.tip-item strong {
+color: var(--text-main);
+}
+
+footer {
+text-align: center;
+margin-top: 5rem;
+padding-top: 2rem;
+border-top: 1px solid rgba(255, 255, 255, 0.05);
+color: var(--text-muted);
+font-size: 0.85rem;
+}
+
+footer a {
+color: var(--accent-cyan);
+text-decoration: none;
+}
+
+@media (max-width: 768px) {
+header h1 { font-size: 1.8rem; }
+.presets-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<header>
+<span class="badge">SimRacing Ecosystem</span>
+<h1>Pro-Sim Utilities Hub</h1>
+<p>Complete Guide & Setup Suite for FOV Calculation and LookAhead Camera Control</p>
+</header>
+
+<!-- Showcase Section for Both Applications -->
+<div class="showcase-grid">
+
+<!-- Pro-Sim FOV Utility -->
+<section class="app-card">
+<div class="app-card-title-group">
+<span class="badge">FOV & Camera Calculation</span>
+<h2 class="app-card-title">Pro-Sim FOV Utility</h2>
+<p class="app-card-subtitle">Precision FOV and camera position calculator tailored for single and triple monitor SimRacing setups.</p>
+</div>
+
+<div class="app-features-grid">
+<div class="feature-item">
+<div class="feature-title">Mathematical FOV Accuracy</div>
+<div class="feature-desc">Calculates exact vertical & horizontal FOV angles based on display size, distance, and bezel thickness.</div>
+</div>
+<div class="feature-item">
+<div class="feature-title">Multi-Simulator Support</div>
+<div class="feature-desc">Generates direct camera config values for Assetto Corsa, iRacing, rFactor 2, and ACC.</div>
+</div>
+<div class="feature-item">
+<div class="feature-title">Visual Projection Guide</div>
+<div class="feature-desc">Helps align horizon line and driver eye level for maximum immersion and realistic speed perception.</div>
+</div>
+</div>
+
+<div style="margin-top: 1.5rem;">
+<a href="https://github.com/ilborga70/Pro-Sim-FOV-Utility/releases" target="_blank" class="btn">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+<span>Download <strong>Pro-Sim FOV Utility</strong></span>
+</a>
+</div>
+</section>
+
+<!-- LookAhead Steering Controller -->
+<section class="app-card">
+<div class="app-card-title-group">
+<span class="badge">Dynamic Camera Control</span>
+<h2 class="app-card-title">LookAhead Steering Controller</h2>
+<p class="app-card-subtitle">Steering-based camera tracking for maximum immersion without head-tracking hardware or VR headsets.</p>
+</div>
+
+<div class="app-features-grid">
+<div class="feature-item">
+<div class="feature-title">Dynamic Yaw & Apex Roll</div>
+<div class="feature-desc">Translates wheel rotation into natural head movement and centrifugal camera tilt.</div>
+</div>
+<div class="feature-item">
+<div class="feature-title">UDP OpenTrack Bridge</div>
+<div class="feature-desc">Direct 60Hz high-frequency communication with OpenTrack using minimal CPU footprint.</div>
+</div>
+<div class="feature-item">
+<div class="feature-title">Dedicated Physics Telemetry</div>
+<div class="feature-desc">Custom-built versions optimized for specific game telemetry pipelines.</div>
+</div>
+</div>
+
+<!-- 3 Dedicated Download Buttons for Different Versions -->
+<div class="download-group-container">
+<div class="download-group-title">Download Dedicated Builds:</div>
+<div class="download-buttons-grid">
+<a href="https://github.com/ilborga70/RBR-LookAhead-Steering-Controller/releases" target="_blank" class="btn">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+<span>Download for <strong>RBR</strong></span>
+</a>
+
+<a href="https://github.com/ilborga70/ACRally-LookAhead-Steering-Controller/releases" target="_blank" class="btn">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+<span>Download for <strong>ACRally</strong></span>
+</a>
+
+<a href="https://github.com/ilborga70/ACEVO-LookAhead-Steering-Controller/releases" target="_blank" class="btn">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+<span>Download for <strong>AC Evo</strong></span>
+</a>
+</div>
+</div>
+</section>
+
+</div>
+
+<!-- LookAhead Presets Configurator -->
+<h2 class="section-title">LookAhead Preset Configurator</h2>
+<p class="section-subtitle">Recommended settings for LookAhead Steering Controller across various driving disciplines</p>
+
+<div class="search-container">
+<input type="text" id="searchInput" class="search-input" placeholder="Search discipline (e.g., Drift, GT3, Rally)..." onkeyup="filterCards()">
+</div>
+
+<div class="presets-grid" id="presetsGrid">
+
+<!-- All-Rounder -->
+<div class="card" data-title="all-rounder global universal default balanced">
+<div class="card-header">
+<div class="card-title">All-Rounder (Global)</div>
+<div class="card-tag" style="color:#00ff88; border-color:rgba(0,255,136,0.3)">Recommended</div>
+</div>
+<div class="metrics-grid">
+<div class="metric-box">
+<div class="metric-label">Sensitivity</div>
+<div class="metric-value highlight">8%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Deadzone</div>
+<div class="metric-value">1°</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Smoothing Filter</div>
+<div class="metric-value">10%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Apex Roll Tilt</div>
+<div class="metric-value status-active">Enabled (8)</div>
+</div>
+<div class="metric-box full-width">
+<div class="metric-label">Wheel Degrees</div>
+<div class="metric-value">1080°</div>
+</div>
+</div>
+</div>
+
+<!-- Circuit GT3 -->
+<div class="card" data-title="circuit gt3 prototypes endurance track racing">
+<div class="card-header">
+<div class="card-title">Circuit (GT3 / Prototypes)</div>
+<div class="card-tag">Precision</div>
+</div>
+<div class="metrics-grid">
+<div class="metric-box">
+<div class="metric-label">Sensitivity</div>
+<div class="metric-value highlight">5% - 8%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Deadzone</div>
+<div class="metric-value">1° - 2°</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Smoothing Filter</div>
+<div class="metric-value">5% - 10%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Apex Roll Tilt</div>
+<div class="metric-value status-active">Enabled (5-8)</div>
+</div>
+<div class="metric-box full-width">
+<div class="metric-label">Wheel Degrees</div>
+<div class="metric-value">540°</div>
+</div>
+</div>
+</div>
+
+<!-- Formula -->
+<div class="card" data-title="formula open-wheel f1 f2 f3 f4 single-seater">
+<div class="card-header">
+<div class="card-title">Formula / Open-Wheel</div>
+<div class="card-tag">Direct</div>
+</div>
+<div class="metrics-grid">
+<div class="metric-box">
+<div class="metric-label">Sensitivity</div>
+<div class="metric-value highlight">4% - 6%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Deadzone</div>
+<div class="metric-value">1°</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Smoothing Filter</div>
+<div class="metric-value">5%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Apex Roll Tilt</div>
+<div class="metric-value status-active">Enabled (3-5)</div>
+</div>
+<div class="metric-box full-width">
+<div class="metric-label">Wheel Degrees</div>
+<div class="metric-value">360°</div>
+</div>
+</div>
+</div>
+
+<!-- Rally -->
+<div class="card" data-title="rally wrc dirt gravel snow offroad">
+<div class="card-header">
+<div class="card-title">Rally (WRC / Dirt / RBR)</div>
+<div class="card-tag">Reactive</div>
+</div>
+<div class="metrics-grid">
+<div class="metric-box">
+<div class="metric-label">Sensitivity</div>
+<div class="metric-value highlight">8% - 12%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Deadzone</div>
+<div class="metric-value">0°</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Smoothing Filter</div>
+<div class="metric-value">15% - 20%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Apex Roll Tilt</div>
+<div class="metric-value status-off">OFF (0-3)</div>
+</div>
+<div class="metric-box full-width">
+<div class="metric-label">Wheel Degrees</div>
+<div class="metric-value">540° - 720°</div>
+</div>
+</div>
+</div>
+
+<!-- Drift -->
+<div class="card" data-title="drift countersteer sideways sliding">
+<div class="card-header">
+<div class="card-title">Drift</div>
+<div class="card-tag">Wide Angle</div>
+</div>
+<div class="metrics-grid">
+<div class="metric-box">
+<div class="metric-label">Sensitivity</div>
+<div class="metric-value highlight">15% - 25%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Deadzone</div>
+<div class="metric-value">0°</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Smoothing Filter</div>
+<div class="metric-value">10% - 15%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Apex Roll Tilt</div>
+<div class="metric-value status-active">Enabled (10-15)</div>
+</div>
+<div class="metric-box full-width">
+<div class="metric-label">Wheel Degrees</div>
+<div class="metric-value">900° - 1080°</div>
+</div>
+</div>
+</div>
+
+<!-- Oval Racing -->
+<div class="card" data-title="oval nascar indycar ovals speedway">
+<div class="card-header">
+<div class="card-title">Oval Racing (NASCAR)</div>
+<div class="card-tag">Stable</div>
+</div>
+<div class="metrics-grid">
+<div class="metric-box">
+<div class="metric-label">Sensitivity</div>
+<div class="metric-value highlight">3% - 6%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Deadzone</div>
+<div class="metric-value">2° - 3°</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Smoothing Filter</div>
+<div class="metric-value">15% - 20%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Apex Roll Tilt</div>
+<div class="metric-value status-off">OFF (0-2)</div>
+</div>
+<div class="metric-box full-width">
+<div class="metric-label">Wheel Degrees</div>
+<div class="metric-value">360° - 540°</div>
+</div>
+</div>
+</div>
+
+<!-- Hillclimb -->
+<div class="card" data-title="hillclimb mountain hairpin climb time attack">
+<div class="card-header">
+<div class="card-title">Hillclimb</div>
+<div class="card-tag">Sharp Hairpins</div>
+</div>
+<div class="metrics-grid">
+<div class="metric-box">
+<div class="metric-label">Sensitivity</div>
+<div class="metric-value highlight">10% - 15%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Deadzone</div>
+<div class="metric-value">0° - 1°</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Smoothing Filter</div>
+<div class="metric-value">10%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Apex Roll Tilt</div>
+<div class="metric-value status-active">Enabled (5-8)</div>
+</div>
+<div class="metric-box full-width">
+<div class="metric-label">Wheel Degrees</div>
+<div class="metric-value">540° - 720°</div>
+</div>
+</div>
+</div>
+
+<!-- Touge / Canyon -->
+<div class="card" data-title="touge canyon mountain japan street racing">
+<div class="card-header">
+<div class="card-title">Touge / Canyon</div>
+<div class="card-tag">Technical</div>
+</div>
+<div class="metrics-grid">
+<div class="metric-box">
+<div class="metric-label">Sensitivity</div>
+<div class="metric-value highlight">12% - 18%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Deadzone</div>
+<div class="metric-value">0°</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Smoothing Filter</div>
+<div class="metric-value">10% - 15%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Apex Roll Tilt</div>
+<div class="metric-value status-active">Enabled (8-12)</div>
+</div>
+<div class="metric-box full-width">
+<div class="metric-label">Wheel Degrees</div>
+<div class="metric-value">720° - 900°</div>
+</div>
+</div>
+</div>
+
+<!-- Karting -->
+<div class="card" data-title="karting kart direct response">
+<div class="card-header">
+<div class="card-title">Karting</div>
+<div class="card-tag">Ultra Reactive</div>
+</div>
+<div class="metrics-grid">
+<div class="metric-box">
+<div class="metric-label">Sensitivity</div>
+<div class="metric-value highlight">8% - 12%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Deadzone</div>
+<div class="metric-value">0°</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Smoothing Filter</div>
+<div class="metric-value">0% - 5%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Apex Roll Tilt</div>
+<div class="metric-value status-off">OFF (0-5)</div>
+</div>
+<div class="metric-box full-width">
+<div class="metric-label">Wheel Degrees</div>
+<div class="metric-value">180° - 270°</div>
+</div>
+</div>
+</div>
+
+<!-- Truck / Heavy Offroad -->
+<div class="card" data-title="truck euro truck simulator heavy offroad vehicle">
+<div class="card-header">
+<div class="card-title">Trucks / Heavy Off-Road</div>
+<div class="card-tag">Geared Ratio</div>
+</div>
+<div class="metrics-grid">
+<div class="metric-box">
+<div class="metric-label">Sensitivity</div>
+<div class="metric-value highlight">15% - 25%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Deadzone</div>
+<div class="metric-value">1° - 2°</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Smoothing Filter</div>
+<div class="metric-value">20% - 25%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Apex Roll Tilt</div>
+<div class="metric-value status-active">Enabled (10-15)</div>
+</div>
+<div class="metric-box full-width">
+<div class="metric-label">Wheel Degrees</div>
+<div class="metric-value">900° - 1800°</div>
+</div>
+</div>
+</div>
+
+<!-- Classic Road / Vintage -->
+<div class="card" data-title="classic road vintage sports car default">
+<div class="card-header">
+<div class="card-title">Classic Road (Vintage)</div>
+<div class="card-tag">Default Preset</div>
+</div>
+<div class="metrics-grid">
+<div class="metric-box">
+<div class="metric-label">Sensitivity</div>
+<div class="metric-value highlight">5%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Deadzone</div>
+<div class="metric-value">0°</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Smoothing Filter</div>
+<div class="metric-value">5%</div>
+</div>
+<div class="metric-box">
+<div class="metric-label">Apex Roll Tilt</div>
+<div class="metric-value status-active">Enabled (10)</div>
+</div>
+<div class="metric-box full-width">
+<div class="metric-label">Wheel Degrees</div>
+<div class="metric-value">1080°</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- Fine-Tuning Tips -->
+<div class="tips-section">
+<div class="tips-title">💡 Fine-Tuning Quick Tips</div>
+<div class="tips-grid">
+<div class="tip-item">
+<strong>Eye Fatigue / Motion Sickness:</strong> Lower the <i>Sensitivity</i> and increase the <i>Smoothing Filter</i> to 15-20%.
+</div>
+<div class="tip-item">
+<strong>Input Lag / Delayed Camera:</strong> Reduce the <i>Smoothing Filter</i> (below 10%) for a sharper, immediate camera response.
+</div>
+<div class="tip-item">
+<strong>Straight-line Wobble:</strong> Set the <i>Deadzone</i> to 1° or 2° to filter out minor wheel micro-adjustments.
+</div>
+</div>
+</div>
+
+<footer>
+<p>Created by <strong>ilborga70</strong> • Free and Open Source SimRacing Tools • <a href="https://github.com/ilborga70" target="_blank">View GitHub Profile</a></p>
+</footer>
+</div>
+
+<script>
+function filterCards() {
+const input = document.getElementById('searchInput').value.toLowerCase();
+const cards = document.querySelectorAll('#presetsGrid .card');
+
+cards.forEach(card => {
+const title = card.getAttribute('data-title');
+if (title.includes(input)) {
+card.style.display = "block";
+} else {
+card.style.display = "none";
+}
+});
+}
+</script>
+
+</body>
+</html>
