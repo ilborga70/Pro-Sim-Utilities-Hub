@@ -1,0 +1,227 @@
+Step 1: Crea il file guide.html su GitHub
+1. ​Entra nella tua repository su GitHub.
+2.  ​Clicca su Add file \rightarrow Create new file. 
+3.  ​In alto nel campo del nome digita guide.html. 
+4. ​Incolla il seguente codice completo:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setup Guide & FAQ - Pro-Sim Utilities</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg-color: #0b0d12;
+--card-bg: rgba(22, 27, 38, 0.75);
+--card-border: rgba(255, 255, 255, 0.08);
+--accent-cyan: #00f2fe;
+--accent-blue: #4facfe;
+--accent-green: #00ff88;
+--text-main: #f0f4f8;
+--text-muted: #8a99ad;
+--font-heading: 'Orbitron', sans-serif;
+--font-body: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background-color: var(--bg-color);
+background-image:
+radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+radial-gradient(circle at 90% 80%, rgba(255, 51, 102, 0.08) 0%, transparent 40%);
+color: var(--text-main);
+font-family: var(--font-body);
+padding: 2rem 1rem;
+min-height: 100vh;
+}
+
+.container { max-width: 1000px; margin: 0 auto; }
+
+header { text-align: center; margin-bottom: 2rem; }
+
+header h1 {
+font-family: var(--font-heading);
+font-size: 2.2rem;
+font-weight: 900;
+text-transform: uppercase;
+background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+margin-bottom: 0.5rem;
+}
+
+/* Navigation Tabs */
+.tabs-nav {
+display: flex;
+justify-content: center;
+gap: 1rem;
+margin-bottom: 3rem;
+}
+
+.tab-link {
+font-family: var(--font-heading);
+color: var(--text-muted);
+text-decoration: none;
+padding: 0.7rem 1.5rem;
+border-radius: 8px;
+border: 1px solid var(--card-border);
+background: var(--card-bg);
+transition: all 0.3s ease;
+font-size: 0.85rem;
+text-transform: uppercase;
+}
+
+.tab-link:hover, .tab-link.active {
+color: #fff;
+border-color: var(--accent-cyan);
+box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+background: rgba(0, 242, 254, 0.1);
+}
+
+/* Content Sections */
+.guide-card {
+background: var(--card-bg);
+border: 1px solid var(--card-border);
+border-radius: 12px;
+padding: 2rem;
+margin-bottom: 2rem;
+backdrop-filter: blur(12px);
+}
+
+.guide-card h2 {
+font-family: var(--font-heading);
+font-size: 1.3rem;
+color: var(--accent-cyan);
+margin-bottom: 1rem;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+}
+
+.step-list {
+list-style: none;
+counter-reset: step-counter;
+}
+
+.step-list li {
+position: relative;
+padding-left: 2.5rem;
+margin-bottom: 1.2rem;
+line-height: 1.6;
+color: var(--text-main);
+}
+
+.step-list li::before {
+counter-increment: step-counter;
+content: counter(step-counter);
+position: absolute;
+left: 0;
+top: 0;
+width: 1.8rem;
+height: 1.8rem;
+background: rgba(0, 242, 254, 0.1);
+border: 1px solid var(--accent-cyan);
+color: var(--accent-cyan);
+font-family: var(--font-heading);
+font-size: 0.85rem;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: bold;
+}
+
+.faq-item {
+margin-bottom: 1.5rem;
+border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+padding-bottom: 1rem;
+}
+
+.faq-question {
+font-family: var(--font-heading);
+font-size: 1rem;
+color: #fff;
+margin-bottom: 0.5rem;
+}
+
+.faq-answer {
+color: var(--text-muted);
+font-size: 0.9rem;
+line-height: 1.5;
+}
+
+footer {
+text-align: center;
+margin-top: 4rem;
+color: var(--text-muted);
+font-size: 0.85rem;
+}
+
+footer a { color: var(--accent-cyan); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+<header>
+<h1>Installation & Setup Guide</h1>
+</header>
+
+<!-- Tab Navigation -->
+<nav class="tabs-nav">
+<a href="index.html" class="tab-link">Main Hub & Presets</a>
+<a href="guide.html" class="tab-link active">Setup Guide & FAQ</a>
+</nav>
+
+<!-- LookAhead Setup -->
+<div class="guide-card">
+<h2>🛠️ Setting up LookAhead Steering Controller</h2>
+<ol class="step-list">
+<li><strong>Download & Extract:</strong> Download the specific version for your simulator (RBR, ACRally, or AC Evo) from the main page and extract the ZIP archive.</li>
+<li><strong>OpenTrack Bridge Setup:</strong> Install and open OpenTrack. Set the Input protocol to <i>UDP over network</i> and verify port <i>4242</i> is open.</li>
+<li><strong>Launch LookAhead:</strong> Run <code>LookAheadController.exe</code> as Administrator before launching your simulator.</li>
+<li><strong>Load Preset:</strong> Select a recommended preset from our main hub matching your current driving discipline.</li>
+</ol>
+</div>
+
+<!-- Pro-Sim FOV Setup -->
+<div class="guide-card">
+<h2>📐 Setting up Pro-Sim FOV Utility</h2>
+<ol class="step-list">
+<li><strong>Measure Your Setup:</strong> Measure your screen size (diagonal in inches), viewing distance from eye level to screen (cm), and monitor bezel thickness.</li>
+<li><strong>Input Data:</strong> Enter these values into Pro-Sim FOV Utility to calculate your exact mathematical field of view.</li>
+<li><strong>Apply Config:</strong> Copy the calculated horizontal or vertical FOV directly into your simulator's graphics/camera settings.</li>
+</ol>
+</div>
+
+<!-- FAQ Section -->
+<div class="guide-card">
+<h2>❓ Frequently Asked Questions (FAQ)</h2>
+
+<div class="faq-item">
+<div class="faq-question">Does LookAhead require a webcam or head-tracker?</div>
+<div class="faq-answer">No hardware is required! LookAhead translates your steering wheel input directly into dynamic camera rotation.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">Will LookAhead cause input lag?</div>
+<div class="faq-answer">The utility operates via high-frequency UDP packets at 60Hz. If you notice any camera delay, simply lower the <i>Smoothing Filter</i> setting to below 10%.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">Is Pro-Sim FOV Utility suitable for Triple Monitor setups?</div>
+<div class="faq-answer">Yes, it fully supports Single, Ultrawide, and Triple Monitor angle/bezel calculations.</div>
+</div>
+</div>
+
+<footer>
+<p>Created by <strong>ilborga70</strong> • <a href="index.html">Return to Main Hub</a></p>
+</footer>
+</div>
+
+</body>
+</html>
