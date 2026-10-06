@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Mans Ultimate — Ultimate Setup & Optimization Hub</title>
+    <!-- Google Fonts Motorsport -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0a0c10;
+            --panel-bg: rgba(18, 22, 31, 0.85);
+            --border-glow: #00d2ff;
+            --accent-yellow: #f5d000;
+            --accent-red: #e60000;
+            --accent-blue: #00d2ff;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+        }
+
+        body { 
+            font-family: 'Rajdhani', sans-serif; 
+            line-height: 1.5; 
+            color: var(--text-main); 
+            margin: 0; 
+            padding: 30px 15px; 
+            background: radial-gradient(circle at top, #141a29 0%, #050608 100%);
+            background-attachment: fixed;
+            font-size: 17px;
+        }
+
+        .container { 
+            max-width: 1100px; 
+            margin: auto; 
+            background: var(--panel-bg); 
+            padding: 35px; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 210, 255, 0.15); 
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .language-switcher {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(10, 12, 16, 0.9);
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 210, 255, 0.4);
+            z-index: 1000;
+        }
+
+        .language-switcher label {
+            margin: 0;
+            color: var(--accent-yellow);
+            font-size: 0.8em;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .language-switcher select {
+            width: auto;
+            margin: 0;
+            padding: 4px 8px;
+            font-size: 0.85em;
+            background: #0a0c10;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #fff 0%, var(--accent-yellow) 50%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(245, 208, 0, 0.2);
+            padding-right: 180px;
+        }
+
+        h2 { 
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-yellow); 
+            font-size: 1.4em;
+            letter-spacing: 1px;
+            border-left: 4px solid var(--accent-yellow);
+            padding-left: 10px;
+            margin-top: 25px;
+            text-transform: uppercase;
+        }
+
+        h3 { 
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-blue); 
+            font-size: 1.1em;
+            margin-top: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .section { 
+            margin-bottom: 30px; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+            padding-bottom: 25px; 
+        }
+
+        label { 
+            font-weight: 700; 
+            display: block; 
+            margin-top: 15px; 
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        select, input { 
+            width: 100%; 
+            padding: 12px 15px; 
+            margin-top: 6px; 
+            border-radius: 6px; 
+            border: 1px solid rgba(0, 210, 255, 0.3); 
+            background: rgba(10, 12, 16, 0.8);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1em;
+            box-sizing: border-box; 
+            transition: all 0.3s ease;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--accent-yellow);
+            box-shadow: 0 0 10px rgba(245, 208, 0, 0.3);
+        }
+
+        optgroup {
+            background: #0a0c10;
+            color: var(--accent-yellow);
+        }
+
+        button { 
+            margin-top: 25px; 
+            padding: 16px; 
+            background: linear-gradient(135deg, #e60000 0%, #a00000 100%); 
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1em; 
+            font-weight: 800; 
+            width: 100%; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px rgba(230, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        button:hover { 
+            background: linear-gradient(135deg, #ff1a1a 0%, #c80000 100%); 
+            box-shadow: 0 0 25px rgba(230, 0, 0, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .result-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            border-left: 3px solid var(--accent-blue);
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .result-card h4 {
+            margin: 0 0 8px 0;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-yellow);
+            font-size: 0.95em;
+            text-transform: uppercase;
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 15px; 
+            background: rgba(0,0,0,0.3);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        th, td { 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            padding: 12px; 
+            text-align: left; 
+        }
+
+        th { 
+            background-color: rgba(0, 210, 255, 0.15); 
+            color: var(--accent-blue);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85em;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .footer { 
+            margin-top: 40px; 
+            text-align: center; 
+            font-size: 0.85em; 
+            color: var(--text-muted); 
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+        
+        #resultsBox { 
+            display: none; 
+            background: rgba(0, 20, 40, 0.85); 
+            border: 2px solid var(--accent-blue); 
+            border-radius: 8px; 
+            padding: 25px; 
+            margin-top: 30px; 
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
+        }
+
+        #resultsBox h3 { 
+            margin-top: 0; 
+            color: #fff; 
+            font-size: 1.4em;
+            border-bottom: 1px solid var(--accent-blue);
+            padding-bottom: 10px;
+        }
+
+        .car-card { display: block; }
+
+        .badge-lmu {
+            background: var(--accent-yellow);
+            color: #000;
+            padding: 2px 8px;
+            font-weight: 800;
+            border-radius: 3px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+        }
+
+        .highlight-fix {
+            color: var(--accent-yellow);
+            font-weight: bold;
+        }
+
+        .pole-box {
+            background: rgba(245, 208, 0, 0.08);
+            border: 1px solid var(--accent-yellow);
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .pole-box h3 {
+            color: var(--accent-yellow);
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 15px;
+                justify-content: flex-end;
+            }
+            h1 { padding-right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- MENÙ A TENDINA TRADUTTORE -->
+    <div class="language-switcher">
+        <label for="langSelect" id="langLabel">🌐 Lingua / Language:</label>
+        <select id="langSelect" onchange="translatePage(this.value)">
+            <option value="it" selected>Italiano</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+
+    <h1>Le Mans Ultimate — Setup & Optimization Hub</h1>
+    <p>Guida completa ed ottimizzatore interattivo per tutte le categorie (<span class="badge-lmu">LMP3</span> <span class="badge-lmu">Hypercar</span> <span class="badge-lmu">GTE</span> <span class="badge-lmu">LMP2</span>). Calcola i valori ideali di campanatura, convergenza, altezze, sospensioni, ammortizzatori, freni, differenziale e bilanciamento per qualsiasi pista.</p>
+    <p>🔗 <strong>Fonte Ufficiale Le Mans Ultimate</strong> 🏎️</p>
+
+    <div class="section">
+        <h2>Calcolatore & Ottimizzatore Setup LMU</h2>
+        <p>Seleziona la tua vettura, le caratteristiche del circuito, la temperatura e i problemi di guida riscontrati per generare istantaneamente il setup raccomandato ed ottimizzato in ogni parametro.</p>
+
+        <form id="setupForm">
+            <label for="carModel">Classe Vettura / Modello:</label>
+            <select id="carModel" name="carModel">
+                <optgroup label="LMP3">
+                    <option value="ligier_lmp3" selected>LMP3 - Ligier JS P320 (RHD)</option>
+                    <option value="ginetta_lmp3">LMP3 - Ginetta G61-LT-P3 EVO (LHD)</option>
+                    <option value="duqueine_lmp3">LMP3 - Duqueine M30-D08</option>
+                </optgroup>
+                <optgroup label="Hypercar">
+                    <option value="ferrari_499p">Hypercar - Ferrari 499P</option>
+                    <option value="toyota_gr010">Hypercar - Toyota GR010 Hybrid</option>
+                    <option value="porsche_963">Hypercar - Porsche 963</option>
+                    <option value="cadillac_v_series">Hypercar - Cadillac V-Series.R</option>
+                    <option value="peugeot_9x8">Hypercar - Peugeot 9X8</option>
+                    <option value="bmw_m_hybrid">Hypercar - BMW M Hybrid V8</option>
+                    <option value="alpine_a424">Hypercar - Alpine A424</option>
+                    <option value="lamborghini_sc63">Hypercar - Lamborghini SC63</option>
+                    <option value="isotta_fraschini">Hypercar - Isotta Fraschini Tipo 6-C</option>
+                </optgroup>
+                <optgroup label="LMP2">
+                    <option value="oreca_07">LMP2 - Oreca 07 Gibson</option>
+                </optgroup>
+                <optgroup label="GTE">
+                    <option value="ferrari_488_gte">GTE - Ferrari 488 GTE Evo</option>
+                    <option value="porsche_911_rsr">GTE - Porsche 911 RSR-19</option>
+                    <option value="chevrolet_corvette_c8r">GTE - Chevrolet Corvette C8.R</option>
+                    <option value="aston_martin_vantage_gte">GTE - Aston Martin Vantage GTE</option>
+                </optgroup>
+            </select>
+
+            <label for="trackType">Tipo di Tracciato / Layout:</label>
+            <select id="trackType" name="trackType">
+                <option value="balanced">Bilanciato / Misto (es. Spa, Imola)</option>
+                <option value="high_speed">Alta Velocità / Scarico (es. Le Mans, Monza)</option>
+                <option value="technical">Tecnico / Alto Carico (es. COTA, Portimão)</option>
+            </select>
+
+            <label for="temp">Temperatura Asfalto (°C):</label>
+            <input type="number" id="temp" name="temp" value="30">
+
+            <label for="controller">Periferica di Guida:</label>
+            <select id="controller" name="controller">
+                <option value="wheel">Volante e Pedali (Load Cell / Potenziometro)</option>
+                <option value="pad">Gamepad / Controller</option>
+            </select>
+
+            <label for="issue">Problema Dinamico Riscontrato / Modalità:</label>
+            <select id="issue" name="issue">
+                <option value="none">Nessuno (Setup Base Ottimizzato)</option>
+                <option value="pole_position">🏆 Modalità Qualifica Estrema / Pole Position</option>
+                <option value="understeer_entry">Sottosterzo in Ingresso Curva</option>
+                <option value="oversteer_entry">Sovrasterzo in Ingresso / Staccata</option>
+                <option value="oversteer_exit">Sovrasterzo in Uscita (Trazione)</option>
+                <option value="bottoming">La vettura spancia sui cordoli/dossi</option>
+            </select>
+
+            <button type="button" onclick="calculateSetup()">⚙️ Calcola & Ottimizza Setup Ora</button>
+        </form>
+
+        <div id="resultsBox">
+            <h3>🎯 Risultati Setup Calcolato & Parametri Ottimizzati</h3>
+            <div id="resSummary" style="margin-bottom: 15px;"></div>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <h4>📐 Geometria (Camber & Toe)</h4>
+                    <div id="resGeometry"></div>
+                </div>
+                <div class="result-card">
+                    <h4>🏎️ Aerodinamica & Rake</h4>
+                    <div id="resAero"></div>
+                </div>
+                <div class="result-card">
+                    <h4>🛞 Pressioni & Freni</h4>
+                    <div id="resBrakes"></div>
+                </div>
+                <div class="result-card">
+                    <h4>🔧 Sospensioni & Antirollio</h4>
+                    <div id="resSuspension"></div>
+                </div>
+                <div class="result-card">
+                    <h4>⚡ Ammortizzatori & Differenziale</h4>
+                    <div id="resDampersDiff"></div>
+                </div>
+                <div class="result-card">
+                    <h4>💡 Soluzione Problema Dinamico</h4>
+                    <div id="resIssueFix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEZIONE POLE POSITION & QUALIFICA ESTREMA -->
+    <div class="section" id="poleSection">
+        <h2 id="poleTitle">🏆 Assetto da Pole Position per Le Mans Ultimate</h2>
+        <div class="pole-box" id="poleContent">
+            <p>Per fare la pole position in Le Mans Ultimate, non esiste un assetto unico valido per tutte le auto, ma serve un set da qualifica estremo: scarica il carico aerodinamico (ali basse), irrigidisci le sospensioni per i curvoni veloci della Circuit de la Sarthe (Le Mans), usa pressioni gomme basse da qualifica e riduci il carburante al minimo.</p>
+            <h3>Regolazioni Chiave per la Qualifica</h3>
+            <ul>
+                <li><strong>Aerodinamica:</strong> Riduci l'ala posteriore al minimo consentito per massimizzare la velocità di punta sui rettilinei (Hunaudières).</li>
+                <li><strong>Sospensioni:</strong> Aumenta la rigidezza di molle e barre antirollio per stabilizzare l'auto nei cambi di direzione ad alta velocità e ridurre il rollio.</li>
+                <li><strong>Altezza da terra:</strong> Abbassa l'auto il più possibile senza far toccare il fondo nei punti di compressione.</li>
+                <li><strong>Pressioni Gomme:</strong> Imposta i valori a freddo in modo che, dopo un giro di lancio, raggiungano la pressione ideale di esercizio (circa 20-22 psi a seconda della classe).</li>
+                <li><strong>Carburante:</strong> Imbarca solo la benzina strettamente necessaria per il giro di lancio e il giro secco cronometrato.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SCHEDA LIGIER -->
+    <div class="section car-card" id="card_ligier_lmp3">
+        <h2>Ligier JS P320</h2>
+        <p><strong>RHD - Guida a Destra</strong></p>
+        <h3>Caratteristiche e Stile di Guida</h3>
+        <p>Piattaforma versatile ed accessibile. Eccelle per consistenza e stabilità in staccata. Offre maggiore rotazione e grip anteriore alle basse velocità. Punto a sfavore: la posizione di guida a destra (RHD) con montante A molto vicino al campo visivo.</p>
+
+        <h3>⚡ Powertrain (Motore & Differenziale)</h3>
+        <p><strong>Carburante & TC:</strong> Regolazione quantitativo di carburante e livello del controllo di trazione.</p>
+        <p><strong>Coperture Radiatore (Radiator Covers):</strong> Regolare per mantenere acqua e olio nella finestra ottimale. Mantenere le temperature tassativamente sotto i 120°C.</p>
+        <p><strong>Differenziale (Preload & Lock):</strong> Ottimizzato di base per quasi tutti i tracciati. Ridurre il Preload per maggiore rotazione in ingresso curva; aumentarlo (maggior blocco) per indurre sottosterzo in ingresso.</p>
+
+        <h3>🛞 Wheels & Brakes (Ruote e Freni)</h3>
+        <p><strong>Pressioni & Camber:</strong> Si consiglia di partire con pressioni pneumatici al minimo. Il camber predefinito è già ottimizzato.</p>
+        <p><strong>Forza Massima Pedale (Max Pedal Force):</strong> Controller: Default | Pedali: 85% - 91%.</p>
+        <p><strong>Ripartizione Frenata (Brake Bias):</strong> Dipende dal tracciato. La Ligier tollera un bilanciamento spostato maggiormente al posteriore. Utenti controller: usare il valore default.</p>
+        <p><strong>Condotti Freni (Brake Ducting):</strong> Aprire o chiudere per mantenere le gomme nella finestra d'esercizio ideale di 85°C - 95°C.</p>
+
+        <h3>🛞 Suspension (Sospensioni)</h3>
+        <p><strong>Molle (Spring Rates):</strong> Morbida all'anteriore per ridurre il sottosterzo; rigida al posteriore per aumentare la rotazione in accelerazione.</p>
+        <p><strong>Tamponi (Packers):</strong> Usati per evitare che la vettura tocchi il fondo (bottoming out) in punti specifici senza modificare le altezze statiche.</p>
+        <p><strong>Altezza da Terra & Rake:</strong> Valori statici senza carburante. Più alta dietro e bassa davanti (maggior rake) = anteriore più reattivo e tendenza al sovrasterzo in inserimento.</p>
+
+        <h3>📐 Chassis & Aero</h3>
+        <p><strong>Barre Antirollio (ARB):</strong> Anteriore morbida = reattiva ma instabile / rigida = stabilità e sottosterzo. Posteriore morbida = stabilità in trazione / rigida = più rotazione a gas aperto.</p>
+        <p><strong>Punti di Toe (Convergenza):</strong> Anteriore: Toe-in per stabilità ad alta velocità; Toe-out per risposte rapide ma instabili. Posteriore: Toe-in per stabilizzare il retrotreno in ingresso.</p>
+    </div>
+
+    <!-- SCHEDA GINETTA -->
+    <div class="section car-card" id="card_ginetta_lmp3">
+        <h2>Ginetta G61 LT P325 EVO</h2>
+        <p><strong>LHD - Guida a Sinistra</strong></p>
+        <h3>Caratteristiche e Stile di Guida</h3>
+        <p>Ideale per circuiti veloci e pianeggianti con curve a medio-alta velocità. Eccellente stabilità ad alte velocità con ala posteriore scarica. Debolezza: rigidità generale che causa sottosterzo nel lento. Frenata più delicata, richiede forza pedale inferiori e ripartizione avanzata.</p>
+
+        <h3>⚡ Powertrain (Motore & Differenziale)</h3>
+        <p><strong>Carburante & TC:</strong> Regolazione serbatoio e mappa del controllo trazione.</p>
+        <p><strong>Coperture Radiatore (Radiator Covers):</strong> Regolare per mantenere acqua e olio nella finestra ottimale. Mantenere le temperature tassativamente sotto i 120°C.</p>
+        <p><strong>Differenziale (Preload & Lock):</strong> Base ottimizzata. Ridurre il Preload per facilitare l'inserimento o aumentarlo per stabilizzare la staccata a costo di un maggiore sottosterzo.</p>
+
+        <h3>🛞 Wheels & Brakes (Ruote e Freni)</h3>
+        <p><strong>Pressioni & Camber:</strong> Pressioni di partenza raccomandate al minimo. Camber ottimizzato dal setup standard LMU.</p>
+        <p><strong>Forza Massima Pedale (Max Pedal Force):</strong> Controller: Default | Pedali: 80% - 85% (più bassa della Ligier).</p>
+        <p><strong>Ripartizione Frenata (Brake Bias):</strong> Preferisce un bilanciamento più neutro/avanzato (anteriore) rispetto alla Ligier per prevenire il bloccaggio posteriore.</p>
+        <p><strong>Condotti Freni (Brake Ducting):</strong> Gestione raffreddamento per mantenere le gomme nella finestra 85°C - 95°C.</p>
+
+        <h3>🛞 Suspension (Sospensioni)</h3>
+        <p><strong>Molle (Spring Rates):</strong> Ammorbidire l'anteriore per mitigare il sottosterzo congenito nelle basse velocità; irrigidire il posteriore per accelerare la rotazione.</p>
+        <p><strong>Tamponi (Packers):</strong> Impostazione per impedire che lo splitter/fondo impatti il suolo nei dossi o nei punti ad alto carico aerodinamico.</p>
+        <p><strong>Altezza da Terra & Rake:</strong> Regolazione bilanciamento aerodinamico assieme all'ala posteriore. Aumentare l'altezza posteriore (Rake) rende la vettura più puntata in inserimento.</p>
+
+        <h3>📐 Chassis & Aero</h3>
+        <p><strong>Barre Antirollio (ARB):</strong> Anteriore: Morbida per aiutare la staccata e inserimento / Rigida per stabilità high-speed. Posteriore: Stiff = rotazione a centro curva; Soft = trazione in uscita.</p>
+        <p><strong>Punti di Toe (Convergenza):</strong> Anteriore Toe-out per reattività nel lento; Posteriore Toe-in per stabilizzare il posteriore rigido della Ginetta.</p>
+    </div>
+
+    <!-- SCHEDA DUQUEINE LMP3 -->
+    <div class="section car-card" id="card_duqueine_lmp3">
+        <h2>Duqueine M30-D08</h2>
+        <p><strong>LHD - Guida a Sinistra</strong></p>
+        <h3>Caratteristiche e Stile di Guida</h3>
+        <p>Vettura caratterizzata da un'eccellente efficienza aerodinamica nei tratti ad alta velocità e grande stabilità in staccata. Richiede una guida pulita per non innescare sottosterzo a centro curva.</p>
+    </div>
+
+    <!-- SCHEDA HYPERCAR -->
+    <div class="section car-card" id="card_hypercar_gen">
+        <h2>Categoria Hypercar (LMH / LMDh)</h2>
+        <p><strong>Ibrido & Trazione Integrale Virtuale</strong></p>
+        <h3>Caratteristiche e Stile di Guida</h3>
+        <p>Vetture complesse ad altissimo carico aerodinamico e potenza ibrida MGU. Richiedono una precisa gestione del camber per prevenire il surriscaldamento delle coperture nei curvoni veloci e un controllo maniacale del differenziale per gestire l'erogazione della trazione elettrica sull'asse anteriore/posteriore.</p>
+    </div>
+
+    <!-- SCHEDA LMP2 -->
+    <div class="section car-card" id="card_lmp2_gen">
+        <h2>Categoria LMP2 (Oreca 07)</h2>
+        <p><strong>Prototipo ad Alto Carico Aerodinamico</strong></p>
+        <h3>Caratteristiche e Stile di Guida</h3>
+        <p>Riferimento assoluto per bilanciamento e carico aerodinamico. Risponde in maniera estremamente diretta ad ogni minima modifica di Rake, barre antirollio e pressioni pneumatici.</p>
+    </div>
+
+    <!-- SCHEDA GTE -->
+    <div class="section car-card" id="card_gte_gen">
+        <h2>Categoria GTE (Gran Turismo Endurance)</h2>
+        <p><strong>Motore Anteriore / Centrale / Posteriore</strong></p>
+        <h3>Caratteristiche e Stile di Guida</h3>
+        <p>Vetture derivate dalla serie con carico aerodinamico moderato e assenza di ABS. Richiedono grande sensibilità al pedale del freno, gestione del trasferimento di carico e molta cura nella trazione in uscita.</p>
+    </div>
+
+    <!-- TABELLA UNIVERSALE E RISOLUZIONE PROBLEMI DINAMICI -->
+    <div class="section">
+        <h2 id="matrixTitle">📊 Matrice di Regolazione Rapida & Risoluzione Problemi Dinamici</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Problema</th>
+                    <th>Azione: Freccia Sinistra ◄ Soft / Lower / Modifica</th>
+                    <th>Azione: Freccia Destra ► Stiff / Higher / Modifica</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Campanatura / Camber Anteriore</strong></td>
+                    <td>Angolo ridotto: Meno grip in curva ad alta velocità, temp. interne omogenee.</td>
+                    <td>Angolo negativo accentuato: Più grip laterale in percorrenza, temp. interna alta.</td>
+                </tr>
+                <tr>
+                    <td><strong>Campanatura / Camber Posteriore</strong></td>
+                    <td>Meno angolato: Trazione in rettilineo ottimale, meno grip laterale.</td>
+                    <td>Più negativo: Più stabilità e grip nei curvoni, usura gomma interna superiore.</td>
+                </tr>
+                <tr>
+                    <td><strong>Molle Anteriori (Front Springs)</strong></td>
+                    <td>Riduci sottosterzo, maggior grip meccanico anteriore.</td>
+                    <td>Aumenta stabilità ad alta velocità, maggior sottosterzo nel lento.</td>
+                </tr>
+                <tr>
+                    <td><strong>Molle Posteriori (Rear Springs)</strong></td>
+                    <td>Maggior stabilità e trazione in uscita di curva.</td>
+                    <td>Aumenta rotazione della vettura in accelerazione (on-throttle).</td>
+                </tr>
+                <tr>
+                    <td><strong>Toe Anteriore (Front Toe)</strong></td>
+                    <td>Aumenta Toe-in (+): Maggiore stabilità nel dritto, maggior calore/usura gomme.</td>
+                    <td>Crea Toe-out (-): Inserimento curva reattivo/aggressivo, minor usura gomma.</td>
+                </tr>
+                <tr>
+                    <td><strong>Toe Posteriore (Rear Toe)</strong></td>
+                    <td>Riduci Toe-in: Maggior velocità a centro curva e rotazione (retrotreno più libero).</td>
+                    <td>Aumenta Toe-in (+): Stabilizza il retrotreno in fase di staccata e inserimento.</td>
+                </tr>
+                <tr>
+                    <td><strong>Barra Antirollio Ant. (Front ARB)</strong></td>
+                    <td>Anteriore più reattivo, ma rischia instabilità nei cambi di direzione.</td>
+                    <td>Aumenta la stabilità generale inducendo un leggero sottosterzo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Barra Antirollio Post. (Rear ARB)</strong></td>
+                    <td>Retrotreno incollato all'asfalto, molta trazione in accelerazione.</td>
+                    <td>Aumenta la rotazione a centro e uscita curva, rischia sovrasterzo.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ammortizzatori (Dampers)</strong></td>
+                    <td>Ammorbidisce BUMP / REBOUND: Assorbimento migliore sui cordoli.</td>
+                    <td>Irrigidisce BUMP / REBOUND: Controllo della piattaforma aerodinamica.</td>
+                </tr>
+                <tr>
+                    <td><strong>Preload Differenziale</strong></td>
+                    <td>Meno blocco in rilascio: Più rotazione e reattività in ingresso curva.</td>
+                    <td>Più blocco: Stabilità in frenata, ma tende a sottosterzare in ingresso.</td>
+                </tr>
+                <tr>
+                    <td><strong>Altezza Posteriore (Rake)</strong></td>
+                    <td>Meno Rake: Vettura più stabile sui curvoni veloci, meno reattiva.</td>
+                    <td>Più Rake: Anteriore più preciso e puntato, rischio sovrasterzo in staccata.</td>
+                </tr>
+                <tr>
+                    <td><strong>🚨 Soluzione Sottosterzo (Tutti i tipi)</strong></td>
+                    <td>Ammorbidisci ARB Ant., riduci Preload Diff, aumenta Toe-out Ant.</td>
+                    <td>Aumenta Rake (alza posteriore), aumenta Camber negativo Ant., ammorbidisci Molle Ant.</td>
+                </tr>
+                <tr>
+                    <td><strong>🚨 Soluzione Sovrasterzo (Ingresso/Staccata)</strong></td>
+                    <td>Sposta Brake Bias all'anteriore, aumenta Toe-in Posteriore.</td>
+                    <td>Irrigidisci ARB Anteriore, aumenta Preload Diff, diminuisci Rake Posteriore.</td>
+                </tr>
+                <tr>
+                    <td><strong>🚨 Soluzione Sovrasterzo (Uscita/Trazione)</strong></td>
+                    <td>Ammorbidisci ARB Posteriore, ammorbidisci Molle Posteriori.</td>
+                    <td>Aumenta Power Lock Diff, riduci Camber Posteriore se eccessivo per l'impronta a terra.</td>
+                </tr>
+                <tr>
+                    <td><strong>🚨 Spanciamento (Bottoming Out)</strong></td>
+                    <td>Aumenta Packers (Tamponi) di +2/4mm per bloccare la corsa fine.</td>
+                    <td>Aumenta le altezze da terra statiche (Ant e Post) e aumenta la rigidezza Fast Bump.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>Le Mans Ultimate — Setup & Optimization Hub © Documento sintetico e calcolatore per la regolazione degli assetti simracing.</p>
+    </div>
+</div>
+
+<!-- SCRIPT PER GESTIONE TRADUTTORE E CALCOLATORE -->
+<script type="text/javascript">
+const translations = {
+    it: {
+        title: "Le Mans Ultimate — Setup & Optimization Hub",
+        intro: "Guida completa ed ottimizzatore interattivo per tutte le categorie (<span class=\"badge-lmu\">LMP3</span> <span class=\"badge-lmu\">Hypercar</span> <span class=\"badge-lmu\">GTE</span> <span class=\"badge-lmu\">LMP2</span>). Calcola i valori ideali di campanatura, convergenza, altezze, sospensioni, ammortizzatori, freni, differenziale e bilanciamento per qualsiasi pista.",
+        officialSource: "🔗 <strong>Fonte Ufficiale Le Mans Ultimate</strong> 🏎️",
+        calcTitle: "Calcolatore & Ottimizzatore Setup LMU",
+        calcSub: "Seleziona la tua vettura, le caratteristiche del circuito, la temperatura e i problemi di guida riscontrati per generare istantaneamente il setup raccomandato ed ottimizzato in ogni parametro.",
+        lblCar: "Classe Vettura / Modello:",
+        lblTrack: "Tipo di Tracciato / Layout:",
+        lblTemp: "Temperatura Asfalto (°C):",
+        lblCtrl: "Periferica di Guida:",
+        lblIssue: "Problema Dinamico Riscontrato / Modalità:",
+        trackOptions: [
+            "Bilanciato / Misto (es. Spa, Imola)",
+            "Alta Velocità / Scarico (es. Le Mans, Monza)",
+            "Tecnico / Alto Carico (es. COTA, Portimão)"
+        ],
+        ctrlOptions: [
+            "Volante e Pedali (Load Cell / Potenziometro)",
+            "Gamepad / Controller"
+        ],
+        issueOptions: [
+            "Nessuno (Setup Base Ottimizzato)",
+            "🏆 Modalità Qualifica Estrema / Pole Position",
+            "Sottosterzo in Ingresso Curva",
+            "Sovrasterzo in Ingresso / Staccata",
+            "Sovrasterzo in Uscita (Trazione)",
+            "La vettura spancia sui cordoli/dossi"
+        ],
+        btnCalc: "⚙️ Calcola & Ottimizza Setup Ora",
+        resTitle: "🎯 Risultati Setup Calcolato & Parametri Ottimizzati",
+        hGeometry: "📐 Geometria (Camber & Toe)",
+        hAero: "🏎️ Aerodinamica & Rake",
+        hBrakes: "🛞 Pressioni & Freni",
+        hSusp: "🔧 Sospensioni & Antirollio",
+        hDampDiff: "⚡ Ammortizzatori & Differenziale",
+        hIssueFix: "💡 Soluzione Problema Dinamico",
+        poleTitle: "🏆 Assetto da Pole Position per Le Mans Ultimate",
+        poleBox: `<p>Per fare la pole position in Le Mans Ultimate, non esiste un assetto unico valido per tutte le auto, ma serve un set da qualifica estremo: scarica il carico aerodinamico (ali basse), irrigidisci le sospensioni per i curvoni veloci della Circuit de la Sarthe (Le Mans), usa pressioni gomme basse da qualifica e riduci il carburante al minimo.</p>
+            <h3>Regolazioni Chiave per la Qualifica</h3>
+            <ul>
+                <li><strong>Aerodinamica:</strong> Riduci l'ala posteriore al minimo consentito per massimizzare la velocità di punta sui rettilinei (Hunaudières).</li>
+                <li><strong>Sospensioni:</strong> Aumenta la rigidezza di molle e barre antirollio per stabilizzare l'auto nei cambi di direzione ad alta velocità e ridurre il rollio.</li>
+                <li><strong>Altezza da terra:</strong> Abbassa l'auto il più possibile senza far toccare il fondo nei punti di compressione.</li>
+                <li><strong>Pressioni Gomme:</strong> Imposta i valori a freddo in modo che, dopo un giro di lancio, raggiungano la pressione ideale di esercizio (circa 20-22 psi a seconda della classe).</li>
+                <li><strong>Carburante:</strong> Imbarca solo la benzina strettamente necessaria per il giro di lancio e il giro secco cronometrato.</li>
+            </ul>`,
+        matrixTitle: "📊 Matrice di Regolazione Rapida & Risoluzione Problemi Dinamici",
+        footerText: "Le Mans Ultimate — Setup & Optimization Hub © Documento sintetico e calcolatore per la regolazione degli assetti simracing.",
+        cards: {
+            ligier: {
+                title: "Ligier JS P320",
+                sub: "RHD - Guida a Destra",
+                hChars: "Caratteristiche e Stile di Guida",
+                pChars: "Piattaforma versatile ed accessibile. Eccelle per consistenza e stabilità in staccata. Offre maggiore rotazione e grip anteriore alle basse velocità. Punto a sfavore: la posizione di guida a destra (RHD) con montante A molto vicino al campo visivo.",
+                hPower: "⚡ Powertrain (Motore & Differenziale)",
+                pFuel: "<strong>Carburante & TC:</strong> Regolazione quantitativo di carburante e livello del controllo di trazione.",
+                pRad: "<strong>Coperture Radiatore (Radiator Covers):</strong> Regolare per mantenere acqua e olio nella finestra ottimale. Mantenere le temperature tassativamente sotto i 120°C.",
+                pDiff: "<strong>Differenziale (Preload & Lock):</strong> Ottimizzato di base per quasi tutti i tracciati. Ridurre il Preload per maggiore rotazione in ingresso curva; aumentarlo (maggior blocco) per indurre sottosterzo in ingresso.",
+                hWheels: "🛞 Wheels & Brakes (Ruote e Freni)",
+                pPress: "<strong>Pressioni & Camber:</strong> Si consiglia di partire con pressioni pneumatici al minimo. Il camber predefinito è già ottimizzato.",
+                pForce: "<strong>Forza Massima Pedale (Max Pedal Force):</strong> Controller: Default | Pedali: 85% - 91%.",
+                pBias: "<strong>Ripartizione Frenata (Brake Bias):</strong> Dipende dal tracciato. La Ligier tollera un bilanciamento spostato maggiormente al posteriore. Utenti controller: usare il valore default.",
+                pDucts: "<strong>Condotti Freni (Brake Ducting):</strong> Aprire o chiudere per mantenere le gomme nella finestra d'esercizio ideale di 85°C - 95°C.",
+                hSusp: "🛞 Suspension (Sospensioni)",
+                pSprings: "<strong>Molle (Spring Rates):</strong> Morbida all'anteriore per ridurre il sottosterzo; rigida al posteriore per aumentare la rotazione in accelerazione.",
+                pPackers: "<strong>Tamponi (Packers):</strong> Usati per evitare che la vettura tocchi il fondo (bottoming out) in punti specifici senza modificare le altezze statiche.",
+                pRake: "<strong>Altezza da Terra & Rake:</strong> Valori statici senza carburante. Più alta dietro e bassa davanti (maggior rake) = anteriore più reattivo e tendenza al sovrasterzo in inserimento.",
+                hAero: "📐 Chassis & Aero",
+                pArb: "<strong>Barre Antirollio (ARB):</strong> Anteriore morbida = reattiva ma instabile / rigida = stabilità e sottosterzo. Posteriore morbida = stabilità in trazione / rigida = più rotazione a gas aperto.",
+                pToe: "<strong>Punti di Toe (Convergenza):</strong> Anteriore: Toe-in per stabilità ad alta velocità; Toe-out per risposte rapide ma instabili. Posteriore: Toe-in per stabilizzare il retrotreno in ingresso."
+            },
+            ginetta: {
+                title: "Ginetta G61 LT P325 EVO",
+                sub: "LHD - Guida a Sinistra",
+                hChars: "Caratteristiche e Stile di Guida",
+                pChars: "Ideale per circuiti veloci e pianeggianti con curve a medio-alta velocità. Eccellente stabilità ad alte velocità con ala posteriore scarica. Debolezza: rigidità generale che causa sottosterzo nel lento. Frenata più delicata, richiede forza pedale inferiori e ripartizione avanzata.",
+                hPower: "⚡ Powertrain (Motore & Differenziale)",
+                pFuel: "<strong>Carburante & TC:</strong> Regolazione serbatoio e mappa del controllo trazione.",
+                pRad: "<strong>Coperture Radiatore (Radiator Covers):</strong> Regolare per mantenere acqua e olio nella finestra ottimale. Mantenere le temperature tassativamente sotto i 120°C.",
+                pDiff: "<strong>Differenziale (Preload & Lock):</strong> Base ottimizzata. Ridurre il Preload per facilitare l'inserimento o aumentarlo per stabilizzare la staccata a costo di un maggiore sottosterzo.",
+                hWheels: "🛞 Wheels & Brakes (Ruote e Freni)",
+                pPress: "<strong>Pressioni & Camber:</strong> Pressioni di partenza raccomandate al minimo. Camber ottimizzato dal setup standard LMU.",
+                pForce: "<strong>Forza Massima Pedale (Max Pedal Force):</strong> Controller: Default | Pedali: 80% - 85% (più bassa della Ligier).",
+                pBias: "<strong>Ripartizione Frenata (Brake Bias):</strong> Preferisce un bilanciamento più neutro/avanzato (anteriore) rispetto alla Ligier per prevenire il bloccaggio posteriore.",
+                pDucts: "<strong>Condotti Freni (Brake Ducting):</strong> Gestione raffreddamento per mantenere le gomme nella finestra 85°C - 95°C.",
+                hSusp: "🛞 Suspension (Sospensioni)",
+                pSprings: "<strong>Molle (Spring Rates):</strong> Ammorbidire l'anteriore per mitigare il sottosterzo congenito nelle basse velocità; irrigidire il posteriore per accelerare la rotazione.",
+                pPackers: "<strong>Tamponi (Packers):</strong> Impostazione per impedire che lo splitter/fondo impatti il suolo nei dossi o nei punti ad alto carico aerodinamico.",
+                pRake: "<strong>Altezza da Terra & Rake:</strong> Regolazione bilanciamento aerodinamico assieme all'ala posteriore. Aumentare l'altezza posteriore (Rake) rende la vettura più puntata in inserimento.",
+                hAero: "📐 Chassis & Aero",
+                pArb: "<strong>Barre Antirollio (ARB):</strong> Anteriore: Morbida per aiutare la staccata e inserimento / Rigida per stabilità high-speed. Posteriore: Stiff = rotazione a centro curva; Soft = trazione in uscita.",
+                pToe: "<strong>Punti di Toe (Convergenza):</strong> Anteriore Toe-out per reattività nel lento; Posteriore Toe-in per stabilizzare il posteriore rigido della Ginetta."
+            },
+            duqueine: {
+                title: "Duqueine M30-D08",
+                sub: "LHD - Guida a Sinistra",
+                hChars: "Caratteristiche e Stile di Guida",
+                pChars: "Vettura caratterizzata da un'eccellente efficienza aerodinamica nei tratti ad alta velocità e grande stabilità in staccata. Richiede una guida pulita per non innescare sottosterzo a centro curva."
+            },
+            hypercar: {
+                title: "Categoria Hypercar (LMH / LMDh)",
+                sub: "Ibrido & Trazione Integrale Virtuale",
+                hChars: "Caratteristiche e Stile di Guida",
+                pChars: "Vetture complesse ad altissimo carico aerodinamico e potenza ibrida MGU. Richiedono una precisa gestione del camber per prevenire il surriscaldamento delle coperture nei curvoni veloci e un controllo maniacale del differenziale per gestire l'erogazione della trazione elettrica sull'asse anteriore/posteriore."
+            },
+            lmp2: {
+                title: "Categoria LMP2 (Oreca 07)",
+                sub: "Prototipo ad Alto Carico Aerodinamico",
+                hChars: "Caratteristiche e Stile di Guida",
+                pChars: "Riferimento assoluto per bilanciamento e carico aerodinamico. Risponde in maniera estremamente diretta ad ogni minima modifica di Rake, barre antirollio e pressioni pneumatici."
+            },
+            gte: {
+                title: "Categoria GTE (Gran Turismo Endurance)",
+                sub: "Motore Anteriore / Centrale / Posteriore",
+                hChars: "Caratteristiche e Stile di Guida",
+                pChars: "Vetture derivate dalla serie con carico aerodinamico moderato e assenza di ABS. Richiedono grande sensibilità al pedale del freno, gestione del trasferimento di carico e molta cura nella trazione in uscita."
+            }
+        },
+        tableHeaders: ["Componente / Problema", "Azione: Freccia Sinistra ◄ Soft / Lower / Modifica", "Azione: Freccia Destra ► Stiff / Higher / Modifica"],
+        tableRows: [
+            ["Campanatura / Camber Anteriore", "Angolo ridotto: Meno grip in curva ad alta velocità, temp. interne omogenee.", "Angolo negativo accentuato: Più grip laterale in percorrenza, temp. interna alta."],
+            ["Campanatura / Camber Posteriore", "Meno angolato: Trazione in rettilineo ottimale, meno grip laterale.", "Più negativo: Più stabilità e grip nei curvoni, usura gomma interna superiore."],
+            ["Molle Anteriori (Front Springs)", "Riduci sottosterzo, maggior grip meccanico anteriore.", "Aumenta stabilità ad alta velocità, maggior sottosterzo nel lento."],
+            ["Molle Posteriori (Rear Springs)", "Maggior stabilità e trazione in uscita di curva.", "Aumenta rotazione della vettura in accelerazione (on-throttle)."],
+            ["Toe Anteriore (Front Toe)", "Aumenta Toe-in (+): Maggiore stabilità nel dritto, maggior calore/usura gomme.", "Crea Toe-out (-): Inserimento curva reattivo/aggressivo, minor usura gomma."],
+            ["Toe Posteriore (Rear Toe)", "Riduci Toe-in: Maggior velocità a centro curva e rotazione (retrotreno più libero).", "Aumenta Toe-in (+): Stabilizza il retrotreno in fase di staccata e inserimento."],
+            ["Barra Antirollio Ant. (Front ARB)", "Anteriore più reattivo, ma rischia instabilità nei cambi di direzione.", "Aumenta la stabilità generale inducendo un leggero sottosterzo."],
+            ["Barra Antirollio Post. (Rear ARB)", "Retrotreno incollato all'asfalto, molta trazione in accelerazione.", "Aumenta la rotazione a centro e uscita curva, rischia sovrasterzo."],
+            ["Ammortizzatori (Dampers)", "Ammorbidisce BUMP / REBOUND: Assorbimento migliore sui cordoli.", "Irrigidisce BUMP / REBOUND: Controllo della piattaforma aerodinamica."],
+            ["Preload Differenziale", "Meno blocco in rilascio: Più rotazione e reattività in ingresso curva.", "Più blocco: Stabilità in frenata, ma tende a sottosterzare in ingresso."],
+            ["Altezza Posteriore (Rake)", "Meno Rake: Vettura più stabile sui curvoni veloci, meno reattiva.", "Più Rake: Anteriore più preciso e puntato, rischio sovrasterzo in staccata."],
+            ["🚨 Soluzione Sottosterzo (Tutti i tipi)", "Ammorbidisci ARB Ant., riduci Preload Diff, aumenta Toe-out Ant.", "Aumenta Rake (alza posteriore), aumenta Camber negativo Ant., ammorbidisci Molle Ant."],
+            ["🚨 Soluzione Sovrasterzo (Ingresso/Staccata)", "Sposta Brake Bias all'anteriore, aumenta Toe-in Posteriore.", "Irrigidisci ARB Anteriore, aumenta Preload Diff, diminuisci Rake Posteriore."],
+            ["🚨 Soluzione Sovrasterzo (Uscita/Trazione)", "Ammorbidisci ARB Posteriore, ammorbidisci Molle Posteriori.", "Aumenta Power Lock Diff, riduci Camber Posteriore se excessive per l'impronta a terra."],
+            ["🚨 Spanciamento (Bottoming Out)", "Aumenta Packers (Tamponi) di +2/4mm per bloccare la corsa fine.", "Aumenta le altezze da terra statiche (Ant e Post) e aumenta la rigidezza Fast Bump."]
+        ]
+    },
+    en: {
+        title: "Le Mans Ultimate — Setup & Optimization Hub",
+        intro: "Complete guide and interactive optimizer for all categories (<span class=\"badge-lmu\">LMP3</span> <span class=\"badge-lmu\">Hypercar</span> <span class=\"badge-lmu\">GTE</span> <span class=\"badge-lmu\">LMP2</span>). Calculates optimal camber, toe, ride height, suspension, dampers, brakes, differential, and balance for any track.",
+        officialSource: "🔗 <strong>Official Le Mans Ultimate Source</strong> 🏎️",
+        calcTitle: "LMU Setup Calculator & Optimizer",
+        calcSub: "Select your car, track features, temperature, and handling issues to instantly generate a fully optimized recommended setup.",
+        lblCar: "Car Class / Model:",
+        lblTrack: "Track Type / Layout:",
+        lblTemp: "Track Temperature (°C):",
+        lblCtrl: "Input Device:",
+        lblIssue: "Handling Issue Experienced / Mode:",
+        trackOptions: [
+            "Balanced / Mixed (e.g., Spa, Imola)",
+            "High Speed / Low Drag (e.g., Le Mans, Monza)",
+            "Technical / High Downforce (e.g., COTA, Portimão)"
+        ],
+        ctrlOptions: [
+            "Wheel and Pedals (Load Cell / Potentiometer)",
+            "Gamepad / Controller"
+        ],
+        issueOptions: [
+            "None (Base Optimized Setup)",
+            "🏆 Extreme Qualifying / Pole Position Mode",
+            "Turn-in Understeer",
+            "Entry / Braking Oversteer",
+            "Exit Oversteer (Traction)",
+            "Car is bottoming out on kerbs/bumps"
+        ],
+        btnCalc: "⚙️ Calculate & Optimize Setup Now",
+        resTitle: "🎯 Calculated Setup Results & Optimized Parameters",
+        hGeometry: "📐 Geometry (Camber & Toe)",
+        hAero: "🏎️ Aerodynamics & Rake",
+        hBrakes: "🛞 Pressures & Brakes",
+        hSusp: "🔧 Suspension & Anti-Roll Bars",
+        hDampDiff: "⚡ Dampers & Differential",
+        hIssueFix: "💡 Dynamic Issue Solution",
+        poleTitle: "🏆 Pole Position Setup for Le Mans Ultimate",
+        poleBox: `<p>To achieve pole position in Le Mans Ultimate, there is no single setup that fits all cars. You need an extreme qualifying configuration: lower downforce (low rear wing), stiffen suspensions for high-speed sweepers at Circuit de la Sarthe (Le Mans), use low cold pressures, and reduce fuel to the absolute minimum.</p>
+            <h3>Key Qualifying Adjustments</h3>
+            <ul>
+                <li><strong>Aerodynamics:</strong> Reduce rear wing to the minimum allowed to maximize top speed on straights (Mulsanne / Hunaudières).</li>
+                <li><strong>Suspension:</strong> Increase spring rates and anti-roll bar stiffness to stabilize the chassis during high-speed direction changes and minimize roll.</li>
+                <li><strong>Ride Height:</strong> Lower the car as much as possible without bottoming out in high compression zones.</li>
+                <li><strong>Tire Pressures:</strong> Set cold pressures low so that after an outlap they reach ideal operating pressure (approx. 20-22 PSI depending on class).</li>
+                <li><strong>Fuel Load:</strong> Carry only the fuel strictly needed for the outlap and one flying hotlap.</li>
+            </ul>`,
+        matrixTitle: "📊 Quick Adjustment Matrix & Dynamic Troubleshooting",
+        footerText: "Le Mans Ultimate — Setup & Optimization Hub © Summary document and calculator for simracing setup adjustments.",
+        cards: {
+            ligier: {
+                title: "Ligier JS P320",
+                sub: "RHD - Right Hand Drive",
+                hChars: "Handling Characteristics & Driving Style",
+                pChars: "Versatile and accessible platform. Excels in consistency and braking stability. Offers better rotation and front grip at lower speeds. Drawback: Right Hand Drive (RHD) layout with the A-pillar very close to the visual field.",
+                hPower: "⚡ Powertrain (Engine & Differential)",
+                pFuel: "<strong>Fuel & TC:</strong> Fuel load adjustment and Traction Control levels.",
+                pRad: "<strong>Radiator Covers:</strong> Adjust to keep water and oil within the optimal window. Keep temperatures strictly below 120°C.",
+                pDiff: "<strong>Differential (Preload & Lock):</strong> Well optimized by default for most tracks. Lower Preload for better turn-in rotation; increase it (more locking) to induce entry understeer.",
+                hWheels: "🛞 Wheels & Brakes",
+                pPress: "<strong>Pressures & Camber:</strong> Starting with minimum tire pressures is recommended. Default camber is already well optimized.",
+                pForce: "<strong>Max Pedal Force:</strong> Controller: Default | Pedals: 85% - 91%.",
+                pBias: "<strong>Brake Bias:</strong> Track dependent. The Ligier tolerates a rearward bias shift. Controller users: use default value.",
+                pDucts: "<strong>Brake Ducting:</strong> Open or close to maintain tires in the ideal operating window of 85°C - 95°C.",
+                hSusp: "🛞 Suspension",
+                pSprings: "<strong>Spring Rates:</strong> Soft front to reduce understeer; stiff rear to increase acceleration rotation.",
+                pPackers: "<strong>Packers:</strong> Used to prevent bottoming out at specific points without altering static ride height.",
+                pRake: "<strong>Ride Height & Rake:</strong> Static values without fuel. Higher rear / lower front (more rake) = sharper front end and entry oversteer tendency.",
+                hAero: "📐 Chassis & Aero",
+                pArb: "<strong>Anti-Roll Bars (ARB):</strong> Soft front = responsive but unstable / stiff = stability and understeer. Soft rear = traction stability / stiff = more rotation on throttle.",
+                pToe: "<strong>Toe Angles:</strong> Front: Toe-in for high-speed stability; Toe-out for sharp but twitchy response. Rear: Toe-in to stabilize the rear on entry."
+            },
+            ginetta: {
+                title: "Ginetta G61 LT P325 EVO",
+                sub: "LHD - Left Hand Drive",
+                hChars: "Handling Characteristics & Driving Style",
+                pChars: "Ideal for fast, flat tracks with medium-to-high speed corners. Excellent high-speed stability with low rear wing. Weakness: general stiffness causing low-speed understeer. More delicate braking, requiring lower pedal force and forward bias.",
+                hPower: "⚡ Powertrain (Engine & Differential)",
+                pFuel: "<strong>Fuel & TC:</strong> Fuel tank capacity and Traction Control mapping.",
+                pRad: "<strong>Radiator Covers:</strong> Adjust to keep water and oil within optimal range. Keep temperatures strictly below 120°C.",
+                pDiff: "<strong>Differential (Preload & Lock):</strong> Good baseline. Lower Preload for easier turn-in or increase it to stabilize heavy braking at the cost of understeer.",
+                hWheels: "🛞 Wheels & Brakes",
+                pPress: "<strong>Pressures & Camber:</strong> Minimum recommended cold pressures. Camber optimized from LMU standard setup.",
+                pForce: "<strong>Max Pedal Force:</strong> Controller: Default | Pedals: 80% - 85% (lower than Ligier).",
+                pBias: "<strong>Brake Bias:</strong> Prefers a more neutral/forward bias compared to the Ligier to prevent rear wheel lockup.",
+                pDucts: "<strong>Brake Ducting:</strong> Cooling management to keep tires within the 85°C - 95°C range.",
+                hSusp: "🛞 Suspension",
+                pSprings: "<strong>Spring Rates:</strong> Soften front to mitigate low-speed understeer; stiffen rear to accelerate rotation.",
+                pPackers: "<strong>Packers:</strong> Set to prevent the splitter/floor from striking the ground on bumps or under high downforce load.",
+                pRake: "<strong>Ride Height & Rake:</strong> Aerodynamic balance adjustment alongside rear wing. Increasing rear height (Rake) sharpens entry.",
+                hAero: "📐 Chassis & Aero",
+                pArb: "<strong>Anti-Roll Bars (ARB):</strong> Front: Soft to aid braking and turn-in / Stiff for high-speed stability. Rear: Stiff = mid-corner rotation; Soft = exit traction.",
+                pToe: "<strong>Toe Angles:</strong> Front Toe-out for low-speed sharpness; Rear Toe-in to stabilize the Ginetta's stiff rear end."
+            },
+            duqueine: {
+                title: "Duqueine M30-D08",
+                sub: "LHD - Left Hand Drive",
+                hChars: "Handling Characteristics & Driving Style",
+                pChars: "Car featured by high aerodynamic efficiency on high-speed sections and strong braking stability. Requires clean inputs to prevent mid-corner understeer."
+            },
+            hypercar: {
+                title: "Hypercar Class (LMH / LMDh)",
+                sub: "Hybrid & Virtual All-Wheel Drive",
+                hChars: "Handling Characteristics & Driving Style",
+                pChars: "Complex cars with extreme downforce and hybrid MGU deployment. Require precise camber management to prevent tire overheating in fast sweepers, and meticulous differential management for electric power delivery."
+            },
+            lmp2: {
+                title: "LMP2 Class (Oreca 07)",
+                sub: "High Downforce Prototype",
+                hChars: "Handling Characteristics & Driving Style",
+                pChars: "The benchmark for balance and aerodynamic downforce. Responds directly and precisely to minor adjustments in Rake, Anti-Roll Bars, and tire pressures."
+            },
+            gte: {
+                title: "GTE Class (Gran Turismo Endurance)",
+                sub: "Front / Mid / Rear Engine",
+                hChars: "Handling Characteristics & Driving Style",
+                pChars: "Production-derived race cars with moderate downforce and no ABS. Require fine brake pedal sensitivity, weight transfer management, and careful traction control on exit."
+            }
+        },
+        tableHeaders: ["Component / Issue", "Action: Left Arrow ◄ Soft / Lower / Modify", "Action: Right Arrow ► Stiff / Higher / Modify"],
+        tableRows: [
+            ["Front Camber", "Reduced angle: Less high-speed corner grip, even inner temperatures.", "Increased negative angle: More lateral cornering grip, high inner temp."],
+            ["Rear Camber", "Less angled: Optimal straight-line traction, less lateral grip.", "More negative: More stability and grip in sweepers, higher inner tire wear."],
+            ["Front Springs", "Reduces understeer, increases front mechanical grip.", "Increases high-speed stability, higher low-speed understeer."],
+            ["Rear Springs", "Higher stability and traction when exiting corners.", "Increases car rotation on acceleration (on-throttle)."],
+            ["Front Toe", "Increase Toe-in (+): Higher straight-line stability, more heat/wear.", "Create Toe-out (-): Sharp/aggressive turn-in, lower tire wear."],
+            ["Rear Toe", "Reduce Toe-in: Higher mid-corner speed and rotation (freer rear).", "Increase Toe-in (+): Stabilizes rear during braking and entry."],
+            ["Front ARB", "Front end more responsive, but risks direction-change instability.", "Increases overall stability by inducing mild understeer."],
+            ["Rear ARB", "Rear end glued to tarmac, maximum acceleration traction.", "Increases mid-corner and exit rotation, risks oversteer."],
+            ["Dampers", "Softens BUMP / REBOUND: Better kerb absorption.", "Stiffens BUMP / REBOUND: Controls aerodynamic platform."],
+            ["Differential Preload", "Less coast locking: More rotation and entry sharpness.", "More locking: Braking stability, but tends to understeer on entry."],
+            ["Rear Ride Height (Rake)", "Less Rake: Car more stable in fast corners, less responsive.", "More Rake: Sharper, more precise front end, risk of entry oversteer."],
+            ["🚨 Understeer Solution (All Types)", "Soften Front ARB, reduce Diff Preload, increase Front Toe-out.", "Increase Rake (raise rear), increase Front negative Camber, soften Front Springs."],
+            ["🚨 Entry Oversteer Solution", "Shift Brake Bias forward, increase Rear Toe-in.", "Stiffen Front ARB, increase Diff Preload, lower Rear Rake."],
+            ["🚨 Exit Oversteer Solution", "Soften Rear ARB, soften Rear Springs.", "Increase Diff Power Lock, reduce Rear Camber if contact patch is compromised."],
+            ["🚨 Bottoming Out Solution", "Increase Packers (+2/4mm) to catch travel limits.", "Increase static ride heights (Front & Rear) and increase Fast Bump stiffness."]
+        ]
+    }
+};
+
+let currentLanguage = 'it';
+
+function translatePage(langCode) {
+    currentLanguage = langCode;
+    const t = translations[langCode] || translations['it'];
+
+    // 1. Header & Intro
+    const h1 = document.querySelector('h1');
+    if (h1) h1.innerText = t.title;
+
+    const paragraphs = document.querySelectorAll('.container > p');
+    if (paragraphs.length >= 2) {
+        paragraphs[0].innerHTML = t.intro;
+        paragraphs[1].innerHTML = t.officialSource;
+    }
+
+    // 2. Form & Calculator Section Header
+    const calcH2 = document.querySelector('.section h2');
+    if (calcH2) calcH2.innerText = t.calcTitle;
+
+    const calcP = document.querySelector('.section form').previousElementSibling;
+    if (calcP) calcP.innerText = t.calcSub;
+
+    const labels = document.querySelectorAll('#setupForm label');
+    if (labels.length >= 5) {
+        labels[0].innerText = t.lblCar;
+        labels[1].innerText = t.lblTrack;
+        labels[2].innerText = t.lblTemp;
+        labels[3].innerText = t.lblCtrl;
+        labels[4].innerText = t.lblIssue;
+    }
+
+    // Traduzione Opzioni Select Form
+    const trackSelect = document.getElementById('trackType');
+    if (trackSelect && trackSelect.options.length >= 3) {
+        for (let i = 0; i < 3; i++) trackSelect.options[i].text = t.trackOptions[i];
+    }
+
+    const ctrlSelect = document.getElementById('controller');
+    if (ctrlSelect && ctrlSelect.options.length >= 2) {
+        for (let i = 0; i < 2; i++) ctrlSelect.options[i].text = t.ctrlOptions[i];
+    }
+
+    const issueSelect = document.getElementById('issue');
+    if (issueSelect && issueSelect.options.length >= 6) {
+        for (let i = 0; i < 6; i++) issueSelect.options[i].text = t.issueOptions[i];
+    }
+
+    const btn = document.querySelector('#setupForm button');
+    if (btn) btn.innerText = t.btnCalc;
+
+    // 3. Titoli Box Risultati Calcolatore
+    const resH3 = document.querySelector('#resultsBox h3');
+    if (resH3) resH3.innerText = t.resTitle;
+
+    const cardHeaders = document.querySelectorAll('.result-card h4');
+    if (cardHeaders.length >= 6) {
+        cardHeaders[0].innerText = t.hGeometry;
+        cardHeaders[1].innerText = t.hAero;
+        cardHeaders[2].innerText = t.hBrakes;
+        cardHeaders[3].innerText = t.hSusp;
+        cardHeaders[4].innerText = t.hDampDiff;
+        cardHeaders[5].innerText = t.hIssueFix;
+    }
+
+    // 4. Traduzione Sezione Pole Position
+    const poleTitle = document.getElementById('poleTitle');
+    if (poleTitle) poleTitle.innerText = t.poleTitle;
+    const poleContent = document.getElementById('poleContent');
+    if (poleContent) poleContent.innerHTML = t.poleBox;
+
+    // 5. Traduzione Scheda LIGIER
+    const cardLigier = document.getElementById('card_ligier_lmp3');
+    if (cardLigier) {
+        cardLigier.querySelector('h2').innerText = t.cards.ligier.title;
+        cardLigier.querySelector('p strong').innerText = t.cards.ligier.sub;
+        const h3s = cardLigier.querySelectorAll('h3');
+        const ps = cardLigier.querySelectorAll('p');
+        if (h3s.length >= 5) {
+            h3s[0].innerText = t.cards.ligier.hChars;
+            h3s[1].innerText = t.cards.ligier.hPower;
+            h3s[2].innerText = t.cards.ligier.hWheels;
+            h3s[3].innerText = t.cards.ligier.hSusp;
+            h3s[4].innerText = t.cards.ligier.hAero;
+        }
+        if (ps.length >= 14) {
+            ps[1].innerText = t.cards.ligier.pChars;
+            ps[2].innerHTML = t.cards.ligier.pFuel;
+            ps[3].innerHTML = t.cards.ligier.pRad;
+            ps[4].innerHTML = t.cards.ligier.pDiff;
+            ps[5].innerHTML = t.cards.ligier.pPress;
+            ps[6].innerHTML = t.cards.ligier.pForce;
+            ps[7].innerHTML = t.cards.ligier.pBias;
+            ps[8].innerHTML = t.cards.ligier.pDucts;
+            ps[9].innerHTML = t.cards.ligier.pSprings;
+            ps[10].innerHTML = t.cards.ligier.pPackers;
+            ps[11].innerHTML = t.cards.ligier.pRake;
+            ps[12].innerHTML = t.cards.ligier.pArb;
+            ps[13].innerHTML = t.cards.ligier.pToe;
+        }
+    }
+
+    // 6. Traduzione Scheda GINETTA
+    const cardGinetta = document.getElementById('card_ginetta_lmp3');
+    if (cardGinetta) {
+        cardGinetta.querySelector('h2').innerText = t.cards.ginetta.title;
+        cardGinetta.querySelector('p strong').innerText = t.cards.ginetta.sub;
+        const h3s = cardGinetta.querySelectorAll('h3');
+        const ps = cardGinetta.querySelectorAll('p');
+        if (h3s.length >= 5) {
+            h3s[0].innerText = t.cards.ginetta.hChars;
+            h3s[1].innerText = t.cards.ginetta.hPower;
+            h3s[2].innerText = t.cards.ginetta.hWheels;
+            h3s[3].innerText = t.cards.ginetta.hSusp;
+            h3s[4].innerText = t.cards.ginetta.hAero;
+        }
+        if (ps.length >= 14) {
+            ps[1].innerText = t.cards.ginetta.pChars;
+            ps[2].innerHTML = t.cards.ginetta.pFuel;
+            ps[3].innerHTML = t.cards.ginetta.pRad;
+            ps[4].innerHTML = t.cards.ginetta.pDiff;
+            ps[5].innerHTML = t.cards.ginetta.pPress;
+            ps[6].innerHTML = t.cards.ginetta.pForce;
+            ps[7].innerHTML = t.cards.ginetta.pBias;
+            ps[8].innerHTML = t.cards.ginetta.pDucts;
+            ps[9].innerHTML = t.cards.ginetta.pSprings;
+            ps[10].innerHTML = t.cards.ginetta.pPackers;
+            ps[11].innerHTML = t.cards.ginetta.pRake;
+            ps[12].innerHTML = t.cards.ginetta.pArb;
+            ps[13].innerHTML = t.cards.ginetta.pToe;
+        }
+    }
+
+    // 7. Traduzione Altre Schede Auto (Duqueine, Hypercar, LMP2, GTE)
+    const translateSimpleCard = (cardId, cardData) => {
+        const card = document.getElementById(cardId);
+        if (card && cardData) {
+            card.querySelector('h2').innerText = cardData.title;
+            card.querySelector('p strong').innerText = cardData.sub;
+            const h3 = card.querySelector('h3');
+            if (h3) h3.innerText = cardData.hChars;
+            const ps = card.querySelectorAll('p');
+            if (ps.length >= 2) ps[1].innerText = cardData.pChars;
+        }
+    };
+
+    translateSimpleCard('card_duqueine_lmp3', t.cards.duqueine);
+    translateSimpleCard('card_hypercar_gen', t.cards.hypercar);
+    translateSimpleCard('card_lmp2_gen', t.cards.lmp2);
+    translateSimpleCard('card_gte_gen', t.cards.gte);
+
+    // 8. Traduzione Tabella Matrice Setup
+    const matrixH2 = document.getElementById('matrixTitle');
+    if (matrixH2) matrixH2.innerText = t.matrixTitle;
+
+    const ths = document.querySelectorAll('table th');
+    if (ths.length >= 3) {
+        ths[0].innerText = t.tableHeaders[0];
+        ths[1].innerText = t.tableHeaders[1];
+        ths[2].innerText = t.tableHeaders[2];
+    }
+
+    const trs = document.querySelectorAll('table tbody tr');
+    trs.forEach((tr, idx) => {
+        const tds = tr.querySelectorAll('td');
+        if (tds.length >= 3 && t.tableRows[idx]) {
+            tds[0].innerHTML = `<strong>${t.tableRows[idx][0]}</strong>`;
+            tds[1].innerText = t.tableRows[idx][1];
+            tds[2].innerText = t.tableRows[idx][2];
+        }
+    });
+
+    // 9. Footer Text
+    const footer = document.querySelector('.footer p');
+    if (footer) footer.innerText = t.footerText;
+
+    if (document.getElementById('resultsBox').style.display === 'block') {
+        calculateSetup();
+    }
+}
+
+function calculateSetup() {
+    const carSelect = document.getElementById('carModel');
+    const selectedCarText = carSelect.options[carSelect.selectedIndex].text;
+    const carValue = carSelect.value;
+    
+    const trackSelect = document.getElementById('trackType');
+    const selectedTrackText = trackSelect.options[trackSelect.selectedIndex].text;
+    const trackType = trackSelect.value;
+    
+    const temp = parseInt(document.getElementById('temp').value);
+    const controller = document.getElementById('controller').value;
+    const issue = document.getElementById('issue').value;
+
+    // 1. Gestione visibilità schede informative
+    const activeCard = document.getElementById('card_' + carValue);
+    if (activeCard) {
+        document.querySelectorAll('.car-card').forEach(card => card.style.display = 'none');
+        activeCard.style.display = 'block';
+    } else {
+        document.querySelectorAll('.car-card').forEach(card => {
+            if (carValue.includes('lmp3')) {
+                card.style.display = (card.id.includes('lmp3')) ? 'block' : 'none';
+            } else if (carValue.includes('gte')) {
+                card.style.display = (card.id.includes('gte')) ? 'block' : 'none';
+            } else if (carValue.includes('oreca')) {
+                card.style.display = (card.id.includes('lmp2')) ? 'block' : 'none';
+            } else {
+                card.style.display = (card.id.includes('hypercar')) ? 'block' : 'none';
+            }
+        });
+    }
+
+    const isEn = (currentLanguage === 'en');
+
+    // 2. Intestazione Risultati
+    document.getElementById('resSummary').innerHTML = isEn ?
+        `<p>🏎️ <strong>Car:</strong> ${selectedCarText} | 🏁 <strong>Track:</strong> ${selectedTrackText} | 🌡️ <strong>Track Temp:</strong> ${temp}°C</p>` :
+        `<p>🏎️ <strong>Vettura:</strong> ${selectedCarText} | 🏁 <strong>Tracciato:</strong> ${selectedTrackText} | 🌡️ <strong>Temp. Asfalto:</strong> ${temp}°C</p>`;
+
+    // 3. BASELINE SPECIFICHE PER OGNI SINGOLA VETTURA
+    let base = {
+        fCamber: -3.2, rCamber: -2.4,
+        fToe: -0.10,   rToe: 0.18,
+        fArb: "Medium", rArb: "Medium",
+        springF: isEn ? "Medium" : "Media", springR: isEn ? "Medium" : "Media",
+        diffPreload: 90, powerLock: 50, coastLock: 35,
+        targetHotPSI: 21.5,
+        brakeBias: 54.0
+    };
+
+    // -- LMP3 --
+    if (carValue === 'ligier_lmp3') {
+        base.fCamber = -3.1; base.rCamber = -2.3; base.fArb = "Medium"; base.rArb = "Soft";
+        base.diffPreload = 80; base.brakeBias = 52.5;
+    } else if (carValue === 'ginetta_lmp3') {
+        base.fCamber = -3.4; base.rCamber = -2.5; base.fArb = "Soft"; base.rArb = "Stiff";
+        base.diffPreload = 100; base.springF = isEn ? "Soft" : "Morbida"; base.brakeBias = 55.0;
+    } else if (carValue === 'duqueine_lmp3') {
+        base.fCamber = -3.2; base.rCamber = -2.4; base.fArb = "Medium"; base.rArb = "Medium";
+        base.diffPreload = 90; base.brakeBias = 53.5;
+    } 
+    // -- HYPERCAR --
+    else if (carValue === 'ferrari_499p') {
+        base.fCamber = -3.5; base.rCamber = -2.6; base.fArb = "Stiff"; base.rArb = "Medium";
+        base.diffPreload = 110; base.powerLock = 55; base.brakeBias = 54.5;
+    } else if (carValue === 'toyota_gr010') {
+        base.fCamber = -3.6; base.rCamber = -2.7; base.fArb = "Stiff"; base.rArb = "Stiff";
+        base.diffPreload = 120; base.powerLock = 60; base.brakeBias = 55.0;
+    } else if (carValue === 'porsche_963') {
+        base.fCamber = -3.3; base.rCamber = -2.5; base.fArb = "Medium"; base.rArb = "Stiff";
+        base.diffPreload = 100; base.powerLock = 50; base.brakeBias = 53.5;
+    } else if (carValue === 'cadillac_v_series') {
+        base.fCamber = -3.2; base.rCamber = -2.4; base.fArb = "Medium"; base.rArb = "Medium";
+        base.diffPreload = 95; base.powerLock = 45; base.brakeBias = 53.0;
+    } else if (carValue === 'peugeot_9x8') {
+        base.fCamber = -3.7; base.rCamber = -2.8; base.fArb = "Stiff"; base.rArb = "Soft";
+        base.diffPreload = 130; base.powerLock = 65; base.brakeBias = 56.0;
+    } else if (carValue.includes('bmw') || carValue.includes('alpine') || carValue.includes('lamborghini') || carValue.includes('isotta')) {
+        base.fCamber = -3.4; base.rCamber = -2.5; base.fArb = "Medium"; base.rArb = "Medium";
+        base.diffPreload = 105; base.brakeBias = 54.0;
+    }
+    // -- LMP2 --
+    else if (carValue === 'oreca_07') {
+        base.fCamber = -3.6; base.rCamber = -2.6; base.fArb = "Stiff"; base.rArb = "Medium";
+        base.diffPreload = 100; base.targetHotPSI = 21.0; base.brakeBias = 53.0;
+    }
+    // -- GTE --
+    else if (carValue === 'ferrari_488_gte') {
+        base.fCamber = -3.0; base.rCamber = -2.2; base.fArb = "Medium"; base.rArb = "Soft";
+        base.diffPreload = 75; base.targetHotPSI = 22.0; base.brakeBias = 52.0;
+    } else if (carValue === 'porsche_911_rsr') {
+        base.fCamber = -2.9; base.rCamber = -2.1; base.fArb = "Soft"; base.rArb = "Stiff";
+        base.diffPreload = 85; base.targetHotPSI = 22.0; base.brakeBias = 51.5;
+    } else if (carValue === 'chevrolet_corvette_c8r' || carValue === 'aston_martin_vantage_gte') {
+        base.fCamber = -3.1; base.rCamber = -2.3; base.fArb = "Stiff"; base.rArb = "Medium";
+        base.diffPreload = 80; base.targetHotPSI = 22.0; base.brakeBias = 53.0;
+    }
+
+    // 4. ADATTAMENTO AL TIPO DI TRACCIATO
+    if (trackType === 'high_speed') {
+        base.fCamber += 0.4; // Camber meno aggressivo per i rettilinei
+        base.rCamber += 0.4;
+        base.fToe = -0.04;
+        base.rToe = 0.12;
+        base.diffPreload += 20;
+    } else if (trackType === 'technical') {
+        base.fCamber -= 0.3; // Più camber nei tratti guidati
+        base.rCamber -= 0.3;
+        base.fToe = -0.16;
+        base.rToe = 0.22;
+        base.diffPreload -= 20;
+    }
+
+    // 5. REGOLAZIONE PERiferica DI GUIDA (Gamepad vs Volante)
+    if (controller === 'pad') {
+        base.brakeBias += 1.5; // Bias spostato all'anteriore per facilitare il pad
+    }
+
+    // 6. GESTIONE PROBLEMI DINAMICI E POLE POSITION
+    let issueFixNote = "";
+    if (issue === 'pole_position') {
+        base.fCamber -= 0.3;
+        base.fArb = isEn ? "Stiff (Max stability)" : "Stiff (Massima stabilità nei curvoni)";
+        base.rArb = isEn ? "Stiff (High speed transition)" : "Stiff (Reattività ad alta velocità)";
+        base.diffPreload += 30;
+        issueFixNote = isEn ?
+            `<span class='highlight-fix'>🏆 POLE POSITION MODE ACTIVATED:</span> Low wing setting for maximum straight-line speed, minimum fuel load (outlap + 1 timed lap), stiffened springs & ARBs for high-speed stability, and lowest cold pressures calibrated for ${base.targetHotPSI - 1.5} PSI target.` :
+            `<span class='highlight-fix'>🏆 MODALITÀ POLE POSITION ATTIVATA:</span> Carico aerodinamico scaricato al minimo (ali basse), benzina ridotta al minimo (1 giro secco), sospensioni e barre ARB irrigidite per i curvoni veloci, e pressioni a freddo basse target (${base.targetHotPSI - 1.5} PSI d'esercizio).`;
+    } else if (issue === 'understeer_entry') {
+        base.fCamber -= 0.3;
+        base.fToe -= 0.06;
+        base.fArb = isEn ? "Soft (Softened to fix understeer)" : "Soft (Ammorbidita per curare il sottosterzo)";
+        base.diffPreload = Math.max(30, base.diffPreload - 35);
+        issueFixNote = isEn ?
+            `<span class='highlight-fix'>Understeer Fixed:</span> Increased Front Toe-out, softened front ARB, and lowered diff Preload to ${base.diffPreload} Nm to increase turn-in rotation.` :
+            `<span class='highlight-fix'>Sottosterzo Corretto:</span> Aumentato il Toe-out Anteriore, ridotta la barra ARB anteriore e abbassato il Preload del differenziale a ${base.diffPreload} Nm per far ruotare l'auto in ingresso.`;
+    } else if (issue === 'oversteer_entry') {
+        base.fToe = Math.min(0, base.fToe + 0.06);
+        base.rToe += 0.08;
+        base.fArb = isEn ? "Stiff (Stiffened for stability)" : "Stiff (Irrigidita per stabilità)";
+        base.diffPreload += 30;
+        base.brakeBias += 1.5;
+        issueFixNote = isEn ?
+            `<span class='highlight-fix'>Entry Oversteer Fixed:</span> Increased Rear Toe-in to +${base.rToe.toFixed(2)}°, stiffened front end, and shifted Brake Bias to ${base.brakeBias.toFixed(1)}% forward to stabilize braking.` :
+            `<span class='highlight-fix'>Sovrasterzo Ingresso Corretto:</span> Aumentato Toe-in posteriore a +${base.rToe.toFixed(2)}°, irrigidito l'anteriore e spostato il bilanciamento freni al ${base.brakeBias.toFixed(1)}% per stabilizzare la staccata.`;
+    } else if (issue === 'oversteer_exit') {
+        base.rCamber += 0.3;
+        base.rArb = isEn ? "Soft (Softened to maximize traction)" : "Soft (Ammorbidita per massimizzare la trazione)";
+        issueFixNote = isEn ?
+            `<span class='highlight-fix'>Exit Oversteer Fixed:</span> Softened Rear Anti-Roll Bar and adjusted rear camber to maximize contact patch on acceleration.` :
+            `<span class='highlight-fix'>Sovrasterzo Uscita Corretto:</span> Ammorbidita la Barra Antirollio Posteriore e ottimizzato il Camber posteriore per dare massima impronta a terra in accelerazione.`;
+    } else if (issue === 'bottoming') {
+        issueFixNote = isEn ?
+            `<span class='highlight-fix'>Bottoming Fixed:</span> Applied +3mm to Packers and increased static Rake by +2mm to protect the floor over kerbs.` :
+            `<span class='highlight-fix'>Spanciamento Corretto:</span> Applicato +3mm ai Packers (Tamponi) e alzato il Rake statico di +2mm per proteggere il fondo sui cordoli.`;
+    } else {
+        issueFixNote = isEn ? 
+            "No specific dynamic issue selected. Purely calculated setup based on track and car." : 
+            "Nessun problema segnalato. Assetto puramente calcolato in base al circuito e vettura.";
+    }
+
+    // Correzione Camber per Temperature elevate
+    if (temp > 35) base.fCamber += 0.2;
+
+    // 7. RENDERING DELLE SCHEDE DI RISULTATO
+    let geometryText = isEn ?
+        `• <strong>Front Camber:</strong> ${base.fCamber.toFixed(1)}°<br>
+         • <strong>Rear Camber:</strong> ${base.rCamber.toFixed(1)}°<br>
+         • <strong>Front Toe:</strong> ${base.fToe.toFixed(2)}° (Toe-out)<br>
+         • <strong>Rear Toe:</strong> +${base.rToe.toFixed(2)}° (Toe-in)` :
+        `• <strong>Camber Ant:</strong> ${base.fCamber.toFixed(1)}°<br>
+         • <strong>Camber Post:</strong> ${base.rCamber.toFixed(1)}°<br>
+         • <strong>Toe Anteriore:</strong> ${base.fToe.toFixed(2)}° (Toe-out)<br>
+         • <strong>Toe Posteriore:</strong> +${base.rToe.toFixed(2)}° (Toe-in)`;
+    document.getElementById('resGeometry').innerHTML = geometryText;
+
+    let aeroText = "";
+    if (issue === 'pole_position' || trackType === 'high_speed') {
+        aeroText = isEn ? 
+            "• <strong>Rear Wing:</strong> Minimum / Low Drag (Pole Setup)<br>• <strong>Rake:</strong> Flat/Low for maximum straight-line speed.<br>• <strong>Ride Height:</strong> Minimum allowed." : 
+            "• <strong>Ala Posteriore:</strong> Minima / Scarica (Setup Pole)<br>• <strong>Rake:</strong> Basso/Piatto per massima velocità sui rettilinei.<br>• <strong>Altezza Ant/Post:</strong> Minima consentita.";
+    } else if (issue === 'bottoming') {
+        aeroText = isEn ? 
+            "• <strong>Ride Height:</strong> +2mm (Adjusted for anti-bottoming)<br>• <strong>Packers:</strong> +3mm to protect the splitter." : 
+            "• <strong>Altezza da Terra:</strong> +2mm (Modificato per anti-bottoming)<br>• <strong>Packers (Tamponi):</strong> +3mm per proteggere lo splitter.";
+    } else if (trackType === 'technical') {
+        aeroText = isEn ? 
+            "• <strong>Rear Wing:</strong> High Downforce<br>• <strong>Rake:</strong> High (Low Front / High Rear).<br>• <strong>Result:</strong> Sharper direction changes." : 
+            "• <strong>Ala Posteriore:</strong> Alto Carico (High Downforce)<br>• <strong>Rake:</strong> Marcato (Anteriore Basso / Posteriore Alto).<br>• <strong>Risultato:</strong> Reattività nei cambi di direzione.";
+    } else {
+        aeroText = isEn ? 
+            "• <strong>Rear Wing:</strong> Medium Drag<br>• <strong>Rake:</strong> Balanced.<br>• <strong>Result:</strong> Optimal compromise between speed and stability." : 
+            "• <strong>Ala Posteriore:</strong> Configurazione Mista (Medium Drag)<br>• <strong>Rake:</strong> Bilanciato moderato.<br>• <strong>Risultato:</strong> Ottimo compromesso velocità/stabilità.";
+    }
+    document.getElementById('resAero').innerHTML = aeroText;
+
+    // Calcolo Pressioni a Freddo in base alle temp. e al target d'esercizio
+    let coldPSI = (base.targetHotPSI - (temp * 0.12) - 3.5).toFixed(1);
+    let brakeText = isEn ? 
+        `• <strong>Cold Pressures:</strong> ${coldPSI} PSI (Target Hot: ${base.targetHotPSI} PSI)<br>` : 
+        `• <strong>Pressioni di Partenza:</strong> ${coldPSI} PSI (Target a Caldo: ${base.targetHotPSI} PSI)<br>`;
+
+    if (temp > 32) {
+        brakeText += isEn ? `• <strong>Brake Ducts:</strong> Open (+1 notch, size 3/4) to cool tires/discs.<br>` : `• <strong>Condotti Freni:</strong> Aprire (+1 notch, misura 3/4) per raffreddare gomma/dischi.<br>`;
+    } else if (temp < 18) {
+        brakeText += isEn ? `• <strong>Brake Ducts:</strong> Close (size 1/2) to warm compound.<br>` : `• <strong>Condotti Freni:</strong> Chiudere (misura 1/2) per scaldare mescola.<br>`;
+    } else {
+        brakeText += isEn ? `• <strong>Brake Ducts:</strong> Standard setting (size 2).<br>` : `• <strong>Condotti Freni:</strong> Configurazione Standard (misura 2).<br>`;
+    }
+
+    if (controller === 'pad') {
+        brakeText += isEn ? `• <strong>Max Pedal Force:</strong> 100% (Default Gamepad)<br>• <strong>Brake Bias:</strong> ${base.brakeBias.toFixed(1)}% Front.` : `• <strong>Max Pedal Force:</strong> 100% (Default Gamepad)<br>• <strong>Brake Bias:</strong> ${base.brakeBias.toFixed(1)}% Anteriore.`;
+    } else {
+        brakeText += isEn ? `• <strong>Max Pedal Force:</strong> 85% - 90% (Load Cell)<br>• <strong>Brake Bias:</strong> ${base.brakeBias.toFixed(1)}% Front.` : `• <strong>Max Pedal Force:</strong> 85% - 90% (Load Cell)<br>• <strong>Brake Bias:</strong> ${base.brakeBias.toFixed(1)}% Anteriore.`;
+    }
+    document.getElementById('resBrakes').innerHTML = brakeText;
+
+    let suspText = isEn ?
+        `• <strong>Front Springs:</strong> ${base.springF}<br>
+         • <strong>Rear Springs:</strong> ${base.springR}<br>
+         • <strong>Front ARB:</strong> ${base.fArb}<br>
+         • <strong>Rear ARB:</strong> ${base.rArb}` :
+        `• <strong>Molle Ant:</strong> ${base.springF}<br>
+         • <strong>Molle Post:</strong> ${base.springR}<br>
+         • <strong>Barra Antirollio Ant:</strong> ${base.fArb}<br>
+         • <strong>Barra Antirollio Post:</strong> ${base.rArb}`;
+    document.getElementById('resSuspension').innerHTML = suspText;
+
+    let dampDiffText = "";
+    if (trackType === 'technical' || issue === 'bottoming') {
+        dampDiffText += isEn ? "• <strong>Slow Bump/Rebound:</strong> Soft to absorb kerbs.<br>" : "• <strong>Slow Bump/Rebound:</strong> Morbidi per assorbire i cordoli.<br>";
+    } else {
+        dampDiffText += isEn ? "• <strong>Slow Bump/Rebound:</strong> Stiff for aero platform control.<br>" : "• <strong>Slow Bump/Rebound:</strong> Rigidi per fermare la piattaforma aero.<br>";
+    }
+    dampDiffText += `• <strong>Differential Preload:</strong> ${base.diffPreload} Nm<br>`;
+    dampDiffText += `• <strong>Power Lock:</strong> ${base.powerLock}% | <strong>Coast Lock:</strong> ${base.coastLock}%`;
+    document.getElementById('resDampersDiff').innerHTML = dampDiffText;
+
+    document.getElementById('resIssueFix').innerHTML = issueFixNote;
+
+    const resultsBox = document.getElementById('resultsBox');
+    resultsBox.style.display = 'block';
+    resultsBox.scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
