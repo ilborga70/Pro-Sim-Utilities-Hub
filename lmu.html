@@ -10,6 +10,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* Navigation Tabs Styling */
+.tabs-nav {
+display: flex !important;
+justify-content: center !important;
+align-items: center !important;
+gap: 1rem !important;
+margin-top: 1.5rem !important;
+margin-bottom: 2rem !important;
+flex-wrap: wrap !important;
+width: 100% !important;
+}
+
+.tab-link {
+display: inline-block !important;
+font-family: inherit;
+color: #8a99ad !important;
+text-decoration: none !important;
+padding: 0.7rem 1.4rem !important;
+border-radius: 8px !important;
+border: 1px solid rgba(255, 255, 255, 0.15) !important;
+background: rgba(22, 27, 38, 0.85) !important;
+transition: all 0.3s ease !important;
+font-size: 0.85rem !important;
+font-weight: 600 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.5px !important;
+}
+
+.tab-link:hover {
+color: #ffffff !important;
+border-color: #00f2fe !important;
+background: rgba(0, 242, 254, 0.15) !important;
+box-shadow: 0 0 12px rgba(0, 242, 254, 0.3) !important;
+}
+
+.tab-link.active {
+color: #ffffff !important;
+border-color: #00f2fe !important;
+background: rgba(0, 242, 254, 0.2) !important;
+box-shadow: 0 0 15px rgba(0, 242, 254, 0.4) !important;
+}
         :root {
             --bg-dark: #0a0c10;
             --panel-bg: rgba(18, 22, 31, 0.85);
