@@ -9,29 +9,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
---bg-color: #0b0d12;
---card-bg: rgba(22, 27, 38, 0.75);
---card-border: rgba(255, 255, 255, 0.08);
---accent-cyan: #00f2fe;
---accent-blue: #4facfe;
---accent-green: #00ff88;
---text-main: #f0f4f8;
---text-muted: #8a99ad;
---font-heading: 'Orbitron', sans-serif;
---font-body: 'Inter', sans-serif;
+  --bg-color: #0b0d12;
+  --card-bg: rgba(22, 27, 38, 0.75);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --accent-cyan: #00f2fe;
+  --accent-blue: #4facfe;
+  --accent-green: #00ff88;
+  --text-main: #f0f4f8;
+  --text-muted: #8a99ad;
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-background-color: var(--bg-color);
-background-image:
-radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
-radial-gradient(circle at 90% 80%, rgba(255, 51, 102, 0.08) 0%, transparent 40%);
-color: var(--text-main);
-font-family: var(--font-body);
-padding: 2rem 1rem;
-min-height: 100vh;
+  background-color: var(--bg-color);
+  background-image:
+    radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(255, 51, 102, 0.08) 0%, transparent 40%);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  padding: 2rem 1rem;
+  min-height: 100vh;
 }
 
 .container { max-width: 1000px; margin: 0 auto; }
@@ -39,121 +39,131 @@ min-height: 100vh;
 header { text-align: center; margin-bottom: 2rem; }
 
 header h1 {
-font-family: var(--font-heading);
-font-size: 2.2rem;
-font-weight: 900;
-text-transform: uppercase;
-background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
 }
 
 /* Navigation Tabs */
 .tabs-nav {
-display: flex;
-justify-content: center;
-gap: 1rem;
-margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
 }
 
 .tab-link {
-font-family: var(--font-heading);
-color: var(--text-muted);
-text-decoration: none;
-padding: 0.7rem 1.5rem;
-border-radius: 8px;
-border: 1px solid var(--card-border);
-background: var(--card-bg);
-transition: all 0.3s ease;
-font-size: 0.85rem;
-text-transform: uppercase;
+  font-family: var(--font-heading);
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  text-transform: uppercase;
 }
 
 .tab-link:hover, .tab-link.active {
-color: #fff;
-border-color: var(--accent-cyan);
-box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
-background: rgba(0, 242, 254, 0.1);
+  color: #fff;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+  background: rgba(0, 242, 254, 0.1);
 }
 
 /* Content Sections */
 .guide-card {
-background: var(--card-bg);
-border: 1px solid var(--card-border);
-border-radius: 12px;
-padding: 2rem;
-margin-bottom: 2rem;
-backdrop-filter: blur(12px);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(12px);
 }
 
 .guide-card h2 {
-font-family: var(--font-heading);
-font-size: 1.3rem;
-color: var(--accent-cyan);
-margin-bottom: 1rem;
-display: flex;
-align-items: center;
-gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--accent-cyan);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .step-list {
-list-style: none;
-counter-reset: step-counter;
+  list-style: none;
+  counter-reset: step-counter;
 }
 
 .step-list li {
-position: relative;
-padding-left: 2.5rem;
-margin-bottom: 1.2rem;
-line-height: 1.6;
-color: var(--text-main);
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+  color: var(--text-main);
 }
 
 .step-list li::before {
-counter-increment: step-counter;
-content: counter(step-counter);
-position: absolute;
-left: 0;
-top: 0;
-width: 1.8rem;
-height: 1.8rem;
-background: rgba(0, 242, 254, 0.1);
-border: 1px solid var(--accent-cyan);
-color: var(--accent-cyan);
-font-family: var(--font-heading);
-font-size: 0.85rem;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: bold;
+  counter-increment: step-counter;
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: rgba(0, 242, 254, 0.1);
+  border: 1px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.code-inline {
+  background: rgba(0, 242, 254, 0.1);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  color: var(--accent-cyan);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
 }
 
 .faq-item {
-margin-bottom: 1.5rem;
-border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 1rem;
 }
 
 .faq-question {
-font-family: var(--font-heading);
-font-size: 1rem;
-color: #fff;
-margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
 }
 
 .faq-answer {
-color: var(--text-muted);
-font-size: 0.9rem;
-line-height: 1.5;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 footer {
-text-align: center;
-margin-top: 4rem;
-color: var(--text-muted);
-font-size: 0.85rem;
+  text-align: center;
+  margin-top: 4rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
 footer a { color: var(--accent-cyan); text-decoration: none; }
@@ -163,59 +173,76 @@ footer a { color: var(--accent-cyan); text-decoration: none; }
 
 <div class="container">
 <header>
-<h1>Installation & Setup Guide</h1>
+  <h1>Installation & Setup Guide</h1>
 </header>
 
 <!-- Tab Navigation -->
 <nav class="tabs-nav">
-<a href="index.html" class="tab-link">Main Hub & Presets</a>
-<a href="guide.html" class="tab-link active">Setup Guide & FAQ</a>
-<a href="lmu.html" class="tab-link">LMU Setup & Optimization</a>
+  <a href="index.html" class="tab-link">Main Hub & Presets</a>
+  <a href="guide.html" class="tab-link active">Setup Guide & FAQ</a>
+  <a href="lmu.html" class="tab-link">LMU Setup & Optimization</a>
 </nav>
 
 <!-- LookAhead Setup -->
 <div class="guide-card">
-<h2>🛠️ Setting up LookAhead Steering Controller</h2>
-<ol class="step-list">
-<li><strong>Download & Extract:</strong> Download the specific version for your simulator (RBR, ACRally, or AC Evo) from the main page and extract the ZIP archive.</li>
-<li><strong>OpenTrack Bridge Setup:</strong> Install and open OpenTrack. Set the Input protocol to <i>UDP over network</i> and verify port <i>4242</i> is open.</li>
-<li><strong>Launch LookAhead:</strong> Run <code>LookAhead Steering Controller.exe</code> as Administrator before launching your simulator.</li>
-<li><strong>Load Preset:</strong> Select a recommended preset from our main hub matching your current driving discipline.</li>
-</ol>
+  <h2>🛠️ Setting up LookAhead Steering Controller (Universal Bridge)</h2>
+  <ol class="step-list">
+    <li><strong>Download & Extract:</strong> Download the latest <code>LookAhead Steering Controller</code> archive from the main hub and extract it to your preferred folder.</li>
+    <li><strong>Set 1440° Lock-to-Lock Scale:</strong> In LookAhead Steering Controller, set <i>Wheel Degrees (Lock-to-Lock)</i> to <span class="code-inline">1440°</span>. This creates a standardized mathematical scale (1440 ÷ 2 = 720°, 1440 ÷ 3 = 480°, 1440 ÷ 4 = 360°) that guarantees perfectly linear telemetry calculations across all vehicles without rounding errors.</li>
+    <li><strong>Wheelbase Software Setup:</strong> Keep 1440° fixed inside the LookAhead Controller software and adjust the real steering lock degrees exclusively within your wheelbase driver software (e.g., Fanatec Control Center / Fanalab, Simucube True Drive, Thrustmaster Control Panel, etc.) to match the real-world car specs.</li>
+    <li><strong>OpenTrack Universal Output Mapping:</strong> Open OpenTrack, set the Input protocol to <i>UDP over network</i> (Port <span class="code-inline">4242</span>) and configure the <i>Options → Output</i> matrix as follows for a single profile working universally across LHD & RHD cars:
+      <ul style="margin-top: 0.5rem; margin-left: 1rem; list-style-type: square; color: var(--text-muted);">
+        <li><strong>Yaw:</strong> Source <span class="code-inline">Yaw</span></li>
+        <li><strong>Pitch:</strong> Source <span class="code-inline">Roll</span></li>
+        <li><strong>Roll:</strong> Source <span class="code-inline">Roll</span> + Enable <span class="code-inline">Post-Invert</span></li>
+      </ul>
+    </li>
+    <li><strong>Run & Drive:</strong> Click <i>Start</i> in OpenTrack and run <code>LookAhead Steering Controller.exe</code> as Administrator before launching RBR, Assetto Corsa, or Assetto Corsa EVO.</li>
+  </ol>
 </div>
 
 <!-- Pro-Sim FOV Setup -->
 <div class="guide-card">
-<h2>📐 Setting up Pro-Sim FOV Utility</h2>
-<ol class="step-list">
-<li><strong>Measure Your Setup:</strong> Measure your screen size (diagonal in inches), viewing distance from eye level to screen (cm), and monitor bezel thickness.</li>
-<li><strong>Input Data:</strong> Enter these values into Pro-Sim FOV Utility to calculate your exact mathematical field of view.</li>
-<li><strong>Apply Config:</strong> Copy the calculated horizontal or vertical FOV directly into your simulator's graphics/camera settings.</li>
-</ol>
+  <h2>📐 Setting up Pro-Sim FOV Utility</h2>
+  <ol class="step-list">
+    <li><strong>Measure Your Setup:</strong> Measure your screen size (diagonal in inches), viewing distance from eye level to screen (cm), and monitor bezel thickness.</li>
+    <li><strong>Input Data:</strong> Enter these values into Pro-Sim FOV Utility to calculate your exact mathematical field of view.</li>
+    <li><strong>Apply Config:</strong> Copy the calculated horizontal or vertical FOV directly into your simulator's graphics/camera settings.</li>
+  </ol>
 </div>
 
 <!-- FAQ Section -->
 <div class="guide-card">
-<h2>❓ Frequently Asked Questions (FAQ)</h2>
+  <h2>❓ Frequently Asked Questions (FAQ)</h2>
 
-<div class="faq-item">
-<div class="faq-question">Does LookAhead require a webcam or head-tracker?</div>
-<div class="faq-answer">No hardware is required! LookAhead translates your steering wheel input directly into dynamic camera rotation.</div>
-</div>
+  <div class="faq-item">
+    <div class="faq-question">Why set 1440° in LookAhead and change degrees only in the wheelbase software?</div>
+    <div class="faq-answer">Setting 1440° as a fixed value inside the LookAhead Controller provides a clean mathematical baseline with exact integer ratios (1/2, 1/3, 1/4). The 60Hz UDP telemetry remains 100% linear and flicker-free, while your wheelbase software (Fanatec Fanalab, Simucube, etc.) controls the realistic physical steering lock for each specific car.</div>
+  </div>
 
-<div class="faq-item">
-<div class="faq-question">Will LookAhead cause input lag?</div>
-<div class="faq-answer">The utility operates via high-frequency UDP packets at 60Hz. If you notice any camera delay, simply lower the <i>Smoothing Filter</i> setting to below 10%.</div>
-</div>
+  <div class="faq-item">
+    <div class="faq-question">Do I need separate OpenTrack profiles for LHD (Left-Hand Drive) and RHD (Right-Hand Drive) cars?</div>
+    <div class="faq-answer">No! By setting <strong>Source: Roll</strong> on both Pitch and Roll axes, and enabling <strong>Post-Invert</strong> on the Roll axis in OpenTrack, the camera motion remains perfectly symmetrical regardless of driver seating position.</div>
+  </div>
 
-<div class="faq-item">
-<div class="faq-question">Is Pro-Sim FOV Utility suitable for Triple Monitor setups?</div>
-<div class="faq-answer">Yes, it fully supports Single, Ultrawide, and Triple Monitor angle/bezel calculations.</div>
-</div>
+  <div class="faq-item">
+    <div class="faq-question">How does this configuration handle Drifting and Countersteering?</div>
+    <div class="faq-answer">Because the cross-blended Roll telemetry is processed at 60Hz with Post-Invert alignment, the camera smooths out high-angle transitions and fast countersteering without camera snapping or losing sight of the apex.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Which simulators are supported?</div>
+    <div class="faq-answer">This universal telemetric chain is tested and fully compatible with Richard Burns Rally (RBR), Assetto Corsa, and Assetto Corsa EVO.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Does LookAhead cause input lag?</div>
+    <div class="faq-answer">The utility operates via high-frequency UDP packets at 60Hz. If you notice any camera delay, simply lower the <i>Smoothing Filter</i> setting to below 10%.</div>
+  </div>
 </div>
 
 <footer>
-<p>Created by <strong>ilborga70</strong> • <a href="index.html">Return to Main Hub</a></p>
+  <p>Created by <strong>ilborga70</strong> • <a href="index.html">Return to Main Hub</a></p>
 </footer>
 </div>
 
