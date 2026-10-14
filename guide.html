@@ -140,6 +140,19 @@ header h1 {
   font-size: 0.9em;
 }
 
+.sim-tag {
+  display: inline-block;
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid var(--accent-green);
+  color: var(--accent-green);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  text-transform: uppercase;
+}
+
 .faq-item {
   margin-bottom: 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -183,21 +196,30 @@ footer a { color: var(--accent-cyan); text-decoration: none; }
   <a href="lmu.html" class="tab-link">LMU Setup & Optimization</a>
 </nav>
 
-<!-- LookAhead Setup -->
+<!-- LookAhead Setup - Richard Burns Rally Specific -->
 <div class="guide-card">
-  <h2>🛠️ Setting up LookAhead Steering Controller (Universal Bridge)</h2>
+  <h2>🛠️ Setting up LookAhead Steering Controller <span class="sim-tag">Richard Burns Rally (RBR)</span></h2>
   <ol class="step-list">
-    <li><strong>Download & Extract:</strong> Download the latest <code>LookAhead Steering Controller</code> archive from the main hub and extract it to your preferred folder.</li>
+    <li><strong>Download & Extract:</strong> Download the latest <code>LookAhead Steering Controller (RBR Build)</code> archive from the main hub and extract it to your preferred folder.</li>
+    <li><strong>Enable TrackIR in RBR Config:</strong> Open <code>RichardBurnsRally.ini</code> located in your main RBR installation directory using Notepad. Locate or add the line <span class="code-inline">UseTrackIR = true</span> and save the file.</li>
     <li><strong>Set 1800° Lock-to-Lock Scale:</strong> In LookAhead Steering Controller, set <i>Wheel Degrees (Lock-to-Lock)</i> to <span class="code-inline">1800°</span>. This provides the maximum dynamic scale (5 full wheel turns) with perfect integer sub-multiples (1800 ÷ 2 = 900°, 1800 ÷ 3.33 = 540°, 1800 ÷ 5 = 360°, 1800 ÷ 10 = 180°) that guarantee 100% linear telemetry calculations across all vehicles without rounding errors.</li>
-    <li><strong>Wheelbase Software Setup:</strong> Keep 1800° fixed inside the LookAhead Controller software and adjust the real physical steering lock degrees exclusively within your wheelbase driver software (e.g., Fanatec Control Center / Fanalab, Simucube True Drive, Thrustmaster Control Panel, etc.) to match the real-world car specs.</li>
-    <li><strong>OpenTrack Universal Output Mapping:</strong> Open OpenTrack, set the Input protocol to <i>UDP over network</i> (Port <span class="code-inline">4242</span>) and configure the <i>Options → Output</i> matrix as follows for a single profile working universally across LHD & RHD cars:
+    <li><strong>Wheelbase Software Setup:</strong> Keep 1800° fixed inside the LookAhead Controller software and adjust the real physical steering lock degrees exclusively within your wheelbase driver software (e.g., Fanatec Control Center / Fanalab, Simucube True Drive, Thrustmaster Control Panel, etc.) to match the real-world rally car specs.</li>
+    <li><strong>OpenTrack Universal Output Mapping:</strong> Open OpenTrack, set the Input protocol to <i>UDP over network</i> (Port <span class="code-inline">4242</span>) and Output to <i>freetrack 2.0 Enhanced</i>. Configure the <i>Options → Output</i> matrix as follows for a single profile working universally across LHD & RHD cars:
       <ul style="margin-top: 0.5rem; margin-left: 1rem; list-style-type: square; color: var(--text-muted);">
         <li><strong>Yaw:</strong> Source <span class="code-inline">Yaw</span></li>
         <li><strong>Pitch:</strong> Source <span class="code-inline">Roll</span></li>
-        <li><strong>Roll:</strong> Source <span class="code-inline">Roll</span> + Enable <span class="code-inline">Post-Invert</span></li>
+        <li><strong>Roll:</strong> Source <span class="code-inline">Roll</span></li>
+        <li><strong>X, Y, Z:</strong> Set to <span class="code-inline">Disabled</span></li>
       </ul>
     </li>
-    <li><strong>Run & Drive:</strong> Click <i>Start</i> in OpenTrack and run <code>LookAhead Steering Controller.exe</code> as Administrator before launching RBR, Assetto Corsa, or Assetto Corsa EVO.</li>
+    <li><strong>OpenTrack Accela Filter Setup:</strong> In OpenTrack, go to <i>Options → Filter</i>, select <span class="code-inline">Accela + Hamilton Filter</span> and set:
+      <ul style="margin-top: 0.5rem; margin-left: 1rem; list-style-type: square; color: var(--text-muted);">
+        <li><strong>Rotation filtering (Yaw, Pitch, Roll):</strong> Smoothing <span class="code-inline">1.5°</span>, Deadzone <span class="code-inline">0.03°</span></li>
+        <li><strong>Position filtering (X, Y, Z):</strong> Smoothing <span class="code-inline">1mm</span>, Deadzone <span class="code-inline">0.1mm</span></li>
+        <li><strong>Rotation Smoothing (Zoomed):</strong> Max Added <span class="code-inline">0°</span>, Max Z <span class="code-inline">9.6mm</span></li>
+      </ul>
+    </li>
+    <li><strong>Run & Drive:</strong> Click <i>Start</i> in OpenTrack and run <code>LookAhead Steering Controller.exe</code> as Administrator before launching Richard Burns Rally. Verify connections in the built-in <i>System Process Status</i> panel.</li>
   </ol>
 </div>
 
@@ -216,23 +238,28 @@ footer a { color: var(--accent-cyan); text-decoration: none; }
   <h2>❓ Frequently Asked Questions (FAQ)</h2>
 
   <div class="faq-item">
+    <div class="faq-question">Why is `UseTrackIR = true` required in RichardBurnsRally.ini?</div>
+    <div class="faq-answer">RBR requires TrackIR integration enabled natively in its initialization file so OpenTrack can inject high-frequency camera position packets directly into the game engine via freetrack 2.0.</div>
+  </div>
+
+  <div class="faq-item">
     <div class="faq-question">Why set 1800° in LookAhead and change degrees only in the wheelbase software?</div>
     <div class="faq-answer">Setting 1800° as a fixed maximum value inside the LookAhead Controller utilizes the full dynamic range of the software (covering up to 5 full wheel rotations). The 60Hz UDP telemetry remains 100% linear and flicker-free, while your wheelbase software (Fanatec Fanalab, Simucube, etc.) controls the realistic physical steering lock for each specific car.</div>
   </div>
 
   <div class="faq-item">
     <div class="faq-question">Do I need separate OpenTrack profiles for LHD (Left-Hand Drive) and RHD (Right-Hand Drive) cars?</div>
-    <div class="faq-answer">No! By setting <strong>Source: Roll</strong> on both Pitch and Roll axes, and enabling <strong>Post-Invert</strong> on the Roll axis in OpenTrack, the camera motion remains perfectly symmetrical regardless of driver seating position.</div>
+    <div class="faq-answer">No! By setting <strong>Source: Roll</strong> on both Pitch and Roll axes in OpenTrack, the camera motion remains perfectly symmetrical regardless of driver seating position.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Why use Accela + Hamilton Filter with 1.5° Smoothing and 0.03° Deadzone?</div>
+    <div class="faq-answer">The Accela + Hamilton filter with a 1.5° rotation smoothing and a 0.03° deadzone provides ultra-smooth head movements without adding input latency, perfectly filtering out minor micro-oscillations during high-speed countersteering or drifting.</div>
   </div>
 
   <div class="faq-item">
     <div class="faq-question">How does this configuration handle Drifting and Countersteering?</div>
-    <div class="faq-answer">Because the cross-blended Roll telemetry is processed at 60Hz with Post-Invert alignment and full 1800° resolution, the camera smooths out high-angle transitions and fast countersteering without camera snapping or losing sight of the apex.</div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-question">Which simulators are supported?</div>
-    <div class="faq-answer">This universal telemetric chain is tested and fully compatible with Richard Burns Rally (RBR), Assetto Corsa, and Assetto Corsa EVO.</div>
+    <div class="faq-answer">Because the cross-blended Roll telemetry is processed at 60Hz with full 1800° resolution, the camera smooths out high-angle transitions and fast countersteering without camera snapping or losing sight of the apex.</div>
   </div>
 
   <div class="faq-item">
