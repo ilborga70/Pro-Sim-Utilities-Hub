@@ -153,6 +153,20 @@ header h1 {
   text-transform: uppercase;
 }
 
+/* Container immagine */
+.guide-image-container {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.guide-image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
 .faq-item {
   margin-bottom: 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -204,22 +218,11 @@ footer a { color: var(--accent-cyan); text-decoration: none; }
     <li><strong>Enable TrackIR in RBR Config:</strong> Open <code>RichardBurnsRally.ini</code> located in your main RBR installation directory using Notepad. Locate or add the line <span class="code-inline">UseTrackIR = true</span> and save the file.</li>
     <li><strong>Set 1800° Lock-to-Lock Scale:</strong> In LookAhead Steering Controller, set <i>Wheel Degrees (Lock-to-Lock)</i> to <span class="code-inline">1800°</span>. This provides the maximum dynamic scale (5 full wheel turns) with perfect integer sub-multiples (1800 ÷ 2 = 900°, 1800 ÷ 3.33 = 540°, 1800 ÷ 5 = 360°, 1800 ÷ 10 = 180°) that guarantee 100% linear telemetry calculations across all vehicles without rounding errors.</li>
     <li><strong>Wheelbase Software Setup:</strong> Keep 1800° fixed inside the LookAhead Controller software and adjust the real physical steering lock degrees exclusively within your wheelbase driver software (e.g., Fanatec Control Center / Fanalab, Simucube True Drive, Thrustmaster Control Panel, etc.) to match the real-world rally car specs.</li>
-    <li><strong>OpenTrack Universal Output Mapping:</strong> Open OpenTrack, set the Input protocol to <i>UDP over network</i> (Port <span class="code-inline">4242</span>) and Output to <i>freetrack 2.0 Enhanced</i>. Configure the <i>Options → Output</i> matrix as follows for a single profile working universally across LHD & RHD cars:
-      <ul style="margin-top: 0.5rem; margin-left: 1rem; list-style-type: square; color: var(--text-muted);">
-        <li><strong>Yaw:</strong> Source <span class="code-inline">Yaw</span></li>
-        <li><strong>Pitch:</strong> Source <span class="code-inline">Roll</span></li>
-        <li><strong>Roll:</strong> Source <span class="code-inline">Roll</span></li>
-        <li><strong>X, Y, Z:</strong> Set to <span class="code-inline">Disabled</span></li>
-      </ul>
+    <li><strong>OpenTrack Universal Output Mapping:</strong> Open OpenTrack, set the Input protocol to <i>UDP over network</i> (Port <span class="code-inline">4242</span>) and Output to <i>freetrack 2.0 Enhanced</i>.
+      <div class="guide-image-container">
+        <img src="tua-immagine-opentrack.png" alt="OpenTrack Configuration Schema">
+      </div>
     </li>
-    <li><strong>OpenTrack Accela Filter Setup:</strong> In OpenTrack, go to <i>Options → Filter</i>, select <span class="code-inline">Accela + Hamilton Filter</span> and set:
-      <ul style="margin-top: 0.5rem; margin-left: 1rem; list-style-type: square; color: var(--text-muted);">
-        <li><strong>Rotation filtering (Yaw, Pitch, Roll):</strong> Smoothing <span class="code-inline">1.5°</span>, Deadzone <span class="code-inline">0.03°</span></li>
-        <li><strong>Position filtering (X, Y, Z):</strong> Smoothing <span class="code-inline">1mm</span>, Deadzone <span class="code-inline">0.1mm</span></li>
-        <li><strong>Rotation Smoothing (Zoomed):</strong> Max Added <span class="code-inline">0°</span>, Max Z <span class="code-inline">9.6mm</span></li>
-      </ul>
-    </li>
-    <li><strong>Run & Drive:</strong> Click <i>Start</i> in OpenTrack and run <code>LookAhead Steering Controller.exe</code> as Administrator before launching Richard Burns Rally. Verify connections in the built-in <i>System Process Status</i> panel.</li>
   </ol>
 </div>
 
