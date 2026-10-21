@@ -214,10 +214,10 @@ footer a { color: var(--accent-cyan); text-decoration: none; }
 <div class="guide-card">
   <h2>🛠️ Setting up LookAhead Steering Controller <span class="sim-tag">Richard Burns Rally (RBR)</span></h2>
   <ol class="step-list">
-    <li><strong>Download & Extract:</strong> Download the latest <code>LookAhead Steering Controller (RBR Build)</code> archive from the main hub and extract it to your preferred folder.</li>
+    <li><strong>Download & Extract:</strong> Download the latest <code>LookAhead Steering Controller (RBR Build)</code> archive from the main hub and extract it to your preferred folder. Run <code>LookAhead Steering Controller.exe</code> as Administrator.</li>
     <li><strong>Enable TrackIR in RBR Config:</strong> Open <code>RichardBurnsRally.ini</code> located in your main RBR installation directory using Notepad. Locate or add the line <span class="code-inline">UseTrackIR = true</span> and save the file.</li>
-    <li><strong>Set 1800° Lock-to-Lock Scale:</strong> In LookAhead Steering Controller, set <i>Wheel Degrees (Lock-to-Lock)</i> to <span class="code-inline">1800°</span>. This provides the maximum dynamic scale (5 full wheel turns) with perfect integer sub-multiples (1800 ÷ 2 = 900°, 1800 ÷ 3.33 = 540°, 1800 ÷ 5 = 360°, 1800 ÷ 10 = 180°) that guarantee 100% linear telemetry calculations across all vehicles without rounding errors.</li>
-    <li><strong>Wheelbase Software Setup:</strong> Keep 1800° fixed inside the LookAhead Controller software and adjust the real physical steering lock degrees exclusively within your wheelbase driver software (e.g., Fanatec Control Center / Fanalab, Simucube True Drive, Thrustmaster Control Panel, etc.) to match the real-world rally car specs.</li>
+    <li><strong>Set Steering Degrees in LookAhead:</strong> Enter the exact steering lock value (degrees of rotation) required by the car in-game into the LookAhead Steering Controller.</li>
+    <li><strong>Match Physical Wheelbase Settings:</strong> Set the exact same degree value directly in your physical wheelbase software (e.g., Fanatec Fanalab, Simucube True Drive, Thrustmaster Control Panel, Moza Pit House). Ensure the degrees set in LookAhead, in-game, and in your wheelbase software match 100%.</li>
     <li><strong>OpenTrack Universal Output Mapping:</strong> Open OpenTrack, set the Input protocol to <i>UDP over network</i> (Port <span class="code-inline">4242</span>) and Output to <i>freetrack 2.0 Enhanced</i>.
       <div class="guide-image-container">
         <img src="opentrack-setup.jpg" alt="OpenTrack Configuration Schema">
@@ -246,8 +246,8 @@ footer a { color: var(--accent-cyan); text-decoration: none; }
   </div>
 
   <div class="faq-item">
-    <div class="faq-question">Why set 1800° in LookAhead and change degrees only in the wheelbase software?</div>
-    <div class="faq-answer">Setting 1800° as a fixed maximum value inside the LookAhead Controller utilizes the full dynamic range of the software (covering up to 5 full wheel rotations). The 60Hz UDP telemetry remains 100% linear and flicker-free, while your wheelbase software (Fanatec Fanalab, Simucube, etc.) controls the realistic physical steering lock for each specific car.</div>
+    <div class="faq-question">Why must steering degrees match across LookAhead, in-game car setup, and wheelbase software?</div>
+    <div class="faq-answer">Matching the exact real-world steering degrees across all three layers ensures 1:1 dynamic calibration. This allows the 60Hz UDP telemetry bridge to calculate perfectly linear, accurate camera movement without scaling mismatches or dynamic deadzones.</div>
   </div>
 
   <div class="faq-item">
@@ -256,13 +256,8 @@ footer a { color: var(--accent-cyan); text-decoration: none; }
   </div>
 
   <div class="faq-item">
-    <div class="faq-question">Why use Accela + Hamilton Filter with 1.5° Smoothing and 0.03° Deadzone?</div>
-    <div class="faq-answer">The Accela + Hamilton filter with a 1.5° rotation smoothing and a 0.03° deadzone provides ultra-smooth head movements without adding input latency, perfectly filtering out minor micro-oscillations during high-speed countersteering or drifting.</div>
-  </div>
-
-  <div class="faq-item">
     <div class="faq-question">How does this configuration handle Drifting and Countersteering?</div>
-    <div class="faq-answer">Because the cross-blended Roll telemetry is processed at 60Hz with full 1800° resolution, the camera smooths out high-angle transitions and fast countersteering without camera snapping or losing sight of the apex.</div>
+    <div class="faq-answer">Because the 60Hz telemetry uses real-time 1:1 steering angle ratio matching your wheel, head movement remains smooth and natural during sharp transitions, high-angle drifting, and rapid countersteering.</div>
   </div>
 
   <div class="faq-item">
