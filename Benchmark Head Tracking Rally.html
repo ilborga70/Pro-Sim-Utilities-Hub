@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Head Tracking Benchmark - RBR & AC</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Orbitron & Rajdhani -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        racingDark: '#0b0d11',
+                        racingCard: '#131720',
+                        cyanNeon: '#00f0ff',
+                        cyanGlow: 'rgba(0, 240, 255, 0.25)',
+                        amberWarning: '#ffaa00',
+                        crimsonAlert: '#ff2a5f',
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Carbon fiber texture background */
+        body {
+            background-color: #080a0d;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.12), transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(255, 42, 95, 0.05), transparent 40%),
+                linear-gradient(27deg, #0e1117 5px, transparent 5px),
+                linear-gradient(207deg, #0e1117 5px, transparent 5px),
+                linear-gradient(157deg, #0e1117 5px, transparent 5px),
+                linear-gradient(337deg, #0e1117 5px, transparent 5px);
+            background-size: 100% 100%, 100% 100%, 8px 16px, 8px 16px, 8px 16px, 8px 16px;
+        }
+
+        .glass-panel {
+            background: rgba(19, 23, 32, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .winner-border {
+            border: 1px solid rgba(0, 240, 255, 0.6);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.15), inset 0 0 15px rgba(0, 240, 255, 0.08);
+        }
+
+        .glow-text-cyan {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+        }
+
+        .glow-text-gold {
+            text-shadow: 0 0 10px rgba(255, 170, 0, 0.6);
+        }
+
+        /* Animated Progress Bars */
+        .bar-fill {
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Racing Stripes Accent */
+        .racing-stripe {
+            background: repeating-linear-gradient(
+                -45deg,
+                #00f0ff,
+                #00f0ff 10px,
+                #080a0d 10px,
+                #080a0d 20px
+            );
+        }
+    </style>
+</head>
+<body class="font-rajdhani text-gray-200 min-h-screen p-4 md:p-8 flex flex-col justify-between">
+
+    <div class="max-w-7xl mx-auto w-full space-y-8">
+        
+        <!-- HEADER DASHBOARD -->
+        <header class="glass-panel p-6 rounded-2xl relative overflow-hidden flex flex-col md:flex-row justify-between items-center gap-4 border-b-2 border-cyanNeon">
+            <div class="absolute -top-12 -left-12 w-40 h-40 bg-cyanNeon/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="z-10 text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-3">
+                    <span class="px-3 py-1 bg-cyanNeon/10 border border-cyanNeon/40 text-cyanNeon text-xs font-orbitron tracking-widest rounded-md uppercase font-bold">
+                        <i class="fa-solid font-bold fa-gauge-high mr-1"></i> Telemetry & Benchmark
+                    </span>
+                    <span class="text-xs text-gray-400 font-orbitron">V2.4 | Rally Anti-Flip Spec</span>
+                </div>
+                <h1 class="text-3xl md:text-5xl font-extrabold font-orbitron text-white tracking-wider mt-2">
+                    HEAD TRACKING <span class="text-cyanNeon glow-text-cyan">SHOWDOWN</span>
+                </h1>
+                <p class="text-gray-400 text-sm md:text-base mt-1">
+                    Confronto prestazioni per Richard Burns Rally & Assetto Corsa (Guida al Limite)
+                </p>
+            </div>
+
+            <!-- Author & Stats Badge -->
+            <div class="z-10 flex items-center gap-4 bg-black/50 p-3 rounded-xl border border-white/10">
+                <div class="text-right">
+                    <div class="text-xs text-gray-400 font-orbitron">TEST ARCHITECTURE BY</div>
+                    <div class="text-lg font-bold font-orbitron text-cyanNeon">ilborga70</div>
+                </div>
+                <div class="w-10 h-10 rounded-lg bg-cyanNeon/20 border border-cyanNeon flex items-center justify-center text-cyanNeon">
+                    <i class="fa-solid fa-helm-safety text-xl"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT COMPARISON MATRIX -->
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- CARD 1: OPENTRACK + LOOKAHEAD (WINNER) -->
+            <div class="glass-panel rounded-2xl p-6 relative flex flex-col justify-between winner-border transform hover:-translate-y-1 transition-all duration-300">
+                <!-- WINNER BADGE -->
+                <div class="absolute -top-4 right-6 bg-gradient-to-r from-amber-500 to-yellow-300 text-black font-orbitron font-extrabold text-xs px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 tracking-wider uppercase">
+                    <i class="fa-solid fa-trophy text-black"></i> Top Performance Choice
+                </div>
+
+                <div>
+                    <!-- Header Card -->
+                    <div class="flex items-start justify-between border-b border-white/10 pb-4 mb-6">
+                        <div>
+                            <span class="text-xs font-orbitron text-cyanNeon uppercase tracking-widest font-semibold">Modular 6-DOF Setup</span>
+                            <h2 class="text-2xl font-bold font-orbitron text-white mt-1">OpenTrack + LookAhead</h2>
+                            <p class="text-xs text-gray-400">ilborga70 Controller Logic</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-4xl font-extrabold font-orbitron text-cyanNeon glow-text-cyan">9.5</span>
+                            <span class="text-xs text-gray-400 font-orbitron block">/ 10 OVERALL</span>
+                        </div>
+                    </div>
+
+                    <!-- Scores & Progress Bars -->
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-orbitron mb-1">
+                                <span class="text-gray-300"><i class="fa-solid fa-bolt text-cyanNeon mr-1"></i> Reattività / Zero-Lag</span>
+                                <span class="text-cyanNeon font-bold">10 / 10</span>
+                            </div>
+                            <div class="w-full bg-black/60 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/10">
+                                <div class="bar-fill bg-cyanNeon h-full rounded-full glow-bg-cyan" style="width: 100%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-orbitron mb-1">
+                                <span class="text-gray-300"><i class="fa-solid fa-shield-halved text-cyanNeon mr-1"></i> Stabilità Anti-Flip (27°)</span>
+                                <span class="text-cyanNeon font-bold">9.5 / 10</span>
+                            </div>
+                            <div class="w-full bg-black/60 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/10">
+                                <div class="bar-fill bg-cyanNeon h-full rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-orbitron mb-1">
+                                <span class="text-gray-300"><i class="fa-solid fa-folder-tree text-cyanNeon mr-1"></i> Gestione Profili & Portabilità</span>
+                                <span class="text-cyanNeon font-bold">10 / 10</span>
+                            </div>
+                            <div class="w-full bg-black/60 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/10">
+                                <div class="bar-fill bg-cyanNeon h-full rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-orbitron mb-1">
+                                <span class="text-gray-300"><i class="fa-solid fa-eye text-cyanNeon mr-1"></i> Calibrazione 3D (Polpo Preview)</span>
+                                <span class="text-cyanNeon font-bold">9.0 / 10</span>
+                            </div>
+                            <div class="w-full bg-black/60 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/10">
+                                <div class="bar-fill bg-cyanNeon h-full rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highlights & Strengths -->
+                    <div class="space-y-2 mb-6">
+                        <div class="text-xs font-orbitron text-gray-400 uppercase tracking-wider">Punti di Forza:</div>
+                        <ul class="text-sm space-y-1.5 text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyanNeon text-xs"></i> Accela 6ms: risposta immediata senza inerzia</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyanNeon text-xs"></i> Algoritmo predittivo legato all'angolo sterzo</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyanNeon text-xs"></i> 3 Profili `.ini` separati (GT, Rally, Endurance)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyanNeon text-xs"></i> Protezione simmetrica Anti-Flip a 27° Yaw</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Footer status -->
+                <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs font-orbitron text-cyanNeon">
+                    <span><i class="fa-solid fa-circle text-[8px] animate-pulse mr-1"></i> CONSIGLIATO PER RBR</span>
+                    <span class="bg-cyanNeon/10 px-2.5 py-1 rounded border border-cyanNeon/30">ZERO LAG</span>
+                </div>
+            </div>
+
+            <!-- CARD 2: NECKFX (CSP) -->
+            <div class="glass-panel rounded-2xl p-6 relative flex flex-col justify-between transform hover:-translate-y-1 transition-all duration-300 border-t-2 border-amberWarning">
+                <!-- BADGE -->
+                <div class="absolute -top-4 right-6 bg-gray-800 border border-amberWarning/50 text-amberWarning font-orbitron font-bold text-xs px-3 py-1 rounded-full flex items-center gap-1.5">
+                    <i class="fa-solid fa-medal"></i> Runner Up
+                </div>
+
+                <div>
+                    <!-- Header Card -->
+                    <div class="flex items-start justify-between border-b border-white/10 pb-4 mb-6">
+                        <div>
+                            <span class="text-xs font-orbitron text-amberWarning uppercase tracking-widest font-semibold">Integrated CSP Plugin</span>
+                            <h2 class="text-2xl font-bold font-orbitron text-white mt-1">NeckFX</h2>
+                            <p class="text-xs text-gray-400">Custom Shaders Patch (Assetto Corsa)</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-4xl font-extrabold font-orbitron text-amberWarning">7.5</span>
+                            <span class="text-xs text-gray-400 font-orbitron block">/ 10 OVERALL</span>
+                        </div>
+                    </div>
+
+                    <!-- Scores & Progress Bars -->
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-orbitron mb-1">
+                                <span class="text-gray-300"><i class="fa-solid fa-bolt text-amberWarning mr-1"></i> Reattività / Zero-Lag</span>
+                                <span class="text-amberWarning font-bold">6.5 / 10</span>
+                            </div>
+                            <div class="w-full bg-black/60 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/10">
+                                <div class="bar-fill bg-amberWarning h-full rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-orbitron mb-1">
+                                <span class="text-gray-300"><i class="fa-solid fa-shield-halved text-amberWarning mr-1"></i> Stabilità Anti-Flip</span>
+                                <span class="text-amberWarning font-bold">7.0 / 10</span>
+                            </div>
+                            <div class="w-full bg-black/60 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/10">
+                                <div class="bar-fill bg-amberWarning h-full rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-orbitron mb-1">
+                                <span class="text-gray-300"><i class="fa-solid fa-folder-tree text-amberWarning mr-1"></i> Gestione Profili</span>
+                                <span class="text-amberWarning font-bold">9.0 / 10</span>
+                            </div>
+                            <div class="w-full bg-black/60 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/10">
+                                <div class="bar-fill bg-amberWarning h-full rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-orbitron mb-1">
+                                <span class="text-gray-300"><i class="fa-solid fa-eye text-amberWarning mr-1"></i> Calibrazione In-Game</span>
+                                <span class="text-amberWarning font-bold">7.5 / 10</span>
+                            </div>
+                            <div class="w-full bg-black/60 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/10">
+                                <div class="bar-fill bg-amberWarning h-full rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highlights & Weaknesses -->
+                    <div class="space-y-2 mb-6">
+                        <div class="text-xs font-orbitron text-gray-400 uppercase tracking-wider">Analisi:</div>
+                        <ul class="text-sm space-y-1.5 text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-plus text-amberWarning text-xs"></i> Integrato nativamente in Content Manager</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-plus text-amberWarning text-xs"></i> Ottimo per la simulazione G-Force e fov fisici</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-minus text-crimsonAlert text-xs"></i> Effetto "elastico" fastidioso nei controsterzi</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-minus text-crimsonAlert text-xs"></i> Limitato solo ad Assetto Corsa (No RBR)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Footer status -->
+                <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs font-orbitron text-gray-400">
+                    <span>SOLO ASSETTO CORSA</span>
+                    <span class="bg-white/5 px-2.5 py-1 rounded border border-white/10">SMOOTHING ATTIVO</span>
+                </div>
+            </div>
+
+            <!-- CARD 3: REAL HEAD MOTION (RHM) -->
+            <div class="glass-panel rounded-2xl p-6 relative flex flex-col justify-between transform hover:-translate-y-1 transition-all duration-300 border-t-2 border-crimsonAlert">
+                <!-- BADGE -->
+                <div class="absolute -top-4 right-6 bg-gray-800 border border-crimsonAlert/50 text-crimsonAlert font-orbitron font-bold text-xs px-3 py-1 rounded-full flex items-center gap-1.5">
+                    <i class="fa-solid fa-gears"></i> Legacy Mod
+                </div>
+
+                <div>
+                    <!-- Header Card -->
+                    <div class="flex items-start justify-between border-b border-white/10 pb-4 mb-6">
+                        <div>
+                            <span class="text-xs font-orbitron text-crimsonAlert uppercase tracking-widest font-semibold">External Physics Overlay</span>
+                            <h2 class="text-2xl font-bold font-orbitron text-white mt-1">Real Head Motion</h2>
+                            <p class="text-xs text-gray-400">Standalone Camera Tool</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-4xl font-extrabold font-orbitron text-crimsonAlert">7.0</span>
+                            <span class="text-xs text-gray-400 font-orbitron block">/ 10 OVERALL</span>
+                        </div>
+                    </div>
+
+                    <!-- Scores & Progress Bars -->
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <div class="flex justify-between text-xs font-orbitron mb-1">
+                                <span class="text-gray-300"><i class="fa-solid fa-bolt text-crimsonAlert mr-1"></i> Reattività / Zero-Lag</span>
+                                <span class="text-crimsonAlert font-bold">6.0 / 10</span>
+                            </div>
+                            <div class="w-full bg-black/60 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/10">
+                                <div class="bar-fill bg-crimsonAlert h-full rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-orbitron mb-1">
+                                <span class="text-gray-300"><i class="fa-solid fa-shield-halved text-crimsonAlert mr-1"></i> Stabilità Anti-Flip</span>
+                                <span class="text-crimsonAlert font-bold">6.5 / 10</span>
+                            </div>
+                            <div class="w-full bg-black/60 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/10">
+                                <div class="bar-fill bg-crimsonAlert h-full rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-orbitron mb-1">
+                                <span class="text-gray-300"><i class="fa-solid fa-folder-tree text-crimsonAlert mr-1"></i> Gestione Profili</span>
+                                <span class="text-crimsonAlert font-bold">6.5 / 10</span>
+                            </div>
+                            <div class="w-full bg-black/60 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/10">
+                                <div class="bar-fill bg-crimsonAlert h-full rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-orbitron mb-1">
+                                <span class="text-gray-300"><i class="fa-solid fa-eye text-crimsonAlert mr-1"></i> Calibrazione</span>
+                                <span class="text-crimsonAlert font-bold">6.0 / 10</span>
+                            </div>
+                            <div class="w-full bg-black/60 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/10">
+                                <div class="bar-fill bg-crimsonAlert h-full rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highlights & Weaknesses -->
+                    <div class="space-y-2 mb-6">
+                        <div class="text-xs font-orbitron text-gray-400 uppercase tracking-wider">Analisi:</div>
+                        <ul class="text-sm space-y-1.5 text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-plus text-crimsonAlert text-xs"></i> Ottimo filtraggio urti e pendenza orizzonte</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-minus text-crimsonAlert text-xs"></i> Configurazione complessa dei filtri</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-minus text-crimsonAlert text-xs"></i> Manca la logica sterzo predittiva avanzata</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-minus text-crimsonAlert text-xs"></i> Rischio motion-sickness se non calibrato</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Footer status -->
+                <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs font-orbitron text-gray-400">
+                    <span>MULTI-GAME</span>
+                    <span class="bg-white/5 px-2.5 py-1 rounded border border-white/10">COMPLESSO</span>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- DETAILED TELEMETRY COMPARISON TABLE -->
+        <section class="glass-panel rounded-2xl p-6 overflow-hidden">
+            <h3 class="text-xl font-bold font-orbitron text-white mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-list-check text-cyanNeon"></i> Matrice di Confronto Tecnico
+            </h3>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm font-rajdhani border-collapse">
+                    <thead>
+                        <tr class="border-b border-white/10 text-xs font-orbitron text-gray-400 uppercase">
+                            <th class="p-3">Caratteristica / Feature</th>
+                            <th class="p-3 text-cyanNeon">OpenTrack + LookAhead</th>
+                            <th class="p-3 text-amberWarning">NeckFX (CSP)</th>
+                            <th class="p-3 text-crimsonAlert">Real Head Motion</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5 text-gray-300">
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="p-3 font-semibold text-white">Algoritmo di sterzata predittivo</td>
+                            <td class="p-3 text-cyanNeon font-bold"><i class="fa-solid fa-circle-check mr-1"></i> Sì (LookAhead Controller)</td>
+                            <td class="p-3 text-gray-400">Parziale (Reattivo)</td>
+                            <td class="p-3 text-gray-500">No (Solo Fisica Auto)</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="p-3 font-semibold text-white">Input Lag & Smoothing</td>
+                            <td class="p-3 text-cyanNeon font-bold"><i class="fa-solid fa-bolt mr-1"></i> 0-Lag (Accela 6ms)</td>
+                            <td class="p-3 text-amberWarning">Smoothing Medio</td>
+                            <td class="p-3 text-amberWarning">Smoothing Elevato</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="p-3 font-semibold text-white">Protezione Anti-Flip (Fondocorsa)</td>
+                            <td class="p-3 text-cyanNeon font-bold"><i class="fa-solid fa-shield mr-1"></i> Simmetrico 27° Yaw</td>
+                            <td class="p-3 text-gray-400">Standard CSP</td>
+                            <td class="p-3 text-gray-400">Manuale via Soft Limits</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="p-3 font-semibold text-white">Test Real-Time a Gioco Spento</td>
+                            <td class="p-3 text-cyanNeon font-bold"><i class="fa-solid fa-cube mr-1"></i> Sì (Avatar 3D OpenTrack)</td>
+                            <td class="p-3 text-gray-500">No (Richiede Gioco Avviato)</td>
+                            <td class="p-3 text-gray-500">No (Richiede Sessione)</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="p-3 font-semibold text-white">Portabilità Profilo (Backup & Share)</td>
+                            <td class="p-3 text-cyanNeon font-bold"><i class="fa-solid fa-file-code mr-1"></i> File .ini Portabili Indipendenti</td>
+                            <td class="p-3 text-gray-400">Legato a Presets CSP</td>
+                            <td class="p-3 text-gray-400">File Config Locale</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- FOOTER BAR -->
+        <footer class="text-center text-xs text-gray-500 font-orbitron py-4 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-2">
+            <div>RBR LOOKAHEAD STEERING CONTROLLER &copy; 2026 - BY ILBORGA70</div>
+            <div class="flex gap-4">
+                <span class="text-gray-400">OVERTAKE / RACEDEPARTMENT OFFICIAL EDITION</span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
