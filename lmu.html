@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LMU – SETUP & OPTIMIZATION HUB</title>
-    <!-- Google Fonts Motorsport -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Navigation Tabs Styling */
 .tabs-nav {
 display: flex !important;
 justify-content: center !important;
@@ -51,6 +49,7 @@ border-color: #00f2fe !important;
 background: rgba(0, 242, 254, 0.2) !important;
 box-shadow: 0 0 15px rgba(0, 242, 254, 0.4) !important;
 }
+
         :root {
             --bg-dark: #0a0c10;
             --panel-bg: rgba(18, 22, 31, 0.85);
@@ -263,9 +262,7 @@ box-shadow: 0 0 15px rgba(0, 242, 254, 0.4) !important;
             text-transform: uppercase;
         }
 
-        tr:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.02);
-        }
+        tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.02); }
 
         .footer { 
             margin-top: 40px; 
@@ -306,10 +303,7 @@ box-shadow: 0 0 15px rgba(0, 242, 254, 0.4) !important;
             text-transform: uppercase;
         }
 
-        .highlight-fix {
-            color: var(--accent-yellow);
-            font-weight: bold;
-        }
+        .highlight-fix { color: var(--accent-yellow); font-weight: bold; }
 
         .pole-box {
             background: rgba(245, 208, 0, 0.08);
@@ -319,10 +313,7 @@ box-shadow: 0 0 15px rgba(0, 242, 254, 0.4) !important;
             margin-top: 15px;
         }
 
-        .pole-box h3 {
-            color: var(--accent-yellow);
-            margin-top: 0;
-        }
+        .pole-box h3 { color: var(--accent-yellow); margin-top: 0; }
 
         @media (max-width: 768px) {
             .language-switcher {
@@ -337,24 +328,21 @@ box-shadow: 0 0 15px rgba(0, 242, 254, 0.4) !important;
     </style>
 </head>
 <body>
-     <!-- Navigation Tabs -->
+
 <div class="container">
-<!-- 1. TITOLO E SOTTOTITOLO IN ALTO -->
 <header style="text-align: center; margin-bottom: 1.5rem;">
 <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.0rem; font-weight: 900; text-transform: uppercase;">
 LMU – SETUP & OPTIMIZATION HUB
 </h2>
-    
 </header>
     
-<!-- 2. PULSANTI TAB SUBITO SOTTO IL TITOLO -->
 <nav class="tabs-nav">
 <a href="index.html" class="tab-link">Main Hub & Presets</a>
 <a href="guide.html" class="tab-link">Setup Guide & FAQ</a>
 <a href="lmu.html" class="tab-link active">LMU Setup & Optimization</a>
+<a href="benchmark.html" class="tab-link">Head Tracking Benchmark</a>
 </nav>
     
-<!-- 3. MENÙ A TENDINA TRADUTTORE CON SPASIATURA -->
 <div class="language-switcher" style="margin-top: 2rem; margin-bottom: 2rem; display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem;">
 <label for="langSelect" id="langLabel">🌐 Lingua / Language:</label>
 <select id="langSelect" onchange="translatePage(this.value)">
@@ -363,7 +351,6 @@ LMU – SETUP & OPTIMIZATION HUB
 </select>
 </div>
     
-<!-- 4. SEZIONE CALCOLATORE -->    
     <div class="section">
         <p>Seleziona la tua vettura, le caratteristiche del circuito, la temperatura e i problemi di guida riscontrati per generare istantaneamente il setup raccomandato ed ottimizzato in ogni parametro.</p>
 
@@ -459,7 +446,6 @@ LMU – SETUP & OPTIMIZATION HUB
         </div>
     </div>
 
-    <!-- SEZIONE POLE POSITION & QUALIFICA ESTREMA -->
     <div class="section" id="poleSection">
         <h2 id="poleTitle">🏆 Assetto da Pole Position per Le Mans Ultimate</h2>
         <div class="pole-box" id="poleContent">
@@ -475,7 +461,6 @@ LMU – SETUP & OPTIMIZATION HUB
         </div>
     </div>
 
-    <!-- SCHEDA LIGIER -->
     <div class="section car-card" id="card_ligier_lmp3">
         <h2>Ligier JS P320</h2>
         <p><strong>RHD - Guida a Destra</strong></p>
@@ -503,7 +488,6 @@ LMU – SETUP & OPTIMIZATION HUB
         <p><strong>Punti di Toe (Convergenza):</strong> Anteriore: Toe-in per stabilità ad alta velocità; Toe-out per risposte rapide ma instabili. Posteriore: Toe-in per stabilizzare il retrotreno in ingresso.</p>
     </div>
 
-    <!-- SCHEDA GINETTA -->
     <div class="section car-card" id="card_ginetta_lmp3">
         <h2>Ginetta G61 LT P325 EVO</h2>
         <p><strong>LHD - Guida a Sinistra</strong></p>
@@ -531,7 +515,6 @@ LMU – SETUP & OPTIMIZATION HUB
         <p><strong>Punti di Toe (Convergenza):</strong> Anteriore Toe-out per reattività nel lento; Posteriore Toe-in per stabilizzare il posteriore rigido della Ginetta.</p>
     </div>
 
-    <!-- SCHEDA DUQUEINE LMP3 -->
     <div class="section car-card" id="card_duqueine_lmp3">
         <h2>Duqueine M30-D08</h2>
         <p><strong>LHD - Guida a Sinistra</strong></p>
@@ -539,7 +522,6 @@ LMU – SETUP & OPTIMIZATION HUB
         <p>Vettura caratterizzata da un'eccellente efficienza aerodinamica nei tratti ad alta velocità e grande stabilità in staccata. Richiede una guida pulita per non innescare sottosterzo a centro curva.</p>
     </div>
 
-    <!-- SCHEDA HYPERCAR -->
     <div class="section car-card" id="card_hypercar_gen">
         <h2>Categoria Hypercar (LMH / LMDh)</h2>
         <p><strong>Ibrido & Trazione Integrale Virtuale</strong></p>
@@ -547,7 +529,6 @@ LMU – SETUP & OPTIMIZATION HUB
         <p>Vetture complesse ad altissimo carico aerodinamico e potenza ibrida MGU. Richiedono una precisa gestione del camber per prevenire il surriscaldamento delle coperture nei curvoni veloci e un controllo maniacale del differenziale per gestire l'erogazione della trazione elettrica sull'asse anteriore/posteriore.</p>
     </div>
 
-    <!-- SCHEDA LMP2 -->
     <div class="section car-card" id="card_lmp2_gen">
         <h2>Categoria LMP2 (Oreca 07)</h2>
         <p><strong>Prototipo ad Alto Carico Aerodinamico</strong></p>
@@ -555,7 +536,6 @@ LMU – SETUP & OPTIMIZATION HUB
         <p>Riferimento assoluto per bilanciamento e carico aerodinamico. Risponde in maniera estremamente diretta ad ogni minima modifica di Rake, barre antirollio e pressioni pneumatici.</p>
     </div>
 
-    <!-- SCHEDA GTE -->
     <div class="section car-card" id="card_gte_gen">
         <h2>Categoria GTE (Gran Turismo Endurance)</h2>
         <p><strong>Motore Anteriore / Centrale / Posteriore</strong></p>
@@ -563,7 +543,6 @@ LMU – SETUP & OPTIMIZATION HUB
         <p>Vetture derivate dalla serie con carico aerodinamico moderato e assenza di ABS. Richiedono grande sensibilità al pedale del freno, gestione del trasferimento di carico e molta cura nella trazione in uscita.</p>
     </div>
 
-    <!-- TABELLA UNIVERSALE E RISOLUZIONE PROBLEMI DINAMICI -->
     <div class="section">
         <h2 id="matrixTitle">📊 Matrice di Regolazione Rapida & Risoluzione Problemi Dinamici</h2>
         <table>
@@ -659,7 +638,6 @@ LMU – SETUP & OPTIMIZATION HUB
     </div>
 </div>
 
-<!-- SCRIPT PER GESTIONE TRADUTTORE E CALCOLATORE -->
 <script type="text/javascript">
 const translations = {
     it: {
@@ -794,7 +772,7 @@ const translations = {
             ["Altezza Posteriore (Rake)", "Meno Rake: Vettura più stabile sui curvoni veloci, meno reattiva.", "Più Rake: Anteriore più preciso e puntato, rischio sovrasterzo in staccata."],
             ["🚨 Soluzione Sottosterzo (Tutti i tipi)", "Ammorbidisci ARB Ant., riduci Preload Diff, aumenta Toe-out Ant.", "Aumenta Rake (alza posteriore), aumenta Camber negativo Ant., ammorbidisci Molle Ant."],
             ["🚨 Soluzione Sovrasterzo (Ingresso/Staccata)", "Sposta Brake Bias all'anteriore, aumenta Toe-in Posteriore.", "Irrigidisci ARB Anteriore, aumenta Preload Diff, diminuisci Rake Posteriore."],
-            ["🚨 Soluzione Sovrasterzo (Uscita/Trazione)", "Ammorbidisci ARB Posteriore, ammorbidisci Molle Posteriori.", "Aumenta Power Lock Diff, riduci Camber Posteriore se excessive per l'impronta a terra."],
+            ["🚨 Soluzione Sovrasterzo (Uscita/Trazione)", "Ammorbidisci ARB Posteriore, ammorbidisci Molle Posteriori.", "Aumenta Power Lock Diff, riduci Camber Posteriore se eccessive per l'impronta a terra."],
             ["🚨 Spanciamento (Bottoming Out)", "Aumenta Packers (Tamponi) di +2/4mm per bloccare la corsa fine.", "Aumenta le altezze da terra statiche (Ant e Post) e aumenta la rigidezza Fast Bump."]
         ]
     },
@@ -942,7 +920,6 @@ function translatePage(langCode) {
     currentLanguage = langCode;
     const t = translations[langCode] || translations['it'];
 
-    // 1. Header & Intro
     const h1 = document.querySelector('h1');
     if (h1) h1.innerText = t.title;
 
@@ -952,7 +929,6 @@ function translatePage(langCode) {
         paragraphs[1].innerHTML = t.officialSource;
     }
 
-    // 2. Form & Calculator Section Header
     const calcH2 = document.querySelector('.section h2');
     if (calcH2) calcH2.innerText = t.calcTitle;
 
@@ -968,7 +944,6 @@ function translatePage(langCode) {
         labels[4].innerText = t.lblIssue;
     }
 
-    // Traduzione Opzioni Select Form
     const trackSelect = document.getElementById('trackType');
     if (trackSelect && trackSelect.options.length >= 3) {
         for (let i = 0; i < 3; i++) trackSelect.options[i].text = t.trackOptions[i];
@@ -987,7 +962,6 @@ function translatePage(langCode) {
     const btn = document.querySelector('#setupForm button');
     if (btn) btn.innerText = t.btnCalc;
 
-    // 3. Titoli Box Risultati Calcolatore
     const resH3 = document.querySelector('#resultsBox h3');
     if (resH3) resH3.innerText = t.resTitle;
 
@@ -1001,13 +975,11 @@ function translatePage(langCode) {
         cardHeaders[5].innerText = t.hIssueFix;
     }
 
-    // 4. Traduzione Sezione Pole Position
     const poleTitle = document.getElementById('poleTitle');
     if (poleTitle) poleTitle.innerText = t.poleTitle;
     const poleContent = document.getElementById('poleContent');
     if (poleContent) poleContent.innerHTML = t.poleBox;
 
-    // 5. Traduzione Scheda LIGIER
     const cardLigier = document.getElementById('card_ligier_lmp3');
     if (cardLigier) {
         cardLigier.querySelector('h2').innerText = t.cards.ligier.title;
@@ -1038,7 +1010,6 @@ function translatePage(langCode) {
         }
     }
 
-    // 6. Traduzione Scheda GINETTA
     const cardGinetta = document.getElementById('card_ginetta_lmp3');
     if (cardGinetta) {
         cardGinetta.querySelector('h2').innerText = t.cards.ginetta.title;
@@ -1069,7 +1040,6 @@ function translatePage(langCode) {
         }
     }
 
-    // 7. Traduzione Altre Schede Auto (Duqueine, Hypercar, LMP2, GTE)
     const translateSimpleCard = (cardId, cardData) => {
         const card = document.getElementById(cardId);
         if (card && cardData) {
@@ -1087,7 +1057,6 @@ function translatePage(langCode) {
     translateSimpleCard('card_lmp2_gen', t.cards.lmp2);
     translateSimpleCard('card_gte_gen', t.cards.gte);
 
-    // 8. Traduzione Tabella Matrice Setup
     const matrixH2 = document.getElementById('matrixTitle');
     if (matrixH2) matrixH2.innerText = t.matrixTitle;
 
@@ -1108,7 +1077,6 @@ function translatePage(langCode) {
         }
     });
 
-    // 9. Footer Text
     const footer = document.querySelector('.footer p');
     if (footer) footer.innerText = t.footerText;
 
@@ -1130,7 +1098,6 @@ function calculateSetup() {
     const controller = document.getElementById('controller').value;
     const issue = document.getElementById('issue').value;
 
-    // 1. Gestione visibilità schede informative
     const activeCard = document.getElementById('card_' + carValue);
     if (activeCard) {
         document.querySelectorAll('.car-card').forEach(card => card.style.display = 'none');
@@ -1151,12 +1118,10 @@ function calculateSetup() {
 
     const isEn = (currentLanguage === 'en');
 
-    // 2. Intestazione Risultati
     document.getElementById('resSummary').innerHTML = isEn ?
         `<p>🏎️ <strong>Car:</strong> ${selectedCarText} | 🏁 <strong>Track:</strong> ${selectedTrackText} | 🌡️ <strong>Track Temp:</strong> ${temp}°C</p>` :
         `<p>🏎️ <strong>Vettura:</strong> ${selectedCarText} | 🏁 <strong>Tracciato:</strong> ${selectedTrackText} | 🌡️ <strong>Temp. Asfalto:</strong> ${temp}°C</p>`;
 
-    // 3. BASELINE SPECIFICHE PER OGNI SINGOLA VETTURA
     let base = {
         fCamber: -3.2, rCamber: -2.4,
         fToe: -0.10,   rToe: 0.18,
@@ -1167,7 +1132,6 @@ function calculateSetup() {
         brakeBias: 54.0
     };
 
-    // -- LMP3 --
     if (carValue === 'ligier_lmp3') {
         base.fCamber = -3.1; base.rCamber = -2.3; base.fArb = "Medium"; base.rArb = "Soft";
         base.diffPreload = 80; base.brakeBias = 52.5;
@@ -1178,7 +1142,6 @@ function calculateSetup() {
         base.fCamber = -3.2; base.rCamber = -2.4; base.fArb = "Medium"; base.rArb = "Medium";
         base.diffPreload = 90; base.brakeBias = 53.5;
     } 
-    // -- HYPERCAR --
     else if (carValue === 'ferrari_499p') {
         base.fCamber = -3.5; base.rCamber = -2.6; base.fArb = "Stiff"; base.rArb = "Medium";
         base.diffPreload = 110; base.powerLock = 55; base.brakeBias = 54.5;
@@ -1198,12 +1161,10 @@ function calculateSetup() {
         base.fCamber = -3.4; base.rCamber = -2.5; base.fArb = "Medium"; base.rArb = "Medium";
         base.diffPreload = 105; base.brakeBias = 54.0;
     }
-    // -- LMP2 --
     else if (carValue === 'oreca_07') {
         base.fCamber = -3.6; base.rCamber = -2.6; base.fArb = "Stiff"; base.rArb = "Medium";
         base.diffPreload = 100; base.targetHotPSI = 21.0; base.brakeBias = 53.0;
     }
-    // -- GTE --
     else if (carValue === 'ferrari_488_gte') {
         base.fCamber = -3.0; base.rCamber = -2.2; base.fArb = "Medium"; base.rArb = "Soft";
         base.diffPreload = 75; base.targetHotPSI = 22.0; base.brakeBias = 52.0;
@@ -1215,27 +1176,24 @@ function calculateSetup() {
         base.diffPreload = 80; base.targetHotPSI = 22.0; base.brakeBias = 53.0;
     }
 
-    // 4. ADATTAMENTO AL TIPO DI TRACCIATO
     if (trackType === 'high_speed') {
-        base.fCamber += 0.4; // Camber meno aggressivo per i rettilinei
+        base.fCamber += 0.4;
         base.rCamber += 0.4;
         base.fToe = -0.04;
         base.rToe = 0.12;
         base.diffPreload += 20;
     } else if (trackType === 'technical') {
-        base.fCamber -= 0.3; // Più camber nei tratti guidati
+        base.fCamber -= 0.3;
         base.rCamber -= 0.3;
         base.fToe = -0.16;
         base.rToe = 0.22;
         base.diffPreload -= 20;
     }
 
-    // 5. REGOLAZIONE PERiferica DI GUIDA (Gamepad vs Volante)
     if (controller === 'pad') {
-        base.brakeBias += 1.5; // Bias spostato all'anteriore per facilitare il pad
+        base.brakeBias += 1.5;
     }
 
-    // 6. GESTIONE PROBLEMI DINAMICI E POLE POSITION
     let issueFixNote = "";
     if (issue === 'pole_position') {
         base.fCamber -= 0.3;
@@ -1278,10 +1236,8 @@ function calculateSetup() {
             "Nessun problema segnalato. Assetto puramente calcolato in base al circuito e vettura.";
     }
 
-    // Correzione Camber per Temperature elevate
     if (temp > 35) base.fCamber += 0.2;
 
-    // 7. RENDERING DELLE SCHEDE DI RISULTATO
     let geometryText = isEn ?
         `• <strong>Front Camber:</strong> ${base.fCamber.toFixed(1)}°<br>
          • <strong>Rear Camber:</strong> ${base.rCamber.toFixed(1)}°<br>
@@ -1313,7 +1269,6 @@ function calculateSetup() {
     }
     document.getElementById('resAero').innerHTML = aeroText;
 
-    // Calcolo Pressioni a Freddo in base alle temp. e al target d'esercizio
     let coldPSI = (base.targetHotPSI - (temp * 0.12) - 3.5).toFixed(1);
     let brakeText = isEn ? 
         `• <strong>Cold Pressures:</strong> ${coldPSI} PSI (Target Hot: ${base.targetHotPSI} PSI)<br>` : 
