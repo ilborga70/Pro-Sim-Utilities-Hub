@@ -8,11 +8,70 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
+:root {
+--bg-color: #0b0d12;
+--card-bg: rgba(22, 27, 38, 0.75);
+--card-border: rgba(255, 255, 255, 0.08);
+--accent-cyan: #00f2fe;
+--accent-blue: #4facfe;
+--accent-green: #00ff88;
+--accent-red: #ff3366;
+--text-main: #f0f4f8;
+--text-muted: #8a99ad;
+--font-heading: 'Orbitron', sans-serif;
+--font-body: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background-color: var(--bg-color);
+background-image:
+  radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
+  radial-gradient(circle at 90% 80%, rgba(255, 51, 102, 0.08) 0%, transparent 40%);
+color: var(--text-main);
+font-family: var(--font-body);
+padding: 2rem 1rem;
+min-height: 100vh;
+}
+
+.container { max-width: 1300px; margin: 0 auto; }
+
+header { text-align: center; margin-bottom: 3.5rem; position: relative; }
+
+header h1 {
+font-family: var(--font-heading);
+font-size: 2.5rem;
+font-weight: 900;
+letter-spacing: 2px;
+text-transform: uppercase;
+background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+margin-bottom: 0.5rem;
+}
+
+header p { color: var(--text-muted); font-size: 1.1rem; letter-spacing: 1px; }
+
+.badge {
+display: inline-block;
+background: rgba(0, 242, 254, 0.1);
+border: 1px solid var(--accent-cyan);
+color: var(--accent-cyan);
+font-family: var(--font-heading);
+font-size: 0.75rem;
+padding: 0.3rem 0.8rem;
+border-radius: 20px;
+margin-bottom: 1rem;
+text-transform: uppercase;
+}
+
 .tabs-nav {
 display: flex;
 justify-content: center;
 gap: 1rem;
 margin-bottom: 3rem;
+flex-wrap: wrap;
 }
 
 .tab-link {
@@ -34,80 +93,7 @@ border-color: var(--accent-cyan);
 box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
 background: rgba(0, 242, 254, 0.1);
 }
-:root {
---bg-color: #0b0d12;
---card-bg: rgba(22, 27, 38, 0.75);
---card-border: rgba(255, 255, 255, 0.08);
---accent-cyan: #00f2fe;
---accent-blue: #4facfe;
---accent-green: #00ff88;
---accent-red: #ff3366;
---text-main: #f0f4f8;
---text-muted: #8a99ad;
---font-heading: 'Orbitron', sans-serif;
---font-body: 'Inter', sans-serif;
-}
 
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-}
-
-body {
-background-color: var(--bg-color);
-background-image:
-radial-gradient(circle at 10% 10%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
-radial-gradient(circle at 90% 80%, rgba(255, 51, 102, 0.08) 0%, transparent 40%);
-color: var(--text-main);
-font-family: var(--font-body);
-padding: 2rem 1rem;
-min-height: 100vh;
-}
-
-.container {
-max-width: 1300px;
-margin: 0 auto;
-}
-
-header {
-text-align: center;
-margin-bottom: 3.5rem;
-position: relative;
-}
-
-header h1 {
-font-family: var(--font-heading);
-font-size: 2.5rem;
-font-weight: 900;
-letter-spacing: 2px;
-text-transform: uppercase;
-background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-margin-bottom: 0.5rem;
-}
-
-header p {
-color: var(--text-muted);
-font-size: 1.1rem;
-letter-spacing: 1px;
-}
-
-.badge {
-display: inline-block;
-background: rgba(0, 242, 254, 0.1);
-border: 1px solid var(--accent-cyan);
-color: var(--accent-cyan);
-font-family: var(--font-heading);
-font-size: 0.75rem;
-padding: 0.3rem 0.8rem;
-border-radius: 20px;
-margin-bottom: 1rem;
-text-transform: uppercase;
-}
-
-/* App Sections Showcase */
 .showcase-grid {
 display: grid;
 grid-template-columns: 1fr;
@@ -126,26 +112,10 @@ overflow: hidden;
 transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.app-card:hover {
-border-color: rgba(0, 242, 254, 0.3);
-}
-
-.app-card-title-group {
-margin-bottom: 1rem;
-}
-
-.app-card-title {
-font-family: var(--font-heading);
-font-size: 1.6rem;
-color: #fff;
-margin-bottom: 0.4rem;
-}
-
-.app-card-subtitle {
-color: var(--text-muted);
-font-size: 0.95rem;
-line-height: 1.5;
-}
+.app-card:hover { border-color: rgba(0, 242, 254, 0.3); }
+.app-card-title-group { margin-bottom: 1rem; }
+.app-card-title { font-family: var(--font-heading); font-size: 1.6rem; color: #fff; margin-bottom: 0.4rem; }
+.app-card-subtitle { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
 
 .app-features-grid {
 display: grid;
@@ -161,20 +131,9 @@ border-radius: 8px;
 padding: 1rem;
 }
 
-.feature-title {
-font-family: var(--font-heading);
-font-size: 0.85rem;
-color: var(--accent-cyan);
-margin-bottom: 0.3rem;
-}
+.feature-title { font-family: var(--font-heading); font-size: 0.85rem; color: var(--accent-cyan); margin-bottom: 0.3rem; }
+.feature-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
 
-.feature-desc {
-font-size: 0.8rem;
-color: var(--text-muted);
-line-height: 1.4;
-}
-
-/* Buttons & Downloads */
 .btn {
 display: inline-flex;
 align-items: center;
@@ -218,10 +177,7 @@ grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 gap: 1rem;
 }
 
-.download-buttons-grid .btn {
-width: 100%;
-justify-content: center;
-}
+.download-buttons-grid .btn { width: 100%; justify-content: center; }
 
 footer {
 text-align: center;
@@ -232,14 +188,9 @@ color: var(--text-muted);
 font-size: 0.85rem;
 }
 
-footer a {
-color: var(--accent-cyan);
-text-decoration: none;
-}
+footer a { color: var(--accent-cyan); text-decoration: none; }
 
-@media (max-width: 768px) {
-header h1 { font-size: 1.8rem; }
-}
+@media (max-width: 768px) { header h1 { font-size: 1.8rem; } }
 </style>
 </head>
 <body>
@@ -250,16 +201,16 @@ header h1 { font-size: 1.8rem; }
 <h1>Pro-Sim Utilities Hub</h1>
 <p>Complete Guide & Setup Suite for FOV Calculation and LookAhead Camera Control</p>
 </header>
-<!-- Navigation Tabs -->
+
 <nav class="tabs-nav">
 <a href="index.html" class="tab-link active">Main Hub & Presets</a>
 <a href="guide.html" class="tab-link">Setup Guide & FAQ</a>
-<a href="lmu.html" class="tab-link">LMU Setup & Optimization</a>  
+<a href="lmu.html" class="tab-link">LMU Setup & Optimization</a>
+<a href="benchmark.html" class="tab-link">Head Tracking Benchmark</a>
 </nav>
-<!-- Showcase Section for Both Applications -->
+
 <div class="showcase-grid">
 
-<!-- Pro-Sim FOV Utility -->
 <section class="app-card">
 <div class="app-card-title-group">
 <span class="badge">FOV & Camera Calculation</span>
@@ -290,7 +241,6 @@ header h1 { font-size: 1.8rem; }
 </div>
 </section>
 
-<!-- LookAhead Steering Controller -->
 <section class="app-card">
 <div class="app-card-title-group">
 <span class="badge">Dynamic Camera Control</span>
@@ -313,7 +263,6 @@ header h1 { font-size: 1.8rem; }
 </div>
 </div>
 
-<!-- 3 Dedicated Download Buttons for Different Versions -->
 <div class="download-group-container">
 <div class="download-group-title">Download Dedicated Builds:</div>
 <div class="download-buttons-grid">
