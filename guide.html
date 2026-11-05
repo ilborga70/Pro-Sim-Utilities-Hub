@@ -49,12 +49,12 @@ header h1 {
   margin-bottom: 0.5rem;
 }
 
-/* Navigation Tabs */
 .tabs-nav {
   display: flex;
   justify-content: center;
   gap: 1rem;
   margin-bottom: 3rem;
+  flex-wrap: wrap;
 }
 
 .tab-link {
@@ -77,7 +77,6 @@ header h1 {
   background: rgba(0, 242, 254, 0.1);
 }
 
-/* Content Sections */
 .guide-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -153,7 +152,6 @@ header h1 {
   text-transform: uppercase;
 }
 
-/* Container immagine */
 .guide-image-container {
   margin-top: 1rem;
   text-align: center;
@@ -203,14 +201,13 @@ footer a { color: var(--accent-cyan); text-decoration: none; }
   <h1>Installation & Setup Guide</h1>
 </header>
 
-<!-- Tab Navigation -->
 <nav class="tabs-nav">
   <a href="index.html" class="tab-link">Main Hub & Presets</a>
   <a href="guide.html" class="tab-link active">Setup Guide & FAQ</a>
   <a href="lmu.html" class="tab-link">LMU Setup & Optimization</a>
+  <a href="benchmark.html" class="tab-link">Head Tracking Benchmark</a>
 </nav>
 
-<!-- LookAhead Setup - Richard Burns Rally Specific -->
 <div class="guide-card">
   <h2>🛠️ Setting up LookAhead Steering Controller <span class="sim-tag">Richard Burns Rally (RBR)</span></h2>
   <ol class="step-list">
@@ -226,7 +223,6 @@ footer a { color: var(--accent-cyan); text-decoration: none; }
   </ol>
 </div>
 
-<!-- Pro-Sim FOV Setup -->
 <div class="guide-card">
   <h2>📐 Setting up Pro-Sim FOV Utility</h2>
   <ol class="step-list">
@@ -236,7 +232,6 @@ footer a { color: var(--accent-cyan); text-decoration: none; }
   </ol>
 </div>
 
-<!-- FAQ Section -->
 <div class="guide-card">
   <h2>❓ Frequently Asked Questions (FAQ)</h2>
 
