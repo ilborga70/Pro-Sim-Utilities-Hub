@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RALLY – SETUP & OPTIMIZATION HUB</title>
+<style>
+.tabs-nav {
+display: flex !important;
+justify-content: center !important;
+align-items: center !important;
+gap: 1rem !important;
+margin-top: 1.5rem !important;
+margin-bottom: 2rem !important;
+flex-wrap: wrap !important;
+width: 100% !important;
+}
+
+.tab-link {
+display: inline-block !important;
+font-family: inherit;
+color: #8a99ad !important;
+text-decoration: none !important;
+padding: 0.7rem 1.4rem !important;
+border-radius: 8px !important;
+border: 1px solid rgba(255, 255, 255, 0.15) !important;
+background: rgba(22, 27, 38, 0.85) !important;
+transition: all 0.3s ease !important;
+font-size: 0.85rem !important;
+font-weight: 600 !important;
+text-transform: uppercase !important;
+letter-spacing: 0.5px !important;
+}
+
+.tab-link:hover {
+color: #ffffff !important;
+border-color: #00f2fe !important;
+background: rgba(0, 242, 254, 0.15) !important;
+box-shadow: 0 0 12px rgba(0, 242, 254, 0.3) !important;
+}
+
+.tab-link.active {
+color: #ffffff !important;
+border-color: #00f2fe !important;
+background: rgba(0, 242, 254, 0.2) !important;
+box-shadow: 0 0 15px rgba(0, 242, 254, 0.4) !important;
+}
+
+:root {
+--bg-dark: #0a0c10;
+--panel-bg: rgba(18, 22, 31, 0.92);
+--border-glow: #00d2ff;
+--accent-yellow: #f5d000;
+--accent-red: #e60000;
+--accent-blue: #00d2ff;
+--text-main: #e2e8f0;
+--text-muted: #94a3b8;
+--font-display: 'Segoe UI', Impact, 'Arial Black', sans-serif;
+--font-body: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+font-family: var(--font-body);
+line-height: 1.55;
+color: var(--text-main);
+margin: 0;
+padding: 30px 15px;
+background: radial-gradient(circle at top, #141a29 0%, #050608 100%);
+background-attachment: fixed;
+font-size: 16px;
+}
+
+.container {
+max-width: 1100px;
+margin: auto;
+background: var(--panel-bg);
+padding: 35px;
+border-radius: 12px;
+box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 210, 255, 0.15);
+border: 1px solid rgba(255, 255, 255, 0.08);
+position: relative;
+}
+
+.language-switcher {
+display: flex;
+justify-content: flex-end;
+align-items: center;
+gap: 8px;
+background: rgba(10, 12, 16, 0.9);
+padding: 8px 14px;
+border-radius: 6px;
+border: 1px solid rgba(0, 210, 255, 0.4);
+margin-bottom: 20px;
+width: fit-content;
+margin-left: auto;
+}
+
+.language-switcher label {
+margin: 0;
+color: var(--accent-yellow);
+font-size: 0.85em;
+font-weight: 700;
+white-space: nowrap;
+}
+
+.language-switcher select {
+width: auto;
+margin: 0;
+padding: 4px 10px;
+font-size: 0.9em;
+background: #0a0c10;
+color: #fff;
+border: 1px solid rgba(255, 255, 255, 0.2);
+border-radius: 4px;
+cursor: pointer;
+}
+
+header h1 {
+font-family: var(--font-display);
+font-size: 2rem;
+font-weight: 900;
+text-transform: uppercase;
+letter-spacing: 2px;
+background: linear-gradient(90deg, #fff 0%, var(--accent-yellow) 50%, var(--accent-red) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+margin-top: 0;
+margin-bottom: 10px;
+text-align: center;
+}
+
+h2 {
+font-family: var(--font-display);
+color: var(--accent-yellow);
+font-size: 1.35em;
+letter-spacing: 1px;
+border-left: 4px solid var(--accent-yellow);
+padding-left: 12px;
+margin-top: 25px;
+text-transform: uppercase;
+}
+
+h3 {
+font-family: var(--font-display);
+color: var(--accent-blue);
+font-size: 1.05em;
+margin-top: 18px;
+letter-spacing: 0.5px;
+}
+
+.section {
+margin-bottom: 30px;
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+padding-bottom: 25px;
+}
+
+label {
+font-weight: 700;
+display: block;
+margin-top: 15px;
+color: var(--accent-blue);
+text-transform: uppercase;
+font-size: 0.88em;
+letter-spacing: 0.8px;
+}
+
+select, input {
+width: 100%;
+padding: 12px 15px;
+margin-top: 6px;
+border-radius: 6px;
+border: 1px solid rgba(0, 210, 255, 0.3);
+background: rgba(10, 12, 16, 0.85);
+color: #fff;
+font-family: var(--font-body);
+font-size: 1em;
+box-sizing: border-box;
+transition: all 0.25s ease;
+}
+
+select:focus, input:focus {
+outline: none;
+border-color: var(--accent-yellow);
+box-shadow: 0 0 10px rgba(245, 208, 0, 0.3);
+}
+
+optgroup {
+background: #0a0c10;
+color: var(--accent-yellow);
+}
+
+button {
+margin-top: 25px;
+padding: 16px;
+background: linear-gradient(135deg, #e60000 0%, #a00000 100%);
+color: white;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+font-family: var(--font-display);
+font-size: 1.05em;
+font-weight: 800;
+width: 100%;
+text-transform: uppercase;
+letter-spacing: 1.5px;
+box-shadow: 0 0 15px rgba(230, 0, 0, 0.4);
+transition: all 0.25s ease;
+}
+
+button:hover {
+background: linear-gradient(135deg, #ff1a1a 0%, #c80000 100%);
+box-shadow: 0 0 25px rgba(230, 0, 0, 0.8);
+transform: translateY(-2px);
+}
+
+button:active {
+transform: translateY(0);
+}
+
+.results-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 15px;
+margin-top: 15px;
+}
+
+.result-card {
+background: rgba(0, 0, 0, 0.45);
+border: 1px solid rgba(0, 210, 255, 0.25);
+border-left: 3px solid var(--accent-blue);
+padding: 15px;
+border-radius: 6px;
+}
+
+.result-card h4 {
+margin: 0 0 8px 0;
+font-family: var(--font-display);
+color: var(--accent-yellow);
+font-size: 0.95em;
+text-transform: uppercase;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 15px;
+background: rgba(0, 0, 0, 0.3);
+border-radius: 6px;
+overflow: hidden;
+}
+
+th, td {
+border: 1px solid rgba(255, 255, 255, 0.08);
+padding: 12px;
+text-align: left;
+}
+
+th {
+background-color: rgba(0, 210, 255, 0.15);
+color: var(--accent-blue);
+font-family: var(--font-display);
+font-size: 0.85em;
+text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+background-color: rgba(255, 255, 255, 0.02);
+}
+
+.footer {
+margin-top: 40px;
+text-align: center;
+font-size: 0.85em;
+color: var(--text-muted);
+border-top: 1px solid rgba(255, 255, 255, 0.1);
+padding-top: 15px;
+}
+
+#resultsBox {
+display: none;
+background: rgba(0, 20, 40, 0.9);
+border: 2px solid var(--accent-blue);
+border-radius: 8px;
+padding: 25px;
+margin-top: 30px;
+box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
+}
+
+#resultsBox h3 {
+margin-top: 0;
+color: #fff;
+font-size: 1.35em;
+border-bottom: 1px solid var(--accent-blue);
+padding-bottom: 10px;
+}
+
+.car-card {
+display: block;
+}
+
+.badge-rally {
+background: var(--accent-yellow);
+color: #000;
+padding: 2px 8px;
+font-weight: 800;
+border-radius: 3px;
+font-size: 0.8em;
+text-transform: uppercase;
+}
+
+.highlight-fix {
+color: var(--accent-yellow);
+font-weight: bold;
+}
+
+.pole-box {
+background: rgba(245, 208, 0, 0.08);
+border: 1px solid var(--accent-yellow);
+border-radius: 6px;
+padding: 15px;
+margin-top: 15px;
+}
+
+.pole-box h3 {
+color: var(--accent-yellow);
+margin-top: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<header style="text-align: center; margin-bottom: 1rem;">
+<h1 id="mainTitle">RALLY – SETUP & OPTIMIZATION HUB</h1>
+</header>
+
+<nav class="tabs-nav">
+<a href="index.html" class="tab-link">Main Hub & Presets</a>
+<a href="guide.html" class="tab-link">Setup Guide & FAQ</a>
+<a href="rally.html" class="tab-link active">Rally Setup & Optimization</a>
+<a href="benchmark.html" class="tab-link">Head Tracking Benchmark</a>
+</nav>
+
+<div class="language-switcher">
+<label for="langSelect" id="langLabel">🌐 Lingua / Language:</label>
+<select id="langSelect">
+<option value="it" selected>Italiano</option>
+<option value="en">English</option>
+</select>
+</div>
+
+<p id="introText">Guida completa ed ottimizzatore interattivo per tutte le categorie rally (<span class="badge-rally">Rally1</span> <span class="badge-rally">WRC</span> <span class="badge-rally">Rally2</span> <span class="badge-rally">Rally3/4 & Storiche</span>). Calcola i valori ideali di campanatura, convergenza, altezze da terra, sospensioni, ammortizzatori, freni, differenziali e bilanciamento per qualsiasi fondo.</p>
+
+<div class="section">
+<p id="calcSubText">Seleziona la tua auto da rally, il fondo della prova speciale, la temperatura e i problemi di guida riscontrati per generare istantaneamente il setup raccomandato ed ottimizzato in ogni parametro.</p>
+
+<form id="setupForm">
+<label for="carModel">Classe Vettura / Modello Rally:</label>
+<select id="carModel" name="carModel">
+<optgroup label="Rally1 Hybrid (4WD)">
+<option value="toyota_gr_yaris_rally1" selected>Rally1 - Toyota GR Yaris Rally1 Hybrid (4WD)</option>
+<option value="hyundai_i20_rally1">Rally1 - Hyundai i20 N Rally1 Hybrid (4WD)</option>
+<option value="ford_puma_rally1">Rally1 - Ford Puma Rally1 Hybrid (4WD)</option>
+</optgroup>
+<optgroup label="WRC 2017–2021 (4WD)">
+<option value="vw_polo_wrc">WRC - Volkswagen Polo R WRC / GTI</option>
+<option value="toyota_yaris_wrc">WRC - Toyota Yaris WRC</option>
+<option value="hyundai_i20_wrc">WRC - Hyundai i20 Coupe WRC</option>
+<option value="ford_fiesta_wrc">WRC - Ford Fiesta WRC</option>
+<option value="citroen_c3_wrc">WRC - Citroën C3 WRC</option>
+</optgroup>
+<optgroup label="Rally2 / R5 (4WD)">
+<option value="skoda_fabia_rs_rally2">Rally2 - Škoda Fabia RS Rally2</option>
+<option value="hyundai_i20_n_rally2">Rally2 - Hyundai i20 N Rally2</option>
+<option value="ford_fiesta_rally2">Rally2 - Ford Fiesta Rally2</option>
+<option value="citroen_c3_rally2">Rally2 - Citroën C3 Rally2</option>
+</optgroup>
+<optgroup label="Rally3 / Rally4 / Storiche (4WD / FWD / RWD)">
+<option value="ford_fiesta_rally3">Rally3 - Ford Fiesta Rally3 (4WD)</option>
+<option value="peugeot_208_rally4">Rally4 - Peugeot 208 Rally4 (FWD)</option>
+<option value="renault_clio_rally4">Rally4 - Renault Clio Rally4 (FWD)</option>
+<option value="lancia_delta_hf">Gruppo A - Lancia Delta HF Integrale (4WD)</option>
+<option value="subaru_impreza_wrc">Gruppo A / WRC - Subaru Impreza 555 / WRC (4WD)</option>
+<option value="audi_quattro_s1">Gruppo B - Audi Sport Quattro S1 E2 (4WD)</option>
+<option value="lancia_037_rwd">Gruppo B - Lancia Rally 037 Evo 2 (RWD)</option>
+</optgroup>
+</select>
+
+<label for="trackType">Fondo Prova Speciale / Superficie:</label>
+<select id="trackType" name="trackType">
+<option value="balanced">Sterrato Misto / Terra Compatta (es. Portogallo, Sardegna)</option>
+<option value="high_speed">Asfalto Asciutto / Alto Grip (es. Spagna, Croazia, Germania)</option>
+<option value="technical">Sterrato Sconnesso / Neve / Ghiaia Profonda (es. Kenya, Svezia, Grecia)</option>
+</select>
+
+<label for="temp">Temperatura Fondo / Aria (°C):</label>
+<input type="number" id="temp" name="temp" value="22" min="-30" max="60">
+
+<label for="controller">Periferica di Guida:</label>
+<select id="controller" name="controller">
+<option value="wheel">Volante, Pedali (Load Cell / Potenziometro) & Freno a Mano</option>
+<option value="pad">Gamepad / Controller</option>
+</select>
+
+<label for="issue">Problema Dinamico Riscontrato / Modalità:</label>
+<select id="issue" name="issue">
+<option value="none">Nessuno (Setup Base Ottimizzato)</option>
+<option value="pole_position">🏆 Modalità Power Stage / Shakedown Attack</option>
+<option value="understeer_entry">Sottosterzo in Ingresso Tornante / Curva</option>
+<option value="oversteer_entry">Sovrasterzo in Ingresso / Staccata Sconnessa</option>
+<option value="oversteer_exit">Sovrasterzo in Uscita (Trazione / Coda che scappa)</option>
+<option value="bottoming">La vettura spancia su salti, dossi o tagli profondo</option>
+</select>
+
+<button type="button" id="calcBtn">⚙️ Calcola & Ottimizza Setup Rally Ora</button>
+</form>
+
+<div id="resultsBox">
+<h3 id="resTitle">🎯 Risultati Setup Rally Calcolato & Parametri Ottimizzati</h3>
+<div id="resSummary" style="margin-bottom: 15px;"></div>
+
+<div class="results-grid">
+<div class="result-card">
+<h4>📐 Geometria (Camber & Toe)</h4>
+<div id="resGeometry"></div>
+</div>
+<div class="result-card">
+<h4>🏎️ Aerodinamica & Altezze da Terra</h4>
+<div id="resAero"></div>
+</div>
+<div class="result-card">
+<h4>🛞 Pressioni Gomme & Freni</h4>
+<div id="resBrakes"></div>
+</div>
+<div class="result-card">
+<h4>🔧 Sospensioni & Antirollio</h4>
+<div id="resSuspension"></div>
+</div>
+<div class="result-card">
+<h4>⚡ Ammortizzatori & Differenziali (Ant/Cent/Post)</h4>
+<div id="resDampersDiff"></div>
+</div>
+<div class="result-card">
+<h4>💡 Soluzione Problema Dinamico</h4>
+<div id="resIssueFix"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="section" id="poleSection">
+<h2 id="poleTitle">🏆 Assetto da Power Stage / Shakedown Estremo per Rally</h2>
+<div class="pole-box" id="poleContent">
+<p>Per staccare il miglior tempo in una Power Stage decisiva, serve un set d'attacco estremo calibrato sul fondo della prova: massimizza la reattività nei cambi di direzione, sfrutta il trasferimento di carico in frenata, regola le pressioni per avere grip immediato fin dalla prima curva e riduci il peso imbarcando una sola ruota di scorta.</p>
+<h3>Regolazioni Chiave per la Power Stage</h3>
+<ul>
+<li><strong>Aerodinamica & Rapporti:</strong> Su asfalto usa ala media/alta per stabilità nei curvoni veloci; su sterrato veloce accorcia leggermente i rapporti del cambio per massimizzare la ripresa fuori dai tornanti.</li>
+<li><strong>Sospensioni & Barre Antirollio:</strong> Irrigidisci leggermente le barre antirollio su asfalto per reattività immediata, oppure mantenile più libere su sterrato bucato per far copiare ogni avvallamento alle ruote.</li>
+<li><strong>Altezza da terra:</strong> Abbassa la vettura il più possibile su asfalto liscio; mantieni adeguata luce a terra e tamponi (bump stops) progressivi su sterrato con salti per evitare impatti sul paramotore.</li>
+<li><strong>Pressioni Gomme:</strong> Imposta pressioni basse a freddo per aumentare l'impronta a terra e mandare subito in temperatura la mescola (Soft/SuperSoft) fin dai primi chilometri.</li>
+<li><strong>Peso & Scorta:</strong> Imbarca solo una ruota di scorta (o zero se consentito dal regolamento della tappa breve) per alleggerire il retrotreno.</li>
+</ul>
+</div>
+</div>
+
+<div class="section car-card" id="card_toyota_gr_yaris_rally1">
+<h2>Toyota GR Yaris Rally1 Hybrid</h2>
+<p><strong>4WD - Trazione Integrale, Differenziali Meccanici & Boost Ibrido</strong></p>
+<h3>Caratteristiche e Stile di Guida</h3>
+<p>Piattaforma estremamente bilanciata, agile nel misto stretto e dotata di un'ottima trazione in uscita dalle curve lente. Eccelle nei cambi di direzione rapidi e sui salti grazie all'escursione progressiva delle sospensioni. Richiede una gestione precisa dell'acceleratore per sfruttare al meglio il boost ibrido senza far pattinare l'asse posteriore.</p>
+
+<h3>⚡ Powertrain & Differenziali (Ant / Cent / Post)</h3>
+<p><strong>Mappatura Ibrida & Cambio:</strong> Regolazione dell'erogazione ibrida in accelerazione e rapportatura finale corta/media in base alla velocità media della prova.</p>
+<p><strong>Raffreddamento (Radiator & Intercooler):</strong> Mantenere i condotti puliti su sterrato polveroso o fango per evitare cali di potenza del sistema ibrido e motore termico.</p>
+<p><strong>Differenziali (Preload & Ramp Angles):</strong> Senza differenziale centrale attivo nelle Rally1, il bilanciamento tra Preload anteriore e posteriore è fondamentale: Preload anteriore basso aiuta l'inserimento; Preload posteriore medio-alto garantisce trazione in uscita.</p>
+
+<h3>🛞 Wheels & Brakes (Ruote e Freni)</h3>
+<p><strong>Pressioni & Camber:</strong> Su sterrato usare pressioni basse (1.6 - 1.8 bar) per massimizzare l'impronta; su asfalto salire (1.9 - 2.1 bar) e aumentare il camber negativo per sostenere la spalla.</p>
+<p><strong>Forza Massima Pedale (Max Pedal Force):</strong> Controller: Default | Pedali: 80% - 88% per evitare bloccaggi sui fondi a bassa aderenza.</p>
+<p><strong>Ripartizione Frenata (Brake Bias):</strong> Su sterrato spostare leggermente verso il posteriore (52% - 54%) per aiutare l'auto a intraversarsi in ingresso; su asfalto avanzare (56% - 58%) per staccate violente.</p>
+<p><strong>Freno a Mano (Handbrake Bias):</strong> Sblocca istantaneamente il retrotreno nei tornanti stretti disaccoppiando la trasmissione posteriore.</p>
+
+<h3>🛞 Suspension (Sospensioni)</h3>
+<p><strong>Molle (Spring Rates):</strong> Morbide e a lunga escursione su sterrato/neve per copiare le buche; rigide e ribassate su asfalto per reattività e precisione.</p>
+<p><strong>Tamponi (Bump Stops):</strong> Fondamentali negli atterraggi dai salti (es. Finlandia) per assorbire l'energia cinetica senza far rimbalzare il telaio.</p>
+<p><strong>Altezza da Terra & Rake:</strong> Valori più alti su sterrato sconnesso; assetto basso con leggero Rake positivo su asfalto per puntare l'anteriore in corda.</p>
+
+<h3>📐 Chassis & Aero</h3>
+<p><strong>Barre Antirollio (ARB):</strong> Anteriore morbida = maggior grip meccanico e inserimento / rigida = reattività su asfalto liscio. Posteriore morbida = trazione su terra / rigida = aiuta il retrotreno a ruotare.</p>
+<p><strong>Punti di Toe (Convergenza):</strong> Anteriore: leggero Toe-out per reattività immediata nel misto; Posteriore: Toe-in per stabilizzare la coda nei tratti veloci sconnessi.</p>
+</div>
+
+<div class="section car-card" id="card_hyundai_i20_rally1">
+<h2>Hyundai i20 N Rally1 Hybrid</h2>
+<p><strong>4WD - Trazione Integrale, Passo Compatto & Alta Stabilità</strong></p>
+<h3>Caratteristiche e Stile di Guida</h3>
+<p>Molto stabile sui tratti ad alta velocità e nelle staccate sconnesse. Tende leggermente al sottosterzo in ingresso nei tornanti stretti su asfalto se l'anteriore è troppo rigido, ma ripaga con una trazione eccezionale in uscita di curva su ghiaia e fango.</p>
+
+<h3>⚡ Powertrain & Differenziali</h3>
+<p><strong>Erogazione & Rapporti:</strong> Ottima coppia ai medi regimi; regolare la rapportatura in funzione dei rettilinei della speciale.</p>
+<p><strong>Raffreddamento:</strong> Aprire le prese d'aria nelle tappe calde e lente (Grecia, Sardegna) per preservare la batteria ibrida.</p>
+<p><strong>Differenziali (Preload & Lock):</strong> Ridurre il Preload anteriore per eliminare il sottosterzo a centro curva; aumentare il blocco in accelerazione posteriore per chiudere le traiettorie con il gas.</p>
+
+<h3>🛞 Wheels & Brakes (Ruote e Freni)</h3>
+<p><strong>Pressioni & Camber:</strong> Calibrare in base alla mescola (Soft/Hard su asfalto; Soft/Medium su terra) per mantenere uniforme la temperatura del battistrada.</p>
+<p><strong>Forza Massima Pedale:</strong> Controller: Default | Pedali: 80% - 85% per modulare la frenata senza ABS.</p>
+<p><strong>Ripartizione Frenata (Brake Bias):</strong> Spostare leggermente al posteriore sui fondi scivolosi per favorire l'inserimento con il trasferimento di carico (left-foot braking).</p>
+<p><strong>Freno a Mano:</strong> Calibrare la pressione per rotazioni rapide nei tornanti senza spegnere il motore.</p>
+
+<h3>🛞 Suspension (Sospensioni)</h3>
+<p><strong>Molle (Spring Rates):</strong> Ammorbidire l'anteriore per aumentare il grip direzionale nelle curve lente; irrigidire il posteriore per favorire la rotazione.</p>
+<p><strong>Tamponi (Bump Stops):</strong> Regolare per evitare fondocorsa sui tagli profondi dei tornanti asfaltati.</p>
+<p><strong>Altezza da Terra & Rake:</strong> Alzare leggermente il retrotreno per rendere l'avantreno più incisivo in inserimento.</p>
+
+<h3>📐 Chassis & Aero</h3>
+<p><strong>Barre Antirollio (ARB):</strong> Anteriore morbida per cercare corda su sterrato; posteriore più rigida per contrastare il sottosterzo.</p>
+<p><strong>Punti di Toe (Convergenza):</strong> Anteriore Toe-out per inserimento rapido; Posteriore Toe-in per mantenere stabile la vettura in piena accelerazione su fondo irregolare.</p>
+</div>
+
+<div class="section car-card" id="card_ford_puma_rally1">
+<h2>Ford Puma Rally1 Hybrid</h2>
+<p><strong>4WD - Telaio Tubolare & Efficienza Aerodinamica</strong></p>
+<h3>Caratteristiche e Stile di Guida</h3>
+<p>Vettura caratterizzata da un avantreno molto preciso e comunicativo nei curvoni veloci sia su asfalto che su sterrato scorrevole. Richiede una regolazione attenta degli ammortizzatori in estensione (Rebound) per non perdere aderenza sulle sconnessioni in uscita di curva.</p>
+</div>
+
+<div class="section car-card" id="card_wrc_gen">
+<h2>Categoria WRC 2017–2021 (4WD Differenziale Centrale Attivo)</h2>
+<p><strong>4WD - Aerodinamica Estrema & Differenziale Centrale Elettronico</strong></p>
+<h3>Caratteristiche e Stile di Guida</h3>
+<p>Le WRC Plus combinano un carico aerodinamico elevatissimo con il differenziale centrale attivo. Richiedono una regolazione accurata della ripartizione di coppia (Torque Split) tra asse anteriore e posteriore, oltre a molle sufficientemente sostenute per gestire la deportanza nei tratti veloci.</p>
+</div>
+
+<div class="section car-card" id="card_rally2_gen">
+<h2>Categoria Rally2 / R5 (4WD)</h2>
+<p><strong>4WD - Motore 1.6 Turbo & Differenziali Meccanici</strong></p>
+<h3>Caratteristiche e Stile di Guida</h3>
+<p>La classe regina per equilibrio tra potenza e grip meccanico. Meno dipendente dall'aerodinamica rispetto alle Rally1: il segreto della prestazione risiede nella scorrevolezza a centro curva, nella gestione del freno sinistro (left-foot braking) e nella dolcezza delle sospensioni sui fondi rovinati.</p>
+</div>
+
+<div class="section car-card" id="card_classic_2wd_gen">
+<h2>Categoria Rally3 / Rally4 / Storiche (4WD / FWD / RWD)</h2>
+<p><strong>Trazione Integrale, Anteriore (FWD) o Posteriore (RWD)</strong></p>
+<h3>Caratteristiche e Stile di Guida</h3>
+<p><strong>FWD (Rally4):</strong> Richiedono un retrotreno reattivo (barre e molle posteriori più rigide) per far girare la coda ed evitare il sottosterzo in accelerazione.<br>
+<strong>RWD (Gruppo B / Storiche):</strong> Richiedono sospensioni posteriori morbide, camber posteriore contenuto e grande sensibilità sul gas per scaricare i cavalli senza testacoda.<br>
+<strong>4WD Storiche (Gruppo A/B):</strong> Gestione del turbo lag e del trasferimento di carico anticipato prima dell'ingresso curva.</p>
+</div>
+
+<div class="section">
+<h2 id="matrixTitle">📊 Matrice di Regolazione Rapida & Risoluzione Problemi Dinamici Rally</h2>
+<table>
+<thead>
+<tr>
+<th>Componente / Problema</th>
+<th>Azione: Freccia Sinistra ◄ Soft / Lower / Modifica</th>
+<th>Azione: Freccia Destra ► Stiff / Higher / Modifica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Campanatura / Camber Anteriore</strong></td>
+<td>Angolo ridotto (-1.0° / -1.5°): Ideale su sterrato sconnesso e neve per massima trazione in frenata.</td>
+<td>Angolo negativo accentuato (-2.5° / -3.5°): Ideale su asfalto asciutto per grip laterale nei curvoni.</td>
+</tr>
+<tr>
+<td><strong>Campanatura / Camber Posteriore</strong></td>
+<td>Meno angolato: Massima trazione in uscita di curva e sui fondi scivolosi (fango/neve).</td>
+<td>Più negativo: Maggiore stabilità laterale nei curvoni veloci su asfalto.</td>
+</tr>
+<tr>
+<td><strong>Molle Anteriori (Front Springs)</strong></td>
+<td>Riduci sottosterzo, maggior grip meccanico su terra/buche e trasferimento di carico in frenata.</td>
+<td>Aumenta precisione e reattività su asfalto liscio, maggior sottosterzo sullo sconnesso.</td>
+</tr>
+<tr>
+<td><strong>Molle Posteriori (Rear Springs)</strong></td>
+<td>Maggior trazione in uscita di curva e assorbimento sulle buche (ideale RWD e sterrato).</td>
+<td>Aumenta rotazione del retrotreno (ideale FWD e asfalto tecnico).</td>
+</tr>
+<tr>
+<td><strong>Toe Anteriore (Front Toe)</strong></td>
+<td>Aumenta Toe-in (+): Maggiore stabilità direzionale sui rettilinei sconnessi.</td>
+<td>Crea Toe-out (-): Inserimento curva reattivo/immediato nei tornanti e nel misto stretto.</td>
+</tr>
+<tr>
+<td><strong>Toe Posteriore (Rear Toe)</strong></td>
+<td>Riduci Toe-in: Retrotreno più agile e libero di scivolare nei tornanti stretti.</td>
+<td>Aumenta Toe-in (+): Stabilizza la coda in frenata e sulle buche ad alta velocità.</td>
+</tr>
+<tr>
+<td><strong>Barra Antirollio Ant. (Front ARB)</strong></td>
+<td>Anteriore copia meglio il fondo sconnesso, maggior grip in inserimento.</td>
+<td>Aumenta reattività nei cambi di direzione su asfalto, induce sottosterzo su terra.</td>
+</tr>
+<tr>
+<td><strong>Barra Antirollio Post. (Rear ARB)</strong></td>
+<td>Retrotreno morbido e incollato al fondo, massima trazione in accelerazione.</td>
+<td>Aumenta il sovrasterzo controllato e la rotazione a centro curva.</td>
+</tr>
+<tr>
+<td><strong>Ammortizzatori (Bump & Rebound)</strong></td>
+<td>Ammorbidisce BUMP / REBOUND: Assorbimento superiore su buche, sassi e tagli.</td>
+<td>Irrigidisce BUMP / REBOUND: Controllo del rollio su asfalto e atterraggio dai salti (Fast Bump).</td>
+</tr>
+<tr>
+<td><strong>Preload Differenziale (Ant / Post)</strong></td>
+<td>Meno blocco: Inserimento curva più rapido e sterzo più leggero.</td>
+<td>Più blocco: Maggiore trazione sui fondi a bassa aderenza e stabilità in staccata.</td>
+</tr>
+<tr>
+<td><strong>Altezza da Terra (Ride Height)</strong></td>
+<td>Più bassa: Baricentro basso, massima velocità e precisione su asfalto asciutto.</td>
+<td>Più alta: Escursione sospensioni completa per sterrato rotto, fango, neve e salti.</td>
+</tr>
+<tr>
+<td><strong>🚨 Soluzione Sottosterzo (Ingresso/Centro)</strong></td>
+<td>Ammorbidisci ARB Ant., riduci Preload Diff Ant., aumenta Toe-out Ant.</td>
+<td>Sposta Brake Bias leggermente indietro, aumenta Camber negativo Ant., ammorbidisci Molle Ant.</td>
+</tr>
+<tr>
+<td><strong>🚨 Soluzione Sovrasterzo (Ingresso/Staccata)</strong></td>
+<td>Sposta Brake Bias all'anteriore, aumenta Toe-in Posteriore.</td>
+<td>Irrigidisci ARB Anteriore, aumenta Preload Diff Post., ammorbidisci Rebound Posteriore.</td>
+</tr>
+<tr>
+<td><strong>🚨 Soluzione Sovrasterzo (Uscita/Trazione)</strong></td>
+<td>Ammorbidisci ARB Posteriore, ammorbidisci Molle Posteriori, riduci Pressione Gomme Post.</td>
+<td>Riduci Power Lock Diff Posteriore (su RWD/4WD) o aumentalo su FWD per tirare fuori l'auto.</td>
+</tr>
+<tr>
+<td><strong>🚨 Spanciamento (Salti / Dossi / Tagli)</strong></td>
+<td>Irrigidisci Fast Bump (compressione veloce) e aumenta i Bump Stops (tamponi).</td>
+<td>Alza l'altezza da terra statica (Ant e Post) di +5/+10mm e irrigidisci leggermente le molle.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="footer">
+<p>Rally — Setup & Optimization Hub © Documento tecnico e calcolatore per la regolazione degli assetti rally simracing.</p>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const translations = {
+it: {
+title: "RALLY – SETUP & OPTIMIZATION HUB",
+intro: "Guida completa ed ottimizzatore interattivo per tutte le categorie rally (<span class="badge-rally">Rally1</span> <span class="badge-rally">WRC</span> <span class="badge-rally">Rally2</span> <span class="badge-rally">Rally3/4 & Storiche</span>). Calcola i valori ideali di campanatura, convergenza, altezze da terra, sospensioni, ammortizzatori, freni, differenziali e bilanciamento per qualsiasi fondo.",
+calcSub: "Seleziona la tua auto da rally, il fondo della prova speciale, la temperatura e i problemi di guida riscontrati per generare istantaneamente il setup raccomandato ed ottimizzato in ogni parametro.",
+lblCar: "Classe Vettura / Modello Rally:",
+lblTrack: "Fondo Prova Speciale / Superficie:",
+lblTemp: "Temperatura Fondo / Aria (°C):",
+lblCtrl: "Periferica di Guida:",
+lblIssue: "Problema Dinamico Riscontrato / Modalità:",
+trackOptions: [
+"Sterrato Misto / Terra Compatta (es. Portogallo, Sardegna)",
+"Asfalto Asciutto / Alto Grip (es. Spagna, Croazia, Germania)",
+"Sterrato Sconnesso / Neve / Ghiaia Profonda (es. Kenya, Svezia, Grecia)"
+ ],
+ctrlOptions: [
+"Volante, Pedali (Load Cell / Potenziometro) & Freno a Mano",
+"Gamepad / Controller"
+ ],
+issueOptions: [
+"Nessuno (Setup Base Ottimizzato)",
+"🏆 Modalità Power Stage / Shakedown Attack",
+"Sottosterzo in Ingresso Tornante / Curva",
+"Sovrasterzo in Ingresso / Staccata Sconnessa",
+"Sovrasterzo in Uscita (Trazione / Coda che scappa)",
+"La vettura spancia su salti, dossi o tagli profondo"
+ ],
+btnCalc: "⚙️ Calcola & Ottimizza Setup Rally Ora",
+resTitle: "🎯 Risultati Setup Rally Calcolato & Parametri Ottimizzati",
+hGeometry: "📐 Geometria (Camber & Toe)",
+hAero: "🏎️ Aerodinamica & Altezze da Terra",
+hBrakes: "🛞 Pressioni Gomme & Freni",
+hSusp: "🔧 Sospensioni & Antirollio",
+hDampDiff: "⚡ Ammortizzatori & Differenziali (Ant/Cent/Post)",
+hIssueFix: "💡 Soluzione Problema Dinamico",
+poleTitle: "🏆 Assetto da Power Stage / Shakedown Estremo per Rally",
+poleBox: "<p>Per staccare il miglior tempo in una Power Stage decisiva, serve un set d'attacco estremo calibrato sul fondo della prova: massimizza la reattività nei cambi di direzione, sfrutta il trasferimento di carico in frenata, regola le pressioni per avere grip immediato fin dalla prima curva e riduci il peso imbarcando una sola ruota di scorta.</p><h3>Regolazioni Chiave per la Power Stage</h3><ul><li><strong>Aerodinamica & Rapporti:</strong> Su asfalto usa ala media/alta per stabilità nei curvoni veloci; su sterrato veloce accorcia leggermente i rapporti del cambio per massimizzare la ripresa fuori dai tornanti.</li><li><strong>Sospensioni & Barre Antirollio:</strong> Irrigidisci leggermente le barre antirollio su asfalto per reattività immediata, oppure mantenile più libere su sterrato bucato per far copiare ogni avvallamento alle ruote.</li><li><strong>Altezza da terra:</strong> Abbassa la vettura il più possibile su asfalto liscio; mantieni adeguata luce a terra e tamponi (bump stops) progressivi su sterrato con salti per evitare impatti sul paramotore.</li><li><strong>Pressioni Gomme:</strong> Imposta pressioni basse a freddo per aumentare l'impronta a terra e mandare subito in temperatura la mescola (Soft/SuperSoft) fin dai primi chilometri.</li><li><strong>Peso & Scorta:</strong> Imbarca solo una ruota di scorta (o zero se consentito dal regolamento della tappa breve) per alleggerire il retrotreno.</li></ul>",
+matrixTitle: "📊 Matrice di Regolazione Rapida & Risoluzione Problemi Dinamici Rally",
+footerText: "Rally — Setup & Optimization Hub © Documento tecnico e calcolatore per la regolazione degli assetti rally simracing.",
+cards: {
+yaris: {
+title: "Toyota GR Yaris Rally1 Hybrid",
+sub: "4WD - Trazione Integrale, Differenziali Meccanici & Boost Ibrido",
+hChars: "Caratteristiche e Stile di Guida",
+pChars: "Piattaforma estremamente bilanciata, agile nel misto stretto e dotata di un'ottima trazione in uscita dalle curve lente. Eccelle nei cambi di direzione rapidi e sui salti grazie all'escursione progressiva delle sospensioni. Richiede una gestione precisa dell'acceleratore per sfruttare al meglio il boost ibrido senza far pattinare l'asse posteriore.",
+hPower: "⚡ Powertrain & Differenziali (Ant / Cent / Post)",
+pFuel: "<strong>Mappatura Ibrida & Cambio:</strong> Regolazione dell'erogazione ibrida in accelerazione e rapportatura finale corta/media in base alla velocità media della prova.",
+pRad: "<strong>Raffreddamento (Radiator & Intercooler):</strong> Mantenere i condotti puliti su sterrato polveroso o fango per evitare cali di potenza del sistema ibrido e motore termico.",
+pDiff: "<strong>Differenziali (Preload & Ramp Angles):</strong> Senza differenziale centrale attivo nelle Rally1, il bilanciamento tra Preload anteriore e posteriore è fondamentale: Preload anteriore basso aiuta l'inserimento; Preload posteriore medio-alto garantisce trazione in uscita.",
+hWheels: "🛞 Wheels & Brakes (Ruote e Freni)",
+pPress: "<strong>Pressioni & Camber:</strong> Su sterrato usare pressioni basse (1.6 - 1.8 bar) per massimizzare l'impronta; su asfalto salire (1.9 - 2.1 bar) e aumentare il camber negativo per sostenere la spalla.",
+pForce: "<strong>Forza Massima Pedale (Max Pedal Force):</strong> Controller: Default | Pedali: 80% - 88% per evitare bloccaggi sui fondi a bassa aderenza.",
+pBias: "<strong>Ripartizione Frenata (Brake Bias):</strong> Su sterrato spostare leggermente verso il posteriore (52% - 54%) per aiutare l'auto a intraversarsi in ingresso; su asfalto avanzare (56% - 58%) per staccate violente.",
+pDucts: "<strong>Freno a Mano (Handbrake Bias):</strong> Sblocca istantaneamente il retrotreno nei tornanti stretti disaccoppiando la trasmissione posteriore.",
+hSusp: "🛞 Suspension (Sospensioni)",
+pSprings: "<strong>Molle (Spring Rates):</strong> Morbide e a lunga escursione su sterrato/neve per copiare le buche; rigide e ribassate su asfalto per reattività e precisione.",
+pPackers: "<strong>Tamponi (Bump Stops):</strong> Fondamentali negli atterraggi dai salti (es. Finlandia) per assorbire l'energia cinetica senza far rimbalzare il telaio.",
+pRake: "<strong>Altezza da Terra & Rake:</strong> Valori più alti su sterrato sconnesso; assetto basso con leggero Rake positivo su asfalto per puntare l'anteriore in corda.",
+hAero: "📐 Chassis & Aero",
+pArb: "<strong>Barre Antirollio (ARB):</strong> Anteriore morbida = maggior grip meccanico e inserimento / rigida = reattività su asfalto liscio. Posteriore morbida = trazione su terra / rigida = aiuta il retrotreno a ruotare.",
+pToe: "<strong>Punti di Toe (Convergenza):</strong> Anteriore: leggero Toe-out per reattività immediata nel misto; Posteriore: Toe-in per stabilizzare la coda nei tratti veloci sconnessi."
+},
+hyundai: {
+title: "Hyundai i20 N Rally1 Hybrid",
+sub: "4WD - Trazione Integrale, Passo Compatto & Alta Stabilità",
+hChars: "Caratteristiche e Stile di Guida",
+pChars: "Molto stabile sui tratti ad alta velocità e nelle staccate sconnesse. Tende leggermente al sottosterzo in ingresso nei tornanti stretti su asfalto se l'anteriore è troppo rigido, ma ripaga con una trazione eccezionale in uscita di curva su ghiaia e fango.",
+hPower: "⚡ Powertrain & Differenziali",
+pFuel: "<strong>Erogazione & Rapporti:</strong> Ottima coppia ai medi regimi; regolare la rapportatura in funzione dei rettilinei della speciale.",
+pRad: "<strong>Raffreddamento:</strong> Aprire le prese d'aria nelle tappe calde e lente (Grecia, Sardegna) per preservare la batteria ibrida.",
+pDiff: "<strong>Differenziali (Preload & Lock):</strong> Ridurre il Preload anteriore per eliminare il sottosterzo a centro curva; aumentare il blocco in accelerazione posteriore per chiudere le traiettorie con il gas.",
+hWheels: "🛞 Wheels & Brakes (Ruote e Freni)",
+pPress: "<strong>Pressioni & Camber:</strong> Calibrare in base alla mescola (Soft/Hard su asfalto; Soft/Medium su terra) per mantenere uniforme la temperatura del battistrada.",
+pForce: "<strong>Forza Massima Pedale:</strong> Controller: Default | Pedali: 80% - 85% per modulare la frenata senza ABS.",
+pBias: "<strong>Ripartizione Frenata (Brake Bias):</strong> Spostare leggermente al posteriore sui fondi scivolosi per favorire l'inserimento con il trasferimento di carico (left-foot braking).",
+pDucts: "<strong>Freno a Mano:</strong> Calibrare la pressione per rotazioni rapide nei tornanti senza spegnere il motore.",
+hSusp: "🛞 Suspension (Sospensioni)",
+pSprings: "<strong>Molle (Spring Rates):</strong> Ammorbidire l'anteriore per aumentare il grip direzionale nelle curve lente; irrigidire il posteriore per favorire la rotazione.",
+pPackers: "<strong>Tamponi (Bump Stops):</strong> Regolare per evitare fondocorsa sui tagli profondi dei tornanti asfaltati.",
+pRake: "<strong>Altezza da Terra & Rake:</strong> Alzare leggermente il retrotreno per rendere l'avantreno più incisivo in inserimento.",
+hAero: "📐 Chassis & Aero",
+pArb: "<strong>Barre Antirollio (ARB):</strong> Anteriore morbida per cercare corda su sterrato; posteriore più rigida per contrastare il sottosterzo.",
+pToe: "<strong>Punti di Toe (Convergenza):</strong> Anteriore Toe-out per inserimento rapido; Posteriore Toe-in per mantenere stabile la vettura in piena accelerazione su fondo irregolare."
+},
+puma: {
+title: "Ford Puma Rally1 Hybrid",
+sub: "4WD - Telaio Tubolare & Efficienza Aerodinamica",
+hChars: "Caratteristiche e Stile di Guida",
+pChars: "Vettura caratterizzata da un avantreno molto preciso e comunicativo nei curvoni veloci sia su asfalto che su sterrato scorrevole. Richiede una regolazione attenta degli ammortizzatori in estensione (Rebound) per non perdere aderenza sulle sconnessioni in uscita di curva."
+},
+wrc: {
+title: "Categoria WRC 2017–2021 (4WD Differenziale Centrale Attivo)",
+sub: "4WD - Aerodinamica Estrema & Differenziale Centrale Elettronico",
+hChars: "Caratteristiche e Stile di Guida",
+pChars: "Le WRC Plus combinano un carico aerodinamico elevatissimo con il differenziale centrale attivo. Richiedono una regolazione accurata della ripartizione di coppia (Torque Split) tra asse anteriore e posteriore, oltre a molle sufficientemente sostenute per gestire la deportanza nei tratti veloci."
+},
+rally2: {
+title: "Categoria Rally2 / R5 (4WD)",
+sub: "4WD - Motore 1.6 Turbo & Differenziali Meccanici",
+hChars: "Caratteristiche e Stile di Guida",
+pChars: "La classe regina per equilibrio tra potenza e grip meccanico. Meno dipendente dall'aerodinamica rispetto alle Rally1: il segreto della prestazione risiede nella scorrevolezza a centro curva, nella gestione del freno sinistro (left-foot braking) e nella dolcezza delle sospensioni sui fondi rovinati."
+},
+classic: {
+title: "Categoria Rally3 / Rally4 / Storiche (4WD / FWD / RWD)",
+sub: "Trazione Integrale, Anteriore (FWD) o Posteriore (RWD)",
+hChars: "Caratteristiche e Stile di Guida",
+pChars: "FWD (Rally4): Richiedono un retrotreno reattivo (barre e molle posteriori più rigide) per far girare la coda ed evitare il sottosterzo in accelerazione. RWD (Gruppo B / Storiche): Richiedono sospensioni posteriori morbide, camber posteriore contenuto e grande sensibilità sul gas per scaricare i cavalli senza testacoda. 4WD Storiche (Gruppo A/B): Gestione del turbo lag e del trasferimento di carico anticipato prima dell'ingresso curva."
+}
+},
+tableHeaders: ["Componente / Problema", "Azione: Freccia Sinistra ◄ Soft / Lower / Modifica", "Azione: Freccia Destra ► Stiff / Higher / Modifica"],
+tableRows: [
+["Campanatura / Camber Anteriore", "Angolo ridotto (-1.0° / -1.5°): Ideale su sterrato sconnesso e neve per massima trazione in frenata.", "Angolo negativo accentuato (-2.5° / -3.5°): Ideale su asfalto asciutto per grip laterale nei curvoni."],
+["Campanatura / Camber Posteriore", "Meno angolato: Massima trazione in uscita di curva e sui fondi scivolosi (fango/neve).", "Più negativo: Maggiore stabilità laterale nei curvoni veloci su asfalto."],
+["Molle Anteriori (Front Springs)", "Riduci sottosterzo, maggior grip meccanico su terra/buche e trasferimento di carico in frenata.", "Aumenta precisione e reattività su asfalto liscio, maggior sottosterzo sullo sconnesso."],
+["Molle Posteriori (Rear Springs)", "Maggior trazione in uscita di curva e assorbimento sulle buche (ideale RWD e sterrato).", "Aumenta rotazione del retrotreno (ideale FWD e asfalto tecnico)."],
+["Toe Anteriore (Front Toe)", "Aumenta Toe-in (+): Maggiore stabilità direzionale sui rettilinei sconnessi.", "Crea Toe-out (-): Inserimento curva reattivo/immediato nei tornanti e nel misto stretto."],
+["Toe Posteriore (Rear Toe)", "Riduci Toe-in: Retrotreno più agile e libero di scivolare nei tornanti stretti.", "Aumenta Toe-in (+): Stabilizza la coda in frenata e sulle buche ad alta velocità."],
+["Barra Antirollio Ant. (Front ARB)", "Anteriore copia meglio il fondo sconnesso, maggior grip in inserimento.", "Aumenta reattività nei cambi di direzione su asfalto, induce sottosterzo su terra."],
+["Barra Antirollio Post. (Rear ARB)", "Retrotreno morbido e incollato al fondo, massima trazione in accelerazione.", "Aumenta il sovrasterzo controllato e la rotazione a centro curva."],
+["Ammortizzatori (Bump & Rebound)", "Ammorbidisce BUMP / REBOUND: Assorbimento superiore su buche, sassi e tagli.", "Irrigidisce BUMP / REBOUND: Controllo del rollio su asfalto e atterraggio dai salti (Fast Bump)."],
+["Preload Differenziale (Ant / Post)", "Meno blocco: Inserimento curva più rapido e sterzo più leggero.", "Più blocco: Maggiore trazione sui fondi a bassa aderenza e stabilità in staccata."],
+["Altezza da Terra (Ride Height)", "Più bassa: Baricentro basso, massima velocità e precisione su asfalto asciutto.", "Più alta: Escursione sospensioni completa per sterrato rotto, fango, neve e salti."],
+["🚨 Soluzione Sottosterzo (Ingresso/Centro)", "Ammorbidisci ARB Ant., riduci Preload Diff Ant., aumenta Toe-out Ant.", "Sposta Brake Bias leggermente indietro, aumenta Camber negativo Ant., ammorbidisci Molle Ant."],
+["🚨 Soluzione Sovrasterzo (Ingresso/Staccata)", "Sposta Brake Bias all'anteriore, aumenta Toe-in Posteriore.", "Irrigidisci ARB Anteriore, aumenta Preload Diff Post., ammorbidisci Rebound Posteriore."],
+["🚨 Soluzione Sovrasterzo (Uscita/Trazione)", "Ammorbidisci ARB Posteriore, ammorbidisci Molle Posteriori, riduci Pressione Gomme Post.", "Riduci Power Lock Diff Posteriore (su RWD/4WD) o aumentalo su FWD per tirare fuori l'auto."],
+["🚨 Spanciamento (Salti / Dossi / Tagli)", "Irrigidisci Fast Bump (compressione veloce) e aumenta i Bump Stops (tamponi).", "Alza l'altezza da terra statica (Ant e Post) di +5/+10mm e irrigidisci leggermente le molle."]
+]
+},
+en: {
+title: "RALLY – SETUP & OPTIMIZATION HUB",
+intro: "Complete guide and interactive optimizer for all rally categories (<span class="badge-rally">Rally1</span> <span class="badge-rally">WRC</span> <span class="badge-rally">Rally2</span> <span class="badge-rally">Rally3/4 & Historic</span>). Calculates optimal camber, toe, ride height, suspension, dampers, brakes, differentials, and balance for any stage surface.",
+calcSub: "Select your rally car, special stage surface, temperature, and handling issues to instantly generate a fully optimized recommended setup.",
+lblCar: "Car Class / Rally Model:",
+lblTrack: "Special Stage Surface / Terrain:",
+lblTemp: "Surface / Air Temperature (°C):",
+lblCtrl: "Input Device:",
+lblIssue: "Handling Issue Experienced / Mode:",
+trackOptions: [
+"Mixed Gravel / Compact Dirt (e.g., Portugal, Sardinia)",
+"Dry Tarmac / High Grip (e.g., Spain, Croatia, Germany)",
+"Rough Gravel / Snow / Deep Loose Surface (e.g., Kenya, Sweden, Greece)"
+ ],
+ctrlOptions: [
+"Wheel, Pedals (Load Cell / Potentiometer) & Handbrake",
+"Gamepad / Controller"
+ ],
+issueOptions: [
+"None (Base Optimized Setup)",
+"🏆 Power Stage / Shakedown Attack Mode",
+"Hairpin / Corner Entry Understeer",
+"Entry / Rough Braking Oversteer",
+"Exit Oversteer (Traction / Loose Rear)",
+"Car is bottoming out on jumps, bumps, or deep cuts"
+ ],
+btnCalc: "⚙️ Calculate & Optimize Rally Setup Now",
+resTitle: "🎯 Calculated Rally Setup Results & Optimized Parameters",
+hGeometry: "📐 Geometry (Camber & Toe)",
+hAero: "🏎️ Aerodynamics & Ride Height",
+hBrakes: "🛞 Tire Pressures & Brakes",
+hSusp: "🔧 Suspension & Anti-Roll Bars",
+hDampDiff: "⚡ Dampers & Differentials (Front/Center/Rear)",
+hIssueFix: "💡 Dynamic Issue Solution",
+poleTitle: "🏆 Power Stage / Extreme Shakedown Setup for Rally",
+poleBox: "<p>To set the fastest time on a decisive Power Stage, you need an extreme attack setup calibrated to the stage surface: maximize direction-change sharpness, use weight transfer under braking, tune cold pressures for immediate grip from corner one, and reduce weight by carrying only one spare wheel.</p><h3>Key Power Stage Adjustments</h3><ul><li><strong>Aerodynamics & Gearing:</strong> On tarmac use medium/high wing for high-speed corner stability; on fast gravel shorten gear ratios slightly to maximize acceleration out of hairpins.</li><li><strong>Suspension & Anti-Roll Bars:</strong> Stiffen anti-roll bars slightly on tarmac for immediate response, or keep them softer on rutted gravel so wheels track every bump.</li><li><strong>Ride Height:</strong> Lower the car as much as possible on smooth tarmac; keep proper ground clearance and progressive bump stops on bumpy gravel with jumps to protect the sump guard.</li><li><strong>Tire Pressures:</strong> Set low cold pressures to increase contact patch and bring Soft/SuperSoft compounds up to operating temperature immediately.</li><li><strong>Weight & Spare Tire:</strong> Carry only one spare tire (or zero if stage rules allow) to lighten the rear end.</li></ul>",
+matrixTitle: "📊 Quick Adjustment Matrix & Dynamic Rally Troubleshooting",
+footerText: "Rally — Setup & Optimization Hub © Technical document and calculator for simracing rally setup adjustments.",
+cards: {
+yaris: {
+title: "Toyota GR Yaris Rally1 Hybrid",
+sub: "4WD - All-Wheel Drive, Mechanical Differentials & Hybrid Boost",
+hChars: "Handling Characteristics & Driving Style",
+pChars: "Extremely balanced platform, agile in tight technical sections with strong traction out of slow corners. Excels in quick direction changes and jumps thanks to progressive suspension travel. Requires precise throttle modulation to harness hybrid boost without spinning the rear axle.",
+hPower: "⚡ Powertrain & Differentials (Front / Center / Rear)",
+pFuel: "<strong>Hybrid Mapping & Gearing:</strong> Hybrid deployment tuning on acceleration and short/medium final drive based on stage average speed.",
+pRad: "<strong>Cooling (Radiator & Intercooler):</strong> Keep air intakes clear on dusty gravel or mud to avoid power derating of hybrid and ICE systems.",
+pDiff: "<strong>Differentials (Preload & Ramp Angles):</strong> Without an active center diff in Rally1, balancing front and rear Preload is key: lower front Preload helps turn-in; medium-high rear Preload ensures exit traction.",
+hWheels: "🛞 Wheels & Brakes",
+pPress: "<strong>Pressures & Camber:</strong> On gravel run lower pressures (1.6 - 1.8 bar) for maximum footprint; on tarmac increase (1.9 - 2.1 bar) and add negative camber to support the sidewall.",
+pForce: "<strong>Max Pedal Force:</strong> Controller: Default | Pedals: 80% - 88% to prevent wheel lockups on low-grip surfaces.",
+pBias: "<strong>Brake Bias:</strong> On gravel shift slightly rearward (52% - 54%) to help rotate the car on entry; on tarmac shift forward (56% - 58%) for heavy braking.",
+pDucts: "<strong>Handbrake Bias:</strong> Instantly unlocks the rear axle in tight hairpins by decoupling the rear drivetrain.",
+hSusp: "🛞 Suspension",
+pSprings: "<strong>Spring Rates:</strong> Soft, long-travel springs on gravel/snow to absorb ruts; stiff, lowered springs on tarmac for sharp precision.",
+pPackers: "<strong>Bump Stops:</strong> Crucial on jump landings (e.g., Finland) to absorb kinetic energy without bouncing the chassis.",
+pRake: "<strong>Ride Height & Rake:</strong> Higher ride height on rough gravel; low stance with mild positive Rake on tarmac to point the nose into the apex.",
+hAero: "📐 Chassis & Aero",
+pArb: "<strong>Anti-Roll Bars (ARB):</strong> Soft front = better mechanical grip and turn-in / stiff = sharp response on smooth tarmac. Soft rear = gravel traction / stiff = helps rear rotation.",
+pToe: "<strong>Toe Angles:</strong> Front: mild Toe-out for sharp turn-in; Rear: Toe-in to stabilize the tail over fast bumpy sections."
+},
+hyundai: {
+title: "Hyundai i20 N Rally1 Hybrid",
+sub: "4WD - All-Wheel Drive, Compact Wheelbase & High Stability",
+hChars: "Handling Characteristics & Driving Style",
+pChars: "Very stable on high-speed sections and rough braking zones. Can mildly understeer on tight tarmac hairpins if the front end is too stiff, but rewards with tremendous corner-exit traction on gravel and mud.",
+hPower: "⚡ Powertrain & Differentials",
+pFuel: "<strong>Power Delivery & Gearing:</strong> Strong mid-range torque; adjust final drive according to stage straight lengths.",
+pRad: "<strong>Cooling:</strong> Open air vents on hot, slow stages (Greece, Sardinia) to protect the hybrid battery.",
+pDiff: "<strong>Differentials (Preload & Lock):</strong> Lower front Preload to eliminate mid-corner understeer; increase rear acceleration lock to tighten lines on throttle.",
+hWheels: "🛞 Wheels & Brakes",
+pPress: "<strong>Pressures & Camber:</strong> Calibrate to compound (Soft/Hard on tarmac; Soft/Medium on gravel) to keep tread temperatures even.",
+pForce: "<strong>Max Pedal Force:</strong> Controller: Default | Pedals: 80% - 85% to modulate braking without ABS.",
+pBias: "<strong>Brake Bias:</strong> Shift slightly rearward on slippery surfaces to encourage rotation via weight transfer (left-foot braking).",
+pDucts: "<strong>Handbrake:</strong> Calibrate pressure for quick hairpin rotations without stalling.",
+hSusp: "🛞 Suspension",
+pSprings: "<strong>Spring Rates:</strong> Soften front for better directional grip in slow turns; stiffen rear to encourage rotation.",
+pPackers: "<strong>Bump Stops:</strong> Tune to prevent bottoming out on deep tarmac corner cuts.",
+pRake: "<strong>Ride Height & Rake:</strong> Slightly raise rear ride height to give the front end more bite on entry.",
+hAero: "📐 Chassis & Aero",
+pArb: "<strong>Anti-Roll Bars (ARB):</strong> Soft front to bite the apex on gravel; stiffer rear to counter understeer.",
+pToe: "<strong>Toe Angles:</strong> Front Toe-out for quick entry; Rear Toe-in to keep the car planted under full throttle on uneven surfaces."
+},
+puma: {
+title: "Ford Puma Rally1 Hybrid",
+sub: "4WD - Tubular Spaceframe & Aerodynamic Efficiency",
+hChars: "Handling Characteristics & Driving Style",
+pChars: "Featured by a very precise, communicative front end in fast sweepers on both tarmac and flowing gravel. Requires careful Rebound damper tuning to maintain traction over bumps on corner exit."
+},
+wrc: {
+title: "WRC 2017–2021 Class (4WD Active Center Differential)",
+sub: "4WD - Extreme Aerodynamics & Electronic Center Differential",
+hChars: "Handling Characteristics & Driving Style",
+pChars: "WRC Plus cars combine extreme aerodynamic downforce with an active center differential. Require precise Torque Split tuning between front and rear axles, plus sufficiently supportive springs to handle high-speed aero loads."
+},
+rally2: {
+title: "Rally2 / R5 Class (4WD)",
+sub: "4WD - 1.6L Turbo Engine & Mechanical Differentials",
+hChars: "Handling Characteristics & Driving Style",
+pChars: "The benchmark class for balance between power and mechanical grip. Less aero-dependent than Rally1: pure pace comes from carrying mid-corner speed, left-foot braking technique, and compliant suspension over rutted surfaces."
+},
+classic: {
+title: "Rally3 / Rally4 / Historic Class (4WD / FWD / RWD)",
+sub: "All-Wheel Drive, Front-Wheel Drive (FWD) or Rear-Wheel Drive (RWD)",
+hChars: "Handling Characteristics & Driving Style",
+pChars: "FWD (Rally4): Require a lively rear end (stiffer rear bars and springs) to rotate the tail and prevent power-on understeer. RWD (Group B / Historic): Require soft rear suspension, mild rear camber, and fine throttle control to put power down without spinning. Historic 4WD (Group A/B): Manage turbo lag and early weight transfer before turn-in."
+}
+},
+tableHeaders: ["Component / Issue", "Action: Left Arrow ◄ Soft / Lower / Modify", "Action: Right Arrow ► Stiff / Higher / Modify"],
+tableRows: [
+["Front Camber", "Reduced angle (-1.0° / -1.5°): Ideal on rough gravel and snow for maximum braking traction.", "Increased negative angle (-2.5° / -3.5°): Ideal on dry tarmac for high lateral cornering grip."],
+["Rear Camber", "Less angled: Maximum corner-exit traction and grip on slippery surfaces (mud/snow).", "More negative: Higher lateral stability in fast tarmac sweepers."],
+["Front Springs", "Reduces understeer, improves mechanical grip on gravel/bumps and braking weight transfer.", "Increases precision and responsiveness on smooth tarmac, higher understeer on bumps."],
+["Rear Springs", "Higher corner-exit traction and bump absorption (ideal for RWD and gravel).", "Increases rear rotation (ideal for FWD and technical tarmac)."],
+["Front Toe", "Increase Toe-in (+): Higher straight-line stability over rough straights.", "Create Toe-out (-): Sharp/immediate turn-in response in hairpins and tight twists."],
+["Rear Toe", "Reduce Toe-in: Livelier rear end, easier to slide in tight hairpins.", "Increase Toe-in (+): Stabilizes rear under braking and high-speed ruts."],
+["Front ARB", "Front end tracks rough surfaces better, higher entry grip.", "Increases direction-change sharpness on tarmac, induces understeer on gravel."],
+["Rear ARB", "Soft rear planted to the surface, maximum acceleration traction.", "Increases controlled oversteer and mid-corner rotation."],
+["Dampers (Bump & Rebound)", "Softens BUMP / REBOUND: Superior absorption over ruts, rocks, and cuts.", "Stiffens BUMP / REBOUND: Controls roll on tarmac and jump landings (Fast Bump)."],
+["Differential Preload (F / R)", "Less locking: Quicker turn-in and lighter steering feel.", "More locking: Higher traction on low-grip surfaces and braking stability."],
+["Ride Height", "Lower: Low center of gravity, maximum speed and precision on dry tarmac.", "Higher: Full suspension travel for broken gravel, mud, snow, and jumps."],
+["🚨 Understeer Solution (Entry/Mid)", "Soften Front ARB, reduce Front Diff Preload, increase Front Toe-out.", "Shift Brake Bias slightly rearward, increase Front negative Camber, soften Front Springs."],
+["🚨 Entry Oversteer Solution", "Shift Brake Bias forward, increase Rear Toe-in.", "Stiffen Front ARB, increase Rear Diff Preload, soften Rear Rebound."],
+["🚨 Exit Oversteer Solution", "Soften Rear ARB, soften Rear Springs, lower Rear Tire Pressure.", "Reduce Rear Diff Power Lock (on RWD/4WD) or increase it on FWD to pull the car out."],
+["🚨 Bottoming Out (Jumps / Bumps / Cuts)", "Stiffen Fast Bump and increase Bump Stops.", "Raise static ride height (Front & Rear) by +5/+10mm and stiffen springs slightly."]
+]
+}
+};
+
+let currentLanguage = 'it';
+
+function translatePage(langCode) {
+currentLanguage = langCode;
+const t = translations[langCode] || translations['it'];
+
+const mainTitle = document.getElementById('mainTitle');
+if (mainTitle) mainTitle.innerText = t.title;
+
+const introText = document.getElementById('introText');
+if (introText) introText.innerHTML = t.intro;
+
+const calcSubText = document.getElementById('calcSubText');
+if (calcSubText) calcSubText.innerText = t.calcSub;
+
+const labels = document.querySelectorAll('#setupForm label');
+if (labels.length >= 5) {
+labels[0].innerText = t.lblCar;
+labels[1].innerText = t.lblTrack;
+labels[2].innerText = t.lblTemp;
+labels[3].innerText = t.lblCtrl;
+labels[4].innerText = t.lblIssue;
+}
+
+const trackSelect = document.getElementById('trackType');
+if (trackSelect && trackSelect.options.length >= 3) {
+for (let i = 0; i < 3; i++) trackSelect.options[i].text = t.trackOptions[i];
+}
+
+const ctrlSelect = document.getElementById('controller');
+if (ctrlSelect && ctrlSelect.options.length >= 2) {
+for (let i = 0; i < 2; i++) ctrlSelect.options[i].text = t.ctrlOptions[i];
+}
+
+const issueSelect = document.getElementById('issue');
+if (issueSelect && issueSelect.options.length >= 6) {
+for (let i = 0; i < 6; i++) issueSelect.options[i].text = t.issueOptions[i];
+}
+
+const btn = document.getElementById('calcBtn');
+if (btn) btn.innerText = t.btnCalc;
+
+const resTitle = document.getElementById('resTitle');
+if (resTitle) resTitle.innerText = t.resTitle;
+
+const cardHeaders = document.querySelectorAll('.result-card h4');
+if (cardHeaders.length >= 6) {
+cardHeaders[0].innerText = t.hGeometry;
+cardHeaders[1].innerText = t.hAero;
+cardHeaders[2].innerText = t.hBrakes;
+cardHeaders[3].innerText = t.hSusp;
+cardHeaders[4].innerText = t.hDampDiff;
+cardHeaders[5].innerText = t.hIssueFix;
+}
+
+const poleTitle = document.getElementById('poleTitle');
+if (poleTitle) poleTitle.innerText = t.poleTitle;
+const poleContent = document.getElementById('poleContent');
+if (poleContent) poleContent.innerHTML = t.poleBox;
+
+const cardYaris = document.getElementById('card_toyota_gr_yaris_rally1');
+if (cardYaris) {
+cardYaris.querySelector('h2').innerText = t.cards.yaris.title;
+cardYaris.querySelector('p strong').innerText = t.cards.yaris.sub;
+const h3s = cardYaris.querySelectorAll('h3');
+const ps = cardYaris.querySelectorAll('p');
+if (h3s.length >= 5) {
+h3s[0].innerText = t.cards.yaris.hChars;
+h3s[1].innerText = t.cards.yaris.hPower;
+h3s[2].innerText = t.cards.yaris.hWheels;
+h3s[3].innerText = t.cards.yaris.hSusp;
+h3s[4].innerText = t.cards.yaris.hAero;
+}
+if (ps.length >= 14) {
+ps[1].innerText = t.cards.yaris.pChars;
+ps[2].innerHTML = t.cards.yaris.pFuel;
+ps[3].innerHTML = t.cards.yaris.pRad;
+ps[4].innerHTML = t.cards.yaris.pDiff;
+ps[5].innerHTML = t.cards.yaris.pPress;
+ps[6].innerHTML = t.cards.yaris.pForce;
+ps[7].innerHTML = t.cards.yaris.pBias;
+ps[8].innerHTML = t.cards.yaris.pDucts;
+ps[9].innerHTML = t.cards.yaris.pSprings;
+ps[10].innerHTML = t.cards.yaris.pPackers;
+ps[11].innerHTML = t.cards.yaris.pRake;
+ps[12].innerHTML = t.cards.yaris.pArb;
+ps[13].innerHTML = t.cards.yaris.pToe;
+}
+}
+
+const cardHyundai = document.getElementById('card_hyundai_i20_rally1');
+if (cardHyundai) {
+cardHyundai.querySelector('h2').innerText = t.cards.hyundai.title;
+cardHyundai.querySelector('p strong').innerText = t.cards.hyundai.sub;
+const h3s = cardHyundai.querySelectorAll('h3');
+const ps = cardHyundai.querySelectorAll('p');
+if (h3s.length >= 5) {
+h3s[0].innerText = t.cards.hyundai.hChars;
+h3s[1].innerText = t.cards.hyundai.hPower;
+h3s[2].innerText = t.cards.hyundai.hWheels;
+h3s[3].innerText = t.cards.hyundai.hSusp;
+h3s[4].innerText = t.cards.hyundai.hAero;
+}
+if (ps.length >= 14) {
+ps[1].innerText = t.cards.hyundai.pChars;
+ps[2].innerHTML = t.cards.hyundai.pFuel;
+ps[3].innerHTML = t.cards.hyundai.pRad;
+ps[4].innerHTML = t.cards.hyundai.pDiff;
+ps[5].innerHTML = t.cards.hyundai.pPress;
+ps[6].innerHTML = t.cards.hyundai.pForce;
+ps[7].innerHTML = t.cards.hyundai.pBias;
+ps[8].innerHTML = t.cards.hyundai.pDucts;
+ps[9].innerHTML = t.cards.hyundai.pSprings;
+ps[10].innerHTML = t.cards.hyundai.pPackers;
+ps[11].innerHTML = t.cards.hyundai.pRake;
+ps[12].innerHTML = t.cards.hyundai.pArb;
+ps[13].innerHTML = t.cards.hyundai.pToe;
+}
+}
+
+const translateSimpleCard = function(cardId, cardData) {
+const card = document.getElementById(cardId);
+if (card && cardData) {
+card.querySelector('h2').innerText = cardData.title;
+card.querySelector('p strong').innerText = cardData.sub;
+const h3 = card.querySelector('h3');
+if (h3) h3.innerText = cardData.hChars;
+const ps = card.querySelectorAll('p');
+if (ps.length >= 2) ps[1].innerText = cardData.pChars;
+}
+};
+
+translateSimpleCard('card_ford_puma_rally1', t.cards.puma);
+translateSimpleCard('card_wrc_gen', t.cards.wrc);
+translateSimpleCard('card_rally2_gen', t.cards.rally2);
+translateSimpleCard('card_classic_2wd_gen', t.cards.classic);
+
+const matrixH2 = document.getElementById('matrixTitle');
+if (matrixH2) matrixH2.innerText = t.matrixTitle;
+
+const ths = document.querySelectorAll('table th');
+if (ths.length >= 3) {
+ths[0].innerText = t.tableHeaders[0];
+ths[1].innerText = t.tableHeaders[1];
+ths[2].innerText = t.tableHeaders[2];
+}
+
+const trs = document.querySelectorAll('table tbody tr');
+trs.forEach(function(tr, idx) {
+const tds = tr.querySelectorAll('td');
+if (tds.length >= 3 && t.tableRows[idx]) {
+tds[0].innerHTML = '<strong>' + t.tableRows[idx][0] + '</strong>';
+tds[1].innerText = t.tableRows[idx][1];
+tds[2].innerText = t.tableRows[idx][2];
+}
+});
+
+const footer = document.querySelector('.footer p');
+if (footer) footer.innerText = t.footerText;
+
+if (document.getElementById('resultsBox').style.display === 'block') {
+calculateSetup();
+}
+}
+
+function calculateSetup() {
+const carSelect = document.getElementById('carModel');
+const selectedCarText = carSelect.options[carSelect.selectedIndex].text;
+const carValue = carSelect.value;
+
+const trackSelect = document.getElementById('trackType');
+const selectedTrackText = trackSelect.options[trackSelect.selectedIndex].text;
+const trackType = trackSelect.value;
+
+const tempInput = parseInt(document.getElementById('temp').value, 10);
+const temp = isNaN(tempInput) ? 22 : tempInput;
+const controller = document.getElementById('controller').value;
+const issue = document.getElementById('issue').value;
+
+const activeCard = document.getElementById('card_' + carValue);
+if (activeCard) {
+document.querySelectorAll('.car-card').forEach(function(card) {
+card.style.display = 'none';
+});
+activeCard.style.display = 'block';
+} else {
+document.querySelectorAll('.car-card').forEach(function(card) {
+if (carValue.indexOf('rally1') !== -1) {
+card.style.display = (card.id.indexOf('rally1') !== -1) ? 'block' : 'none';
+} else if (carValue.indexOf('wrc') !== -1 && carValue.indexOf('subaru') === -1) {
+card.style.display = (card.id.indexOf('wrc') !== -1) ? 'block' : 'none';
+} else if (carValue.indexOf('rally2') !== -1) {
+card.style.display = (card.id.indexOf('rally2') !== -1) ? 'block' : 'none';
+} else {
+card.style.display = (card.id.indexOf('classic') !== -1) ? 'block' : 'none';
+}
+});
+}
+
+const isEn = (currentLanguage === 'en');
+
+document.getElementById('resSummary').innerHTML = isEn ?
+'<p>🏎️ <strong>Rally Car:</strong> ' + selectedCarText + ' | 🏁 <strong>Stage Surface:</strong> ' + selectedTrackText + ' | 🌡️ <strong>Temp:</strong> ' + temp + '°C</p>' :
+'<p>🏎️ <strong>Vettura Rally:</strong> ' + selectedCarText + ' | 🏁 <strong>Fondo Prova:</strong> ' + selectedTrackText + ' | 🌡️ <strong>Temp. Fondo/Aria:</strong> ' + temp + '°C</p>';
+
+let base = {
+fCamber: -1.8, rCamber: -1.5,
+fToe: -0.15, rToe: 0.20,
+fArb: "Medium", rArb: "Medium",
+springF: isEn ? "Medium" : "Media",
+springR: isEn ? "Medium" : "Media",
+diffPreload: 75, powerLock: 45, coastLock: 30,
+centerSplit: "50:50 (Mech)",
+targetHotPSI: 26.5,
+brakeBias: 54.0,
+drivetrain: "4WD"
+};
+
+if (carValue === 'toyota_gr_yaris_rally1') {
+base.fCamber = -1.7; base.rCamber = -1.4; base.fArb = "Medium"; base.rArb = "Soft";
+base.diffPreload = 70; base.powerLock = 45; base.brakeBias = 53.5;
+} else if (carValue === 'hyundai_i20_rally1') {
+base.fCamber = -1.9; base.rCamber = -1.6; base.fArb = "Soft"; base.rArb = "Stiff";
+base.diffPreload = 85; base.springF = isEn ? "Soft" : "Morbida"; base.brakeBias = 54.5;
+} else if (carValue === 'ford_puma_rally1') {
+base.fCamber = -1.8; base.rCamber = -1.5; base.fArb = "Medium"; base.rArb = "Medium";
+base.diffPreload = 80; base.brakeBias = 54.0;
+} else if (carValue.indexOf('wrc') !== -1 && carValue.indexOf('subaru') === -1) {
+base.fCamber = -2.0; base.rCamber = -1.7; base.fArb = "Stiff"; base.rArb = "Medium";
+base.diffPreload = 90; base.powerLock = 50; base.centerSplit = "48:52 (Active Center)"; base.brakeBias = 55.0;
+} else if (carValue.indexOf('rally2') !== -1) {
+base.fCamber = -1.7; base.rCamber = -1.4; base.fArb = "Medium"; base.rArb = "Medium";
+base.diffPreload = 65; base.powerLock = 40; base.targetHotPSI = 26.0; base.brakeBias = 53.0;
+} else if (carValue === 'peugeot_208_rally4' || carValue === 'renault_clio_rally4') {
+base.drivetrain = "FWD";
+base.fCamber = -2.2; base.rCamber = -1.8; base.fArb = "Soft"; base.rArb = "Stiff";
+base.springR = isEn ? "Stiff" : "Rigida";
+base.diffPreload = 60; base.powerLock = 55; base.centerSplit = "FWD (Front Diff Only)"; base.brakeBias = 58.0;
+} else if (carValue === 'lancia_037_rwd') {
+base.drivetrain = "RWD";
+base.fCamber = -1.9; base.rCamber = -1.2; base.fArb = "Stiff"; base.rArb = "Soft";
+base.springR = isEn ? "Soft" : "Morbida";
+base.diffPreload = 55; base.powerLock = 40; base.centerSplit = "RWD (Rear Diff Only)"; base.brakeBias = 56.0;
+} else {
+base.fCamber = -1.6; base.rCamber = -1.3; base.fArb = "Medium"; base.rArb = "Medium";
+base.diffPreload = 75; base.centerSplit = "50:50 (Viscous / Mech)"; base.brakeBias = 54.0;
+}
+
+if (trackType === 'high_speed') {
+base.fCamber -= 0.9;
+base.rCamber -= 0.7;
+base.fToe = -0.10;
+base.rToe = 0.24;
+base.diffPreload += 20;
+base.targetHotPSI = 29.5;
+base.brakeBias += 2.5;
+} else if (trackType === 'technical') {
+base.fCamber += 0.4;
+base.rCamber += 0.4;
+base.fToe = -0.22;
+base.rToe = 0.28;
+base.diffPreload -= 15;
+base.targetHotPSI = 24.5;
+base.brakeBias -= 1.5;
+}
+
+if (controller === 'pad') {
+base.brakeBias += 1.5;
+}
+
+let issueFixNote = "";
+if (issue === 'pole_position') {
+base.fCamber -= 0.3;
+base.fArb = isEn ? "Stiff (Max direction-change bite)" : "Stiff (Massima reattività nei cambi direzione)";
+base.rArb = isEn ? "Stiff (High-speed rotation)" : "Stiff (Rotazione rapida ad alta velocità)";
+base.diffPreload += 25;
+issueFixNote = isEn ?
+'<span class="highlight-fix">🏆 POWER STAGE MODE ACTIVATED:</span> Minimum spare weight (1 spare wheel), short/aggressive gear ratios, stiffened ARBs for instant turn-in response, and calibrated cold pressures for ' + (base.targetHotPSI - 1.5).toFixed(1) + ' PSI immediate stage grip.' :
+'<span class="highlight-fix">🏆 MODALITÀ POWER STAGE ATTIVATA:</span> Peso ridotto al minimo (1 sola ruota di scorta), rapporti cambio corti per massima ripresa, barre ARB irrigidite per reattività immediata e pressioni calibrate per grip istantaneo (' + (base.targetHotPSI - 1.5).toFixed(1) + ' PSI).';
+} else if (issue === 'understeer_entry') {
+base.fCamber -= 0.3;
+base.fToe -= 0.08;
+base.fArb = isEn ? "Soft (Softened to cure understeer)" : "Soft (Ammorbidita per curare il sottosterzo)";
+base.diffPreload = Math.max(25, base.diffPreload - 30);
+base.brakeBias -= 1.0;
+issueFixNote = isEn ?
+'<span class="highlight-fix">Understeer Fixed:</span> Increased Front Toe-out, softened Front ARB, lowered Front Diff Preload to ' + base.diffPreload + ' Nm, and shifted Brake Bias slightly rearward to help nose rotation.' :
+'<span class="highlight-fix">Sottosterzo Corretto:</span> Aumentato il Toe-out Anteriore, ammorbidita la barra ARB anteriore, abbassato il Preload differenziale a ' + base.diffPreload + ' Nm e arretrato leggermente il Brake Bias per far puntare il muso.';
+} else if (issue === 'oversteer_entry') {
+base.fToe = Math.min(0, base.fToe + 0.08);
+base.rToe += 0.10;
+base.fArb = isEn ? "Stiff (Stiffened for entry stability)" : "Stiff (Irrigidita per stabilità in ingresso)";
+base.diffPreload += 25;
+base.brakeBias += 2.0;
+issueFixNote = isEn ?
+'<span class="highlight-fix">Entry Oversteer Fixed:</span> Increased Rear Toe-in to +' + base.rToe.toFixed(2) + '°, stiffened front end, and shifted Brake Bias to ' + base.brakeBias.toFixed(1) + '% for braking stability.' :
+'<span class="highlight-fix">Sovrasterzo Ingresso Corretto:</span> Aumentato il Toe-in Posteriore a +' + base.rToe.toFixed(2) + '°, irrigidito l'anteriore e spostato il bilanciamento freni al ' + base.brakeBias.toFixed(1) + '% per stabilizzare la staccata.';
+} else if (issue === 'oversteer_exit') {
+base.rArb = isEn ? "Soft (Softened for exit traction)" : "Soft (Ammorbidita per trazione in uscita)";
+base.springR = isEn ? "Soft" : "Morbida";
+base.rCamber = Math.min(-0.8, base.rCamber + 0.3);
+if (base.drivetrain === "FWD") {
+base.powerLock = Math.min(75, base.powerLock + 15);
+} else {
+base.powerLock = Math.max(25, base.powerLock - 15);
+}
+issueFixNote = isEn ?
+'<span class="highlight-fix">Exit Oversteer Fixed:</span> Softened Rear ARB and Rear Springs, reduced negative Rear Camber for maximum contact patch, and tuned Power Lock to ' + base.powerLock + '% for clean exit traction.' :
+'<span class="highlight-fix">Sovrasterzo Uscita Corretto:</span> Ammorbidita la Barra Antirollio Posteriore e le Molle Posteriori, ridotto il camber negativo posteriore per massima impronta a terra e regolato il Power Lock al ' + base.powerLock + '% per trazione pulita in uscita.';
+} else if (issue === 'bottoming') {
+issueFixNote = isEn ?
+'<span class="highlight-fix">Bottoming Fixed:</span> Stiffened Fast Bump damping, added +4mm to Bump Stops, and raised static ride height by +8mm to protect the sump guard over jumps and cuts.' :
+'<span class="highlight-fix">Spanciamento Corretto:</span> Irrigidito il Fast Bump (compressione veloce), aumentati i Bump Stops (tamponi) di +4mm e alzata l'altezza da terra statica di +8mm per proteggere il fondo su salti e tagli.';
+} else {
+issueFixNote = isEn ?
+"No specific dynamic issue selected. Purely calculated rally setup based on stage surface and car." :
+"Nessun problema segnalato. Assetto rally puramente calcolato in base al fondo della speciale e alla vettura.";
+}
+
+if (temp > 30) base.fCamber += 0.2;
+
+const geometryText = isEn ?
+'• <strong>Front Camber:</strong> ' + base.fCamber.toFixed(1) + '°<br>' +
+'• <strong>Rear Camber:</strong> ' + base.rCamber.toFixed(1) + '°<br>' +
+'• <strong>Front Toe:</strong> ' + base.fToe.toFixed(2) + '° (Toe-out)<br>' +
+'• <strong>Rear Toe:</strong> +' + base.rToe.toFixed(2) + '° (Toe-in)' :
+'• <strong>Camber Anteriore:</strong> ' + base.fCamber.toFixed(1) + '°<br>' +
+'• <strong>Camber Posteriore:</strong> ' + base.rCamber.toFixed(1) + '°<br>' +
+'• <strong>Toe Anteriore:</strong> ' + base.fToe.toFixed(2) + '° (Toe-out)<br>' +
+'• <strong>Toe Posteriore:</strong> +' + base.rToe.toFixed(2) + '° (Toe-in)';
+document.getElementById('resGeometry').innerHTML = geometryText;
+
+let aeroText = "";
+if (trackType === 'high_speed') {
+aeroText = isEn ?
+"• <strong>Rear Wing:</strong> Medium-High Downforce (Tarmac Grip)<br>• <strong>Ride Height:</strong> Low (-15/-20mm vs Gravel) with mild positive Rake.<br>• <strong>Gearing:</strong> Medium-Long for high-speed tarmac straights." :
+"• <strong>Ala Posteriore:</strong> Carico Medio-Alto (Grip Asfalto)<br>• <strong>Altezza da Terra:</strong> Bassa (-15/-20mm rispetto a sterrato) con leggero Rake positivo.<br>• <strong>Rapporti Cambio:</strong> Medio-Lunghi per i tratti veloci su asfalto.";
+} else if (issue === 'bottoming') {
+aeroText = isEn ?
+"• <strong>Ride Height:</strong> +8mm (Raised for jumps & deep ruts)<br>• <strong>Bump Stops:</strong> +4mm progressive packers to protect sump guard." :
+"• <strong>Altezza da Terra:</strong> +8mm (Alzata per salti e tagli profondi)<br>• <strong>Bump Stops (Tamponi):</strong> +4mm progressivi per proteggere il paramotore.";
+} else if (trackType === 'technical') {
+aeroText = isEn ?
+"• <strong>Rear Wing:</strong> Max Downforce (Loose Surface Stability)<br>• <strong>Ride Height:</strong> High (+15/+20mm) for full suspension travel over ruts/snow.<br>• <strong>Gearing:</strong> Short for rapid hairpin exit." :
+"• <strong>Ala Posteriore:</strong> Massimo Carico (Stabilità su fondo scivoloso)<br>• <strong>Altezza da Terra:</strong> Alta (+15/+20mm) per massima escursione su buche/neve.<br>• <strong>Rapporti Cambio:</strong> Corti per uscita rapida dai tornanti.";
+} else {
+aeroText = isEn ?
+"• <strong>Rear Wing:</strong> Balanced Gravel Spec<br>• <strong>Ride Height:</strong> Standard Gravel Clearance.<br>• <strong>Result:</strong> Optimal balance between bump absorption and high-speed stability." :
+"• <strong>Ala Posteriore:</strong> Configurazione Sterrato Bilanciata<br>• <strong>Altezza da Terra:</strong> Luce a terra standard da sterrato.<br>• <strong>Risultato:</strong> Ottimo compromesso tra assorbimento buche e stabilità veloce.";
+}
+document.getElementById('resAero').innerHTML = aeroText;
+
+const coldPSIVal = Math.max(18.0, base.targetHotPSI - (temp * 0.12) - 2.8);
+const coldPSI = coldPSIVal.toFixed(1);
+const coldBar = (coldPSIVal * 0.06895).toFixed(2);
+const hotBar = (base.targetHotPSI * 0.06895).toFixed(2);
+
+let brakeText = isEn ?
+'• <strong>Cold Pressures:</strong> ' + coldPSI + ' PSI (' + coldBar + ' Bar)<br>• <strong>Target Hot Pressures:</strong> ' + base.targetHotPSI.toFixed(1) + ' PSI (' + hotBar + ' Bar)<br>' :
+'• <strong>Pressioni a Freddo:</strong> ' + coldPSI + ' PSI (' + coldBar + ' Bar)<br>• <strong>Pressioni Target a Caldo:</strong> ' + base.targetHotPSI.toFixed(1) + ' PSI (' + hotBar + ' Bar)<br>';
+
+if (temp > 28) {
+brakeText += isEn ?
+"• <strong>Compound & Cooling:</strong> Hard/Medium compound; open radiator/brake vents.<br>" :
+"• <strong>Mescola & Raffreddamento:</strong> Mescola Hard/Medium; aprire prese aria radiatore/freni.<br>";
+} else if (temp < 12) {
+brakeText += isEn ?
+"• <strong>Compound & Cooling:</strong> Soft/SuperSoft (or Studded on Snow); partially close vents.<br>" :
+"• <strong>Mescola & Raffreddamento:</strong> Mescola Soft/SuperSoft (o Chiodate su Neve); chiudere parzialmente prese aria.<br>";
+} else {
+brakeText += isEn ?
+"• <strong>Compound & Cooling:</strong> Medium/Soft compound; standard cooling vents.<br>" :
+"• <strong>Mescola & Raffreddamento:</strong> Mescola Medium/Soft; raffreddamento standard.<br>";
+}
+
+if (controller === 'pad') {
+brakeText += isEn ?
+'• <strong>Max Pedal Force:</strong> 100% (Default Gamepad) | <strong>Handbrake:</strong> Strong<br>• <strong>Brake Bias:</strong> ' + base.brakeBias.toFixed(1) + '% Front.' :
+'• <strong>Max Pedal Force:</strong> 100% (Default Gamepad) | <strong>Freno a Mano:</strong> Forte<br>• <strong>Brake Bias:</strong> ' + base.brakeBias.toFixed(1) + '% Anteriore.';
+} else {
+brakeText += isEn ?
+'• <strong>Max Pedal Force:</strong> 80% - 86% (No-ABS Modulation)<br>• <strong>Brake Bias:</strong> ' + base.brakeBias.toFixed(1) + '% Front.' :
+'• <strong>Max Pedal Force:</strong> 80% - 86% (Modulazione senza ABS)<br>• <strong>Brake Bias:</strong> ' + base.brakeBias.toFixed(1) + '% Anteriore.';
+}
+document.getElementById('resBrakes').innerHTML = brakeText;
+
+const suspText = isEn ?
+'• <strong>Front Springs:</strong> ' + base.springF + '<br>' +
+'• <strong>Rear Springs:</strong> ' + base.springR + '<br>' +
+'• <strong>Front ARB:</strong> ' + base.fArb + '<br>' +
+'• <strong>Rear ARB:</strong> ' + base.rArb :
+'• <strong>Molle Anteriori:</strong> ' + base.springF + '<br>' +
+'• <strong>Molle Posteriori:</strong> ' + base.springR + '<br>' +
+'• <strong>Barra Antirollio Ant:</strong> ' + base.fArb + '<br>' +
+'• <strong>Barra Antirollio Post:</strong> ' + base.rArb;
+document.getElementById('resSuspension').innerHTML = suspText;
+
+let dampDiffText = "";
+if (trackType === 'technical' || issue === 'bottoming') {
+dampDiffText += isEn ?
+"• <strong>Dampers:</strong> Soft Slow Bump/Rebound for ruts; Stiff Fast Bump for jumps.<br>" :
+"• <strong>Ammortizzatori:</strong> Slow Bump/Rebound morbidi per buche; Fast Bump rigido per salti.<br>";
+} else if (trackType === 'high_speed') {
+dampDiffText += isEn ?
+"• <strong>Dampers:</strong> Stiff Slow Bump/Rebound for tarmac roll control.<br>" :
+"• <strong>Ammortizzatori:</strong> Slow Bump/Rebound rigidi per controllare il rollio su asfalto.<br>";
+} else {
+dampDiffText += isEn ?
+"• <strong>Dampers:</strong> Balanced Gravel Bump/Rebound for traction over bumps.<br>" :
+"• <strong>Ammortizzatori:</strong> Bump/Rebound bilanciati da sterrato per trazione sulle sconnessioni.<br>";
+}
+dampDiffText += isEn ?
+'• <strong>Differential Preload:</strong> ' + base.diffPreload + ' Nm | <strong>Drivetrain:</strong> ' + base.centerSplit + '<br>• <strong>Power Lock:</strong> ' + base.powerLock + '% | <strong>Coast Lock:</strong> ' + base.coastLock + '%' :
+'• <strong>Preload Differenziale:</strong> ' + base.diffPreload + ' Nm | <strong>Trasmissione:</strong> ' + base.centerSplit + '<br>• <strong>Power Lock (Accel.):</strong> ' + base.powerLock + '% | <strong>Coast Lock (Rilascio):</strong> ' + base.coastLock + '%';
+document.getElementById('resDampersDiff').innerHTML = dampDiffText;
+
+document.getElementById('resIssueFix').innerHTML = issueFixNote;
+
+const resultsBox = document.getElementById('resultsBox');
+resultsBox.style.display = 'block';
+resultsBox.scrollIntoView({ behavior: 'smooth' });
+}
+
+const calcBtn = document.getElementById('calcBtn');
+if (calcBtn) {
+calcBtn.addEventListener('click', calculateSetup);
+}
+
+const setupForm = document.getElementById('setupForm');
+if (setupForm) {
+setupForm.addEventListener('submit', function(e) {
+e.preventDefault();
+calculateSetup();
+});
+}
+
+const langSelect = document.getElementById('langSelect');
+if (langSelect) {
+langSelect.addEventListener('change', function() {
+translatePage(this.value);
+});
+}
+});
+</script>
+
+</body>
+</html>
